@@ -5,16 +5,24 @@ import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class BookShareApi {
-    currentTournament: any = {};
 
+    baseUrl: string = "http://localhost:2725/api/user";
     constructor( private _http: Http ) {
 
     }
-    getTournaments () {
-        return new Promise( resolve => {
-            this._http.get( '' )
-                .subscribe( res => resolve( res.json() ) );
-        } );
+    checkAuth ( email: string, pass: string ) {
+        let headers = new Headers();
+        headers.append( 'Content-Type', 'application/json' );
+        let obj = { pass: pass, email: email };
+        let body = obj;
+        this._http.post( `${ this.baseUrl }/checkAuth`, body, headers )
+            .map( res => res.json() )
+            .subscribe( data => {
+                console.log( data );
+                return ( data );
+            } );
+
+
     }
 
 

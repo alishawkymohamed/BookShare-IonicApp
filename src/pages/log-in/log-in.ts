@@ -1,21 +1,21 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";
-
+import { BookShareApi } from '../../shared/shared';
 @Component( {
   selector: 'page-log-in',
   templateUrl: 'log-in.html',
 } )
 export class LogInPage {
   logInForm: FormGroup;
-  pattern = "[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}";
-  // .pattern ( '^[a-zA-Z0-9._+-]+@[a-zA-Z0-9.-]+.[a-zA-Z0-9-.]+$' )]
+  data: any;
   constructor( private navCtrl: NavController,
     private navParams: NavParams,
-    public formBuilder: FormBuilder ) {
+    private formBuilder: FormBuilder,
+    private bookShareApi: BookShareApi ) {
 
     this.logInForm = this.formBuilder.group( {
-      email: ['', Validators.compose( [Validators.required, Validators.pattern( this.pattern )] )],
+      email: ['', Validators.compose( [Validators.required] )],
       password: ['', Validators.required]
     } );
 
@@ -23,6 +23,8 @@ export class LogInPage {
 
   onSubmit () {
     console.log( this.logInForm.value );
+    this.data = this.bookShareApi.checkAuth( this.logInForm.value.email, this.logInForm.value.password );
+    console.log( this.data );
   }
 
   ionViewDidLoad () {
