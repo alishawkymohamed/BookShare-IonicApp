@@ -1,12 +1,33 @@
 <ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
+    <ion-navbar>
+        <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
-  </ion-navbar>
+        <ion-title>Home</ion-title>
+    </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <button ion-button (click)="logIn()">Go to Login page</button>
+    <ion-slides pager loop full effect="fade" autoplay="2000">
+        <ion-slide>
+            <img src="../assets/book1.jpg" id="Image">
+        </ion-slide>
+        <ion-slide>
+            <img src="../assets/book2.jpg" alt="" id="Image">
+        </ion-slide>
+        <ion-slide>
+            <img src="../assets/book3.jpg" alt="" id="Image">
+        </ion-slide>
+    </ion-slides>
 </ion-content>
+<ion-footer>
+    <ion-grid>
+        <ion-row>
+            <ion-col text-center>
+                <button ion-button icon-left round (click)="logIn()"> <ion-icon name="log-in"></ion-icon>Login </button>
+                <button ion-button icon-left round color="danger" (click)="GoToSignUp()"> <ion-icon name="key"></ion-icon>Sign UP </button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+</ion-footer>
