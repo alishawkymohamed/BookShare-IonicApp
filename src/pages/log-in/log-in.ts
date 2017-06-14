@@ -8,14 +8,13 @@ import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 } )
 export class LogInPage {
   logInForm: FormGroup;
-  pattern = "[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}";
-  // .pattern ( '^[a-zA-Z0-9._+-]+@[a-zA-Z0-9.-]+.[a-zA-Z0-9-.]+$' )]
+
   constructor( private navCtrl: NavController,
     private navParams: NavParams,
     public formBuilder: FormBuilder ) {
 
     this.logInForm = this.formBuilder.group( {
-      email: ['', Validators.compose( [Validators.required, Validators.pattern( this.pattern )] )],
+      email: ['', Validators.compose( [Validators.required] )],
       password: ['', Validators.required]
     } );
 
