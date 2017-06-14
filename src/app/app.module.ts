@@ -7,6 +7,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { LogInPage, HomePage } from "../pages/pages";
 import { HttpModule } from "@angular/http";
 import { ReactiveFormsModule } from "@angular/forms";
+import { BookShareApi } from '../shared/shared';
+
 
 @NgModule( {
   declarations: [
@@ -30,6 +32,7 @@ import { ReactiveFormsModule } from "@angular/forms";
     StatusBar,
     SplashScreen,
     HttpModule,
+    BookShareApi,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 } )
