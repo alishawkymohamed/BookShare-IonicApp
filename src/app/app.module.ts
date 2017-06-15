@@ -1,3 +1,4 @@
+import { WelcomeHomePage } from './../pages/welcome-home/welcome-home';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -7,7 +8,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { LogInPage, HomePage, ProfilePage, RegisterPage } from "../pages/pages";
 import { HttpModule } from "@angular/http";
 import { ReactiveFormsModule } from "@angular/forms";
-import { BookShareApi } from '../shared/shared';
+import { BookShareApi, BookAPI } from '../shared/shared';
 
 
 @NgModule( {
@@ -17,6 +18,7 @@ import { BookShareApi } from '../shared/shared';
     LogInPage,
     ProfilePage,
     RegisterPage
+    WelcomeHomePage
   ],
   imports: [
     BrowserModule,
@@ -31,12 +33,14 @@ import { BookShareApi } from '../shared/shared';
     LogInPage,
     ProfilePage,
     RegisterPage
+    WelcomeHomePage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     HttpModule,
     BookShareApi,
+    BookAPI,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 } )

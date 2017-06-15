@@ -1,0 +1,18 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>welcome</ion-title>
+    </ion-navbar>
+
+</ion-header>
+<ion-content padding>
+    <ion-title>Most Borrowed Book</ion-title>
+    <ion-card *ngFor="let item of books">
+        <ion-card-header>
+            {{ item.Title }}
+        </ion-card-header>
+        <ion-card-content>
+
+        </ion-card-content>
+    </ion-card>
+</ion-content>
