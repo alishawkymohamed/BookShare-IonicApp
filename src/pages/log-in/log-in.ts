@@ -10,9 +10,11 @@ import { ProfilePage } from "../pages";
 export class LogInPage {
 
   @ViewChild( 'error' ) ele: ElementRef;
+
   logInForm: FormGroup;
   data: any;
   errors: any = true;
+  re: RegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
   constructor( private navCtrl: NavController,
     private navParams: NavParams,
@@ -22,7 +24,7 @@ export class LogInPage {
 
 
     this.logInForm = this.formBuilder.group( {
-      email: ['', Validators.compose( [Validators.required] )],
+      email: ['', Validators.compose( [Validators.required, Validators.pattern( this.re )] )],
       password: ['', Validators.required]
     } );
 

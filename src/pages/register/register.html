@@ -6,10 +6,61 @@
       Sign Up
     </ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content padding>
-
+  <ion-list no-lines>
+    <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+      <ion-item>
+        <ion-label floating>
+          <ion-icon name="contact"></ion-icon>&nbsp; Name</ion-label>
+        <ion-input formControlName="name" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>
+          <ion-icon name="at"></ion-icon>&nbsp; E-Mail</ion-label>
+        <ion-input formControlName="email" type="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>
+          <ion-icon name="unlock"></ion-icon>&nbsp; Password</ion-label>
+        <ion-input formControlName="password" type="password"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>
+          <ion-icon name="unlock"></ion-icon>&nbsp; Confirm Password</ion-label>
+        <ion-input formControlName="confirmPassword" type="password"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>
+          <ion-icon name="call"></ion-icon>&nbsp; Phone</ion-label>
+        <ion-input formControlName="phone" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>
+          <ion-icon name="podium"></ion-icon>&nbsp; Governorate</ion-label>
+        <ion-input formControlName="phone" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>
+          <ion-icon name="podium"></ion-icon>&nbsp; City</ion-label>
+        <ion-input formControlName="phone" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>
+          <ion-icon name="locate"></ion-icon>&nbsp; Address</ion-label>
+        <ion-input formControlName="address" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>
+          <ion-icon name="images"></ion-icon>&nbsp; Photo</ion-label>
+        <ion-input formControlName="address" type="file"></ion-input>
+      </ion-item>
+      <ion-item>
+        <button ion-button full large color="primary" [disabled]="!logInForm.valid">
+        <ion-icon name="create-outline"></ion-icon> &nbsp;&nbsp;&nbsp;Sign Up</button>
+      </ion-item>
+    </form>
+  </ion-list>
 </ion-content>
