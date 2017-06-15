@@ -7,9 +7,12 @@
 </ion-header>
 <ion-content padding>
     <ion-title>Most Borrowed Book</ion-title>
-    <ion-slides pager loop effect="fade" autoplay="2000">
-        <ion-slide>
-            <img src="../assets/book1.jpg" id="Image">
-        </ion-slide>
-    </ion-slides>
+    <ion-card *ngFor="let item of books">
+        <ion-card-header>
+            {{ item.Title }}
+        </ion-card-header>
+        <ion-card-content>
+
+        </ion-card-content>
+    </ion-card>
 </ion-content>

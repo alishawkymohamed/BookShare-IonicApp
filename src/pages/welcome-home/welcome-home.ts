@@ -1,17 +1,21 @@
 import { Component } from '@angular/core';
 import {  NavController, NavParams } from 'ionic-angular';
+import {BookAPI} from '../../shared/shared'
 
 @Component({
   selector: 'page-welcome-home',
   templateUrl: 'welcome-home.html',
 })
 export class WelcomeHomePage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
-
+  books=[];
+  constructor(private navCtrl: NavController,
+              private navParams: NavParams,
+              private bookAPI:BookAPI) {}
   ionViewDidLoad() {
-    console.log('ionViewDidLoad WelcomeHomePage');
+      this.bookAPI.GetMostBorrowedBook().subscribe(data=>{
+        this.books = data.books;
+        console.log(this.books);
+      })
   }
 
 }
