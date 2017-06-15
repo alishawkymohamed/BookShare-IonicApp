@@ -15,15 +15,17 @@
             <ion-item>
                 <ion-label floating>
                     <ion-icon name="mail"></ion-icon>&nbsp; E-Mail</ion-label>
-                <ion-input formControlName="email" type="email"></ion-input>
+                <ion-input formControlName="email" type="email" (focus)="hideError()"></ion-input>
             </ion-item>
-            <p *ngIf="logInForm.get('email').touched && !logInForm.get('email').valid" style="color: #ea6153;" padding-left>Invalid Name</p>
+            <p *ngIf="logInForm.get('email').touched && !logInForm.get('email').valid" style="color: #ea6153;" padding-left>Invalid Email</p>
 
             <ion-item>
                 <ion-label floating>
                     <ion-icon name="create"></ion-icon>&nbsp;Password</ion-label>
-                <ion-input formControlName="password" type="password"></ion-input>
+                <ion-input formControlName="password" type="password" (focus)="hideError()"></ion-input>
             </ion-item>
+            <p #error *ngIf="errors != true" style="color: #ea6153;" padding-left>{{errors}}</p>
+
             <ion-item>
                 <button ion-button full large color="primary" [disabled]="!logInForm.valid">
         <ion-icon name="log-in"></ion-icon> &nbsp;&nbsp;&nbsp;Log In</button>

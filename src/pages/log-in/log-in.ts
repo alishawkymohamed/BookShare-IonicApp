@@ -1,18 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 import { BookShareApi } from '../../shared/shared';
+import { ProfilePage } from "../pages";
 @Component( {
   selector: 'page-log-in',
   templateUrl: 'log-in.html',
 } )
 export class LogInPage {
+
+  @ViewChild( 'error' ) ele: ElementRef;
   logInForm: FormGroup;
   data: any;
+  errors: any = true;
+
   constructor( private navCtrl: NavController,
     private navParams: NavParams,
     private formBuilder: FormBuilder,
-    private bookShareApi: BookShareApi ) {
+    private bookShareApi: BookShareApi,
+  ) {
+
 
     this.logInForm = this.formBuilder.group( {
       email: ['', Validators.compose( [Validators.required] )],
@@ -22,11 +29,27 @@ export class LogInPage {
   }
 
   onSubmit () {
-    console.log( this.logInForm.value );
-    this.data = this.bookShareApi.checkAuth( this.logInForm.value.email, this.logInForm.value.password );
-    console.log( this.data );
-  }
+    this.data = this.bookShareApi.checkAuth( this.logInForm.value.email, this.logInForm.value.password )
+      .subscribe( res => {
+        this.data = res
+        if ( res == true ) {
+          this.navCtrl.push( ProfilePage );
+        }
+        else {
+          this.errors = res;
+        }
+      } );
 
+    // this.bookShareApi.checkAuth( this.logInForm.value.email, this.logInForm.value.password )
+    //   .then( data => {
+    //     this.data = data;
+    //     console.log( this.data );
+    //   } );
+  }
+  hideError () {
+    // console.log( this.ele.nativeElement );
+    this.errors = true;
+  }
   ionViewDidLoad () {
 
   }

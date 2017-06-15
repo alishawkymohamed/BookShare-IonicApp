@@ -4,7 +4,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { LogInPage, HomePage } from "../pages/pages";
+import { LogInPage, HomePage, ProfilePage } from "../pages/pages";
 import { HttpModule } from "@angular/http";
 import { ReactiveFormsModule } from "@angular/forms";
 import { BookShareApi } from '../shared/shared';
@@ -14,7 +14,8 @@ import { BookShareApi } from '../shared/shared';
   declarations: [
     MyApp,
     HomePage,
-    LogInPage
+    LogInPage,
+    ProfilePage
   ],
   imports: [
     BrowserModule,
@@ -26,7 +27,8 @@ import { BookShareApi } from '../shared/shared';
   entryComponents: [
     MyApp,
     HomePage,
-    LogInPage
+    LogInPage,
+    ProfilePage
   ],
   providers: [
     StatusBar,
