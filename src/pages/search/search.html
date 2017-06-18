@@ -39,9 +39,10 @@
                     Result
                 </ion-card-header>
                 <ion-card-content>
-                    <p>{{item.Name}}</p>
+                    <p> Owner:{{item.Name}}</p>
                     <ion-avatar item-left>
-                        <img src="data:image/png;base64,{{item.Cover}}">
+                        <img src="data:image/png;base64,{{item.Cover}}" *ngIf="ImageFlag==true">
+                        <img src="../assets/NotPictured.jpg" *ngIf="ImageFlag !=true">
                     </ion-avatar>
                     <button ion-button full id="{{item.id}}" (click)="Details($event)">Details</button>
                 </ion-card-content>

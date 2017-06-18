@@ -1,3 +1,4 @@
+import { PendingListPage } from './../pages/pending-list/pending-list';
 import { WelcomeHomePage } from './../pages/welcome-home/welcome-home';
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform ,NavController } from 'ionic-angular';
@@ -23,7 +24,8 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: WelcomeHomePage },
-      { title: 'Pofile', component: ProfilePage }
+      { title: 'Pofile', component: ProfilePage },
+      {title:'Pending List',component:PendingListPage}
     ];
 
   }

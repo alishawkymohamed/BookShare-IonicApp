@@ -1,3 +1,4 @@
+import { PendingListPage } from './../pages/pending-list/pending-list';
 import { ShowNotificationPage } from './../pages/show-notification/show-notification';
 import { DetailsPage } from './../pages/details/details';
 import { SearchPage } from './../pages/search/search';
@@ -25,7 +26,8 @@ import { Storage, IonicStorageModule } from '@ionic/storage';
         WelcomeHomePage,
         SearchPage,
         DetailsPage,
-        ShowNotificationPage
+        ShowNotificationPage,
+        PendingListPage
     ],
     imports: [
         BrowserModule,
@@ -44,7 +46,8 @@ import { Storage, IonicStorageModule } from '@ionic/storage';
         WelcomeHomePage,
         SearchPage,
         DetailsPage,
-        ShowNotificationPage
+        ShowNotificationPage,
+        PendingListPage
     ],
     providers: [
         StatusBar,

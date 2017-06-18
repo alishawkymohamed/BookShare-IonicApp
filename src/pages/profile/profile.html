@@ -14,7 +14,8 @@
             <ion-col *ngFor="let item of data">
                 <ion-item>
                     <ion-avatar item-left>
-                        <img src="data:image/png;base64,{{item.Image}}" id="Imge">
+                        <img src="data:image/png;base64,{{item.Image}}" id="Imge" *ngIf="ImageFlag==true">
+                        <img src="../assets/images .jpg" id="Imge" *ngIf="ImageFlag !=true">
                     </ion-avatar>
                     <button ion-button icon-left>
                       <ion-icon name="settings"></ion-icon>Edit Profile

@@ -12,6 +12,7 @@ export class ProfilePage {
   Book:any;
   errors:any;
   flag:boolean=true;
+  ImageFlag:boolean=false;
   @ViewChild( 'error' ) ele: ElementRef;
   constructor( private navCtrl: NavController,
     private navParams: NavParams, private bookAPI:BookAPI,public storage:Storage ) {
@@ -24,6 +25,14 @@ export class ProfilePage {
      this.storage.get("LoginEmail").then((LoginEmail)=>
       this.bookAPI.GetUserData(LoginEmail).then((res)=>{
         this.data=res;
+        if(res[2]==null)
+        {
+          this.ImageFlag=false;
+        }
+        else
+        {
+          this.ImageFlag==true;
+        }
       })
       );
       this.storage.get("LoginEmail").then((LoginEmail)=>

@@ -123,5 +123,27 @@ export class BookAPI {
               .subscribe( res => resolve( res.json() ) );
             } );   
      }
+     PendingList(Email:string)
+     {
+          let headers = new Headers();
+        headers.append( 'Content-Type', 'application/json' );
+         let obj = {Email:Email };
+          let body = obj;
+          return new Promise( resolve => {
+         this.http.post( `${this.BaseUrl }/PendingList`, body, headers )
+              .subscribe( res => resolve( res.json() ) );
+            } );   
+     }
+     CancelNot(NotID:number,Email:string)
+     {
+          let headers = new Headers();
+        headers.append( 'Content-Type', 'application/json' );
+         let obj = {NotID:NotID,Email:Email };
+          let body = obj;
+          return new Promise( resolve => {
+         this.http.post( `${this.BaseUrl }/CancelNot`, body, headers )
+              .subscribe( res => resolve( res.json() ) );
+            } );   
+     }
 
 }
