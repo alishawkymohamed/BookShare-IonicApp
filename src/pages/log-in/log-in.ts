@@ -2,7 +2,8 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 import { BookShareApi } from '../../shared/shared';
-import { ProfilePage } from "../pages";
+import { Storage } from '@ionic/storage';
+import { WelcomeHomePage } from "../pages";
 @Component( {
   selector: 'page-log-in',
   templateUrl: 'log-in.html',
@@ -20,6 +21,7 @@ export class LogInPage {
     private navParams: NavParams,
     private formBuilder: FormBuilder,
     private bookShareApi: BookShareApi,
+    public storage:Storage
   ) {
 
 
@@ -35,7 +37,8 @@ export class LogInPage {
       .subscribe( res => {
         this.data = res
         if ( res == true ) {
-          this.navCtrl.push( ProfilePage );
+          this.navCtrl.push( WelcomeHomePage );
+          this.storage.set("LoginEmail",this.logInForm.value.email);
         }
         else {
           this.errors = res;

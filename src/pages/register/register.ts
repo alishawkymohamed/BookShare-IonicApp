@@ -19,7 +19,7 @@ export class RegisterPage {
 
     this.signUpForm = formBuilder.group( {
       name: ['', Validators.compose( [Validators.required, Validators.minLength( 2 ), Validators.maxLength( 100 )] )],
-      email: ['', Validators.compose( [Validators.required, Validators.pattern( this.re ), Validators.maxLength( 200 )] )],
+      email: ['', Validators.compose( [Validators.required, Validators.pattern( this.emailRegex ), Validators.maxLength( 200 )] )],
       password: ['', Validators.compose( [Validators.required,Validators.pattern(this.passwordRegex)] )]
     } );
   }

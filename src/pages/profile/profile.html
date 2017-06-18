@@ -1,12 +1,50 @@
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>Profile</ion-title>
-  </ion-navbar>
-
+    <ion-navbar>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="home()">
+            <ion-icon name="home"></ion-icon>
+        </button>
+        </ion-buttons>
+        <ion-title>Profile</ion-title>
+    </ion-navbar>
 </ion-header>
-
-
 <ion-content padding>
-  <h1>Profile</h1>
+    <ion-grid>
+        <ion-row>
+            <ion-col *ngFor="let item of data">
+                <ion-item>
+                    <ion-avatar item-left>
+                        <img src="data:image/png;base64,{{item.Image}}" id="Imge">
+                    </ion-avatar>
+                    <button ion-button icon-left>
+                      <ion-icon name="settings"></ion-icon>Edit Profile
+                    </button>
+                </ion-item>
+                <ion-item>
+                    <ion-card>
+                        <ion-card-content>
+                            <h3>Address:{{item.Address}}</h3><br>
+                            <h3>Email:{{item.Email}}</h3><br>
+                            <h3>Phone:{{item.Phone}}</h3>
+                        </ion-card-content>
+                    </ion-card>
+                </ion-item>
+                <ion-item>
+                    <p #error *ngIf="flag != true" style="color: #ea6153;" padding-left>{{errors}}</p>
+                    <ion-slides pager loop effect="fade">
+                        <ion-slide *ngFor="let item of Book">
+                            <ion-card>
+                                <ion-card-header>
+                                    <h3>{{item.Title}}</h3>
+                                </ion-card-header>
+                                <ion-card-content>
+                                    <img src="data:image/png;base64,{{item.Cover}}" id="Image" alt="../assets/NotPictured.jpg">
+                                </ion-card-content>
+                            </ion-card>
+                        </ion-slide>
+                    </ion-slides>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>
