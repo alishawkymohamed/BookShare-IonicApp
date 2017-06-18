@@ -9,7 +9,8 @@ import { LogInPage, HomePage, ProfilePage, RegisterPage } from "../pages/pages";
 import { HttpModule } from "@angular/http";
 import { ReactiveFormsModule } from "@angular/forms";
 import { BookShareApi, BookAPI } from '../shared/shared';
-
+import { Camera } from '@ionic-native/camera';
+import { Storage, IonicStorageModule } from '@ionic/storage';
 
 @NgModule( {
   declarations: [
@@ -17,7 +18,7 @@ import { BookShareApi, BookAPI } from '../shared/shared';
     HomePage,
     LogInPage,
     ProfilePage,
-    RegisterPage
+    RegisterPage,
     WelcomeHomePage
   ],
   imports: [
@@ -25,6 +26,7 @@ import { BookShareApi, BookAPI } from '../shared/shared';
     HttpModule,
     ReactiveFormsModule,
     IonicModule.forRoot( MyApp ),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -32,7 +34,7 @@ import { BookShareApi, BookAPI } from '../shared/shared';
     HomePage,
     LogInPage,
     ProfilePage,
-    RegisterPage
+    RegisterPage,
     WelcomeHomePage
   ],
   providers: [
@@ -41,6 +43,7 @@ import { BookShareApi, BookAPI } from '../shared/shared';
     HttpModule,
     BookShareApi,
     BookAPI,
+    Camera,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 } )
