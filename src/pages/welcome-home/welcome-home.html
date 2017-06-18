@@ -23,8 +23,7 @@
                     <ion-slide *ngFor="let item of books">
                         <ion-card>
                             <ion-card-header>
-                                <ion-title>Most Borrowed Book</ion-title>
-                                {{item.Title}}
+                                <h1>Most Borrowed Book</h1> {{item.Title}}
                             </ion-card-header>
                             <ion-card-content>
                                 <img src="data:image/png;base64,{{item.Cover}}" id="Image" alt="../assets/NotPictured.jpg">
@@ -38,8 +37,8 @@
                     <ion-slide *ngFor="let item of User">
                         <ion-card>
                             <ion-card-header>
-                                <ion-title>Most Borrowing User</ion-title>
-                                {{item.Name}} <br> {{item.CityName}}
+                                <h1>Most Active Users
+                                </h1> {{item.Name}} <br> {{item.CityName}}
                             </ion-card-header>
                             <ion-card-content *ngIf="item.Image">
                                 <img src="data:image/png;base64,{{item.Image}}" alt="Unavilable">
