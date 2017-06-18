@@ -44,7 +44,7 @@
         <ion-item>
           <ion-label floating>
             <ion-icon name="card"></ion-icon>&nbsp; Discription</ion-label>
-          <ion-textarea formControlName="discription"></ion-textarea>
+          <ion-textarea #disc formControlName="discription"></ion-textarea>
         </ion-item>
         <p *ngIf="(addBookForm.get('discription').touched && addBookForm.get('discription').errors) && addBookForm.get('discription').errors.minlength"
           style="color: #ea6153;" padding-left>Too Short !!</p>
@@ -55,7 +55,7 @@
       <div>
         <ion-item>
           <ion-label>For Sale</ion-label>
-          <ion-toggle #forsale formControllerName="forSale" color="primary" large checked="false"></ion-toggle>
+          <ion-toggle #forsale formControllerName="forSale" color="primary" large checked="false" (ionChange)='changeForSale()'></ion-toggle>
         </ion-item>
       </div>
 
@@ -70,7 +70,7 @@
       <div>
         <ion-item>
           <ion-label>For Borrow</ion-label>
-          <ion-toggle #forBorrow formControllerName="forBorrow" color="primary" large checked="false"></ion-toggle>
+          <ion-toggle #forBorrow formControllerName="forBorrow" color="primary" large checked="false" (ionChange)='changeForBorrow()'></ion-toggle>
         </ion-item>
       </div>
 
@@ -85,16 +85,21 @@
       <div>
         <ion-item>
           <ion-label>Available</ion-label>
-          <ion-toggle formControllerName="available" color="primary" large checked="false"></ion-toggle>
+          <ion-toggle formControllerName="available" color="primary" large checked="false" (ionChange)='changeAvailable()'></ion-toggle>
         </ion-item>
       </div>
 
       <ion-item *ngIf="!addStatus">
-        <button ion-button full large color="primary" [disabled]='!addBookForm.valid'>
+        <button ion-button full large color="primary" [disabled]='!addBookForm.valid || (forsale.checked == true && addBookForm.get("price").pristine) || (forBorrow.checked == true && addBookForm.get("duration").pristine)'>
                 <ion-icon name="create-outline"></ion-icon> &nbsp;&nbsp;&nbsp;Create Book</button>
       </ion-item>
     </form>
 
+    <br/>
+    <div *ngIf="addStatus">
+      <h2 style="color:darkblue" text-center padding-left>Your Book Added Successfully ..</h2>
+      <button ion-button full large round color="secondary" (click)="continue()">Continue</button>
+    </div>
 
   </ion-list>
 </ion-content>
