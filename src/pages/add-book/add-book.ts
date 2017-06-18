@@ -63,6 +63,7 @@ export class AddBookPage {
     book.ForSale = this.forSaleFlag;
     book.Price = this.addBookForm.value.price;
     book.Title = this.addBookForm.value.title;
+
     this.storage.get( "LoginEmail" )
       .then(( LoginEmail ) => {
         book.email = LoginEmail;
