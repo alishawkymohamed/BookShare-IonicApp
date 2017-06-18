@@ -1,18 +1,61 @@
 <ion-header>
-
-    <ion-navbar>
-        <ion-title>welcome</ion-title>
-    </ion-navbar>
-
+    <ion-toolbar>
+        <ion-title>Welcome {{UserName}}</ion-title>
+        <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+        <ion-buttons right>
+            <button ion-button icon-left (click)="notifications()">
+                <ion-icon name="notifications"></ion-icon>
+            </button>
+            <button ion-button (click)="LogOut()">
+      <ion-icon name="log-out"></ion-icon>
+    </button>
+        </ion-buttons>
+    </ion-toolbar>
 </ion-header>
 <ion-content padding>
-    <ion-title>Most Borrowed Book</ion-title>
-    <ion-card *ngFor="let item of books">
-        <ion-card-header>
-            {{ item.Title }}
-        </ion-card-header>
-        <ion-card-content>
-
-        </ion-card-content>
-    </ion-card>
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <ion-slides pager loop effect="fade">
+                    <ion-slide *ngFor="let item of books">
+                        <ion-card>
+                            <ion-card-header>
+                                <ion-title>Most Borrowed Book</ion-title>
+                                {{item.Title}}
+                            </ion-card-header>
+                            <ion-card-content>
+                                <img src="data:image/png;base64,{{item.Cover}}" id="Image" alt="../assets/NotPictured.jpg">
+                            </ion-card-content>
+                        </ion-card>
+                    </ion-slide>
+                </ion-slides>
+            </ion-col>
+            <ion-col>
+                <ion-slides pager loop effect="fade">
+                    <ion-slide *ngFor="let item of User">
+                        <ion-card>
+                            <ion-card-header>
+                                <ion-title>Most Borrowing User</ion-title>
+                                {{item.Name}} <br> {{item.CityName}}
+                            </ion-card-header>
+                            <ion-card-content *ngIf="item.Image">
+                                <img src="data:image/png;base64,{{item.Image}}" alt="Unavilable">
+                            </ion-card-content>
+                        </ion-card>
+                    </ion-slide>
+                </ion-slides>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>
+<ion-footer>
+    <ion-grid>
+        <ion-row>
+            <ion-col text-center>
+                <button ion-button full icon-left round (click)="Search()"> <ion-icon name="search"></ion-icon>Search</button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-footer>

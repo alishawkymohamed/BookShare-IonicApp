@@ -1,8 +1,9 @@
+import { WelcomeHomePage } from './../pages/welcome-home/welcome-home';
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform ,NavController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
+import { Storage } from '@ionic/storage';
 import { HomePage } from '../pages/home/home';
 import { LogInPage, ProfilePage } from "../pages/pages";
 
@@ -16,18 +17,16 @@ export class MyApp {
 
   pages: Array<{ title: string, component: any }>;
 
-  constructor( public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen ) {
+  constructor( public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,public storage:Storage ) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'LogIn', component: LogInPage },
+      { title: 'Home', component: WelcomeHomePage },
       { title: 'Pofile', component: ProfilePage }
     ];
 
   }
-
   initializeApp () {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.

@@ -1,0 +1,53 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>search</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <ion-item>
+                    <ion-input type="text" placeholder="Search Text" [(ngModel)]="searchTxt"></ion-input>
+                </ion-item>
+
+                <ion-list radio-group [(ngModel)]="searchby">
+                    <ion-item>
+                        <ion-label>User</ion-label>
+                        <ion-radio checked="False " value="User "></ion-radio>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>Book</ion-label>
+                        <ion-radio checked="False " value="Book "></ion-radio>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>Author</ion-label>
+                        <ion-radio checked="False " value="Author "></ion-radio>
+                    </ion-item>
+                </ion-list>
+                <button ion-button full icon-left (click)="Search()">
+                   <ion-icon name="search"></ion-icon>Search</button>
+                <p #error *ngIf="flag" style="color: #ea6153; " padding-left>{{errors}}</p>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-slides pager loop effect="fade " *ngIf="Flag">
+        <ion-slide *ngFor="let item of data ">
+            <ion-card>
+                <ion-card-header>
+                    Result
+                </ion-card-header>
+                <ion-card-content>
+                    <p>{{item.Name}}</p>
+                    <ion-avatar item-left>
+                        <img src="data:image/png;base64,{{item.Cover}}">
+                    </ion-avatar>
+                    <button ion-button full id="{{item.id}}" (click)="Details($event)">Details</button>
+                </ion-card-content>
+            </ion-card>
+        </ion-slide>
+    </ion-slides>
+
+
+</ion-content>
