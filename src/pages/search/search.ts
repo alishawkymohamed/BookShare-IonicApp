@@ -11,7 +11,7 @@ import {BookAPI} from '../../shared/shared';
 export class SearchPage {
 flag : boolean = false;
 Flag : boolean = true;
-
+ImageFlag:boolean=false;
  searchTxt : string;
  searchby : string;
  data:any;
@@ -32,6 +32,15 @@ Flag : boolean = true;
     this.bookApi.Search(this.searchTxt, this.searchby,LoginEmail)
     .subscribe( res => {
         this.data = res;
+        console.log(res[0].Cover);
+       if(res[0].Cover!=null)
+        {
+          this.ImageFlag=true;
+        }
+        else
+        {
+          this.ImageFlag=false;
+        }
         if(this.data==false)
         {
           this.errors ="There is No Book Except Yours if you own book named this and you can get it from your profile!";

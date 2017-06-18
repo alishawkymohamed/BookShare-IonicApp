@@ -7,6 +7,7 @@
         <ion-buttons right>
             <button ion-button icon-left (click)="notifications()">
                 <ion-icon name="notifications"></ion-icon>
+                <ion-badge item-end *ngIf="CountNot" >{{CountNot}}</ion-badge>
             </button>
             <button ion-button (click)="LogOut()">
       <ion-icon name="log-out"></ion-icon>

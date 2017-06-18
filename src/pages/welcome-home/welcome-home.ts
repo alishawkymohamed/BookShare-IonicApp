@@ -13,6 +13,8 @@ import { Storage } from '@ionic/storage';
 export class WelcomeHomePage {
   books = [];
   User = [];
+  CountNot:number;
+  Flag:boolean=false;
   UserName: any;
   constructor( private navCtrl: NavController,
     private navParams: NavParams,
@@ -32,7 +34,16 @@ export class WelcomeHomePage {
 
   }
   ionViewWillEnter () {
-    console.log( "enter" );
+    this.storage.get("LoginEmail").then((LoginEmail)=>{
+    this.bookAPI.ShowNotification(LoginEmail).then((res:Array<any>)=>{
+      if(this.Flag==true)
+      {
+        this.CountNot=null;
+      }
+      else{
+      this.CountNot=res.length;
+      }
+    })});
     this.storage.get( "LoginEmail" ).then(( LoginEmail ) =>
       this.bookAPI.GetUserData( LoginEmail ).then(( res ) => {
         this.UserName = res[0].Name;
@@ -44,9 +55,11 @@ export class WelcomeHomePage {
   }
   LogOut () {
     this.navCtrl.popToRoot();
-    this.storage.remove( "LoginEmail" );
+    this.storage.remove("LoginEmail");
   }
   notifications () {
+    this.Flag=true;
+    this.CountNot=null;
     this.navCtrl.push( ShowNotificationPage );
   }
 }

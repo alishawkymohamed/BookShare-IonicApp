@@ -9,10 +9,11 @@ import { AddBookPage } from "../pages";
   templateUrl: 'profile.html',
 } )
 export class ProfilePage {
-  data: any;
-  Book: any;
-  errors: any;
-  flag: boolean = true;
+  data:any;
+  Book:any;
+  errors:any;
+  flag:boolean=true;
+  ImageFlag:boolean=false;
   @ViewChild( 'error' ) ele: ElementRef;
 
   constructor( private navCtrl: NavController,
@@ -29,20 +30,27 @@ export class ProfilePage {
   ionViewDidLoad () {
     console.log( 'ionViewDidLoad ProfilePage' );
   }
-
-  ionViewWillEnter () {
-    this.storage.get( "LoginEmail" ).then(( LoginEmail ) =>
-      this.bookAPI.GetUserData( LoginEmail ).then(( res ) => {
-        this.data = res;
-      } )
-    );
-
-    this.storage.get( "LoginEmail" ).then(( LoginEmail ) =>
-      this.bookAPI.GetUserBook( LoginEmail ).then(( res ) => {
-        this.Book = res;
-        if ( res == false ) {
-          this.flag = false;
-          this.errors = "There is no Books To Show";
+  ionViewWillEnter(){
+     this.storage.get("LoginEmail").then((LoginEmail)=>
+      this.bookAPI.GetUserData(LoginEmail).then((res)=>{
+        this.data=res;
+        if(res[2]==null)
+        {
+          this.ImageFlag=false;
+        }
+        else
+        {
+          this.ImageFlag==true;
+        }
+      })
+      );
+      this.storage.get("LoginEmail").then((LoginEmail)=>
+      this.bookAPI.GetUserBook(LoginEmail).then((res)=>{
+        this.Book=res;
+        if(res==false)
+        {
+          this.flag=false;
+          this.errors ="There is no Books To Show";
         }
       } )
     );
