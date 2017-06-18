@@ -1,5 +1,5 @@
 export class Book {
-    Tite: string;
+    Title: string;
     ForBorrow: boolean;
     Duration: number;
     ForSale: Boolean;
@@ -7,4 +7,5 @@ export class Book {
     Author: string;
     Description: string;
     Available: boolean;
+    email: string;
 }

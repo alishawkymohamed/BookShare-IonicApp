@@ -3,6 +3,7 @@ import { Http } from '@angular/http'
 import 'rxjs';
 import { Observable } from 'rxjs/Observable';
 import { User } from "../Classes/User";
+import { Book } from "../Classes/Book";
 
 @Injectable()
 export class BookShareApi {
@@ -48,6 +49,17 @@ export class BookShareApi {
         headers.append( 'Content-Type', 'application/json' );
         let body = obj;
         return this._http.post( `${ this.baseUrl }/addUser`, body, headers )
+            .map( res => {
+                this.userAddingStatus = res.json();
+                return this.userAddingStatus;
+            } );
+    }
+
+    addBook ( obj: Book ) {
+        let headers = new Headers();
+        headers.append( 'Content-Type', 'application/json' );
+        let body = obj;
+        return this._http.post( `${ this.baseUrl }/addBook`, body, headers )
             .map( res => {
                 this.userAddingStatus = res.json();
                 return this.userAddingStatus;
