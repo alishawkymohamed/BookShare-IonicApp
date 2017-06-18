@@ -22,13 +22,13 @@ export class LogInPage {
     private navParams: NavParams,
     private formBuilder: FormBuilder,
     private bookShareApi: BookShareApi,
-    public storage:Storage
+    public storage: Storage
   ) {
 
 
     this.logInForm = this.formBuilder.group( {
       email: ['', Validators.compose( [Validators.required, Validators.pattern( this.re )] )],
-      password: ['', Validators.required, Validators.pattern( this.passwordRegex )]
+      password: ['', Validators.compose( [Validators.required, Validators.pattern( this.passwordRegex )] )]
     } );
 
   }
@@ -39,7 +39,7 @@ export class LogInPage {
         this.data = res
         if ( res == true ) {
           this.navCtrl.push( WelcomeHomePage );
-          this.storage.set("LoginEmail",this.logInForm.value.email);
+          this.storage.set( "LoginEmail", this.logInForm.value.email );
         }
         else {
           this.errors = res;
