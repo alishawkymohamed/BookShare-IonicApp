@@ -1,8 +1,9 @@
 import { WelcomeHomePage } from './../welcome-home/welcome-home';
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import {BookAPI} from '../../shared/shared';
+import { BookAPI } from '../../shared/shared';
 import { Storage } from '@ionic/storage';
+import { AddBookPage } from "../pages";
 @Component( {
   selector: 'page-profile',
   templateUrl: 'profile.html',
@@ -14,8 +15,16 @@ export class ProfilePage {
   flag:boolean=true;
   ImageFlag:boolean=false;
   @ViewChild( 'error' ) ele: ElementRef;
+
   constructor( private navCtrl: NavController,
-    private navParams: NavParams, private bookAPI:BookAPI,public storage:Storage ) {
+    private navParams: NavParams, private bookAPI: BookAPI, public storage: Storage ) {
+  }
+
+  goToAddBook () {
+    this.storage.get( "LoginEmail" )
+      .then(( LoginEmail ) => {
+        this.navCtrl.push( AddBookPage, LoginEmail );
+      } );
   }
 
   ionViewDidLoad () {
@@ -43,11 +52,11 @@ export class ProfilePage {
           this.flag=false;
           this.errors ="There is no Books To Show";
         }
-      })
-      );
+      } )
+    );
   }
-home()
-{
-  this.navCtrl.push(WelcomeHomePage);
-}
+
+  home () {
+    this.navCtrl.push( WelcomeHomePage );
+  }
 }
