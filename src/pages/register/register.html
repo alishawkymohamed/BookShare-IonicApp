@@ -78,7 +78,7 @@
 
             <div>
                 <ion-item>
-                    <ion-label floating>
+                    <ion-label>
                         <ion-icon name="podium"></ion-icon>&nbsp; Governorate <span style="color:red;">(Required)</span></ion-label>
                     <ion-select formControlName="governorate" (ionChange)="GovDDL_Changed(signUpForm.get('governorate').value)">
                         <ion-option *ngFor="let gov of govs" value="{{gov.GovernorateID}}">{{gov.Name}}</ion-option>
@@ -88,7 +88,7 @@
 
             <div>
                 <ion-item>
-                    <ion-label floating>
+                    <ion-label>
                         <ion-icon name="podium"></ion-icon>&nbsp; City <span style="color:red;">(Required)</span></ion-label>
                     <ion-select formControlName="city" [disabled]="!signUpForm.get('governorate').dirty">
                         <ion-option *ngFor="let c of cities" value="{{c.CityID}}">{{c.Name}}</ion-option>

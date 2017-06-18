@@ -47,8 +47,4 @@ export class ProfilePage {
       } )
     );
   }
-
-  home () {
-    this.navCtrl.push( WelcomeHomePage );
-  }
 }

@@ -23,6 +23,9 @@ export class AddBookPage {
       discription: ['', Validators.compose( [Validators.minLength( 3 ), Validators.maxLength( 200 )] )],
       forSale: [''],
       price: ['', Validators.compose( [Validators.pattern( /[0-9]/ )] )],
+      forBorrow: [''],
+      duration: ['', Validators.compose( [Validators.pattern( /[0-9]/ )] )],
+      available: ['']
     } );
   }
 
@@ -31,4 +34,8 @@ export class AddBookPage {
     console.log( this.userEmail );
   }
 
+
+  onSubmit () {
+    console.log( this.addBookForm.value );
+  }
 }

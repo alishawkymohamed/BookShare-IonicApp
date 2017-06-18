@@ -63,10 +63,38 @@
         <ion-item>
           <ion-label floating>
             <ion-icon name="logo-bitcoin"></ion-icon>&nbsp; Price</ion-label>
-          <ion-textarea formControlName="discription"></ion-textarea>
+          <ion-textarea formControlName="price"></ion-textarea>
         </ion-item>
       </div>
 
+      <div>
+        <ion-item>
+          <ion-label>For Borrow</ion-label>
+          <ion-toggle #forBorrow formControllerName="forBorrow" color="primary" large checked="false"></ion-toggle>
+        </ion-item>
+      </div>
+
+      <div *ngIf="forBorrow.checked">
+        <ion-item>
+          <ion-label floating>
+            <ion-icon name="logo-bitcoin"></ion-icon>&nbsp; Duration</ion-label>
+          <ion-textarea formControlName="duration"></ion-textarea>
+        </ion-item>
+      </div>
+
+      <div>
+        <ion-item>
+          <ion-label>Available</ion-label>
+          <ion-toggle formControllerName="available" color="primary" large checked="false"></ion-toggle>
+        </ion-item>
+      </div>
+
+      <ion-item *ngIf="!addStatus">
+        <button ion-button full large color="primary" [disabled]='!addBookForm.valid'>
+                <ion-icon name="create-outline"></ion-icon> &nbsp;&nbsp;&nbsp;Create Book</button>
+      </ion-item>
     </form>
+
+
   </ion-list>
 </ion-content>
