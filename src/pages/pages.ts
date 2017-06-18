@@ -6,6 +6,7 @@ export * from './welcome-home/welcome-home';
 export * from './search/search';
 export * from './details/details';
 export * from './show-notification/show-notification';
+export * from './add-book/add-book';
 
 
 
