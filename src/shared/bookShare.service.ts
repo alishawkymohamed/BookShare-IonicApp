@@ -13,6 +13,8 @@ export class BookShareApi {
     Govs: any[];
     Cities: any[];
     userAddingStatus: any;
+    book: any;
+    updateFlag: boolean;
     constructor( private _http: Http ) {
     }
 
@@ -63,6 +65,25 @@ export class BookShareApi {
             .map( res => {
                 this.userAddingStatus = res.json();
                 return this.userAddingStatus;
+            } );
+    }
+
+    getBook ( bookId: number ) {
+        return this._http.get( `${ this.baseUrl }/getBook/${ bookId }` )
+            .map( res => {
+                this.book = res.json();
+                return this.book;
+            } );
+    }
+
+    editBook ( book: Book ) {
+        let headers = new Headers();
+        headers.append( 'Content-Type', 'application/json' );
+        let body = book;
+        return this._http.post( `${ this.baseUrl }/editBook`, body, headers )
+            .map( res => {
+                this.updateFlag = res.json();
+                return this.updateFlag;
             } );
     }
 }

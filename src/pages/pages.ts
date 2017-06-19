@@ -7,7 +7,7 @@ export * from './search/search';
 export * from './details/details';
 export * from './show-notification/show-notification';
 export * from './pending-list/pending-list';
-
+export * from './edit-book/edit-book';
 export * from './add-book/add-book';
 
 

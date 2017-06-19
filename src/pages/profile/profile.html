@@ -38,8 +38,7 @@
                                 </ion-card-header>
                                 <ion-card-content>
                                     <img src="data:image/png;base64,{{item.Cover}}" id="Image" alt="../assets/NotPictured.jpg">
-                                    <button ion-button ion-left><ion-icon name="setting"> </ion-icon> Edit</button>
-
+                                    <button ion-button (click)='editBook($event,item.BookID)'>Edit</button>
                                 </ion-card-content>
                             </ion-card>
                         </ion-slide>

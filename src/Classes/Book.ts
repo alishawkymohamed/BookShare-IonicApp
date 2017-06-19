@@ -1,4 +1,5 @@
 export class Book {
+    BookId: number;
     Title: string;
     ForBorrow: boolean;
     Duration: number;

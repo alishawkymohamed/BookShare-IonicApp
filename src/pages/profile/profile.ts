@@ -1,23 +1,23 @@
 import { WelcomeHomePage } from './../welcome-home/welcome-home';
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { BookAPI } from '../../shared/shared';
+import { BookAPI, BookShareApi } from '../../shared/shared';
 import { Storage } from '@ionic/storage';
-import { AddBookPage } from "../pages";
+import { AddBookPage, EditBookPage } from "../pages";
 @Component( {
   selector: 'page-profile',
   templateUrl: 'profile.html',
 } )
 export class ProfilePage {
-  data:any;
-  Book:any;
-  errors:any;
-  flag:boolean=true;
-  ImageFlag:boolean=false;
+  data: any;
+  Book: any;
+  errors: any;
+  flag: boolean = true;
+  ImageFlag: boolean = false;
   @ViewChild( 'error' ) ele: ElementRef;
 
   constructor( private navCtrl: NavController,
-    private navParams: NavParams, private bookAPI: BookAPI, public storage: Storage ) {
+    private navParams: NavParams, private bookAPI: BookAPI, public storage: Storage, private bookShareApi: BookShareApi ) {
   }
 
   goToAddBook () {
@@ -30,29 +30,30 @@ export class ProfilePage {
   ionViewDidLoad () {
     console.log( 'ionViewDidLoad ProfilePage' );
   }
-  ionViewWillEnter(){
-     this.storage.get("LoginEmail").then((LoginEmail)=>
-      this.bookAPI.GetUserData(LoginEmail).then((res)=>{
-        this.data=res;
-        if(res[2]==null)
-        {
-          this.ImageFlag=false;
+  ionViewWillEnter () {
+    this.storage.get( "LoginEmail" ).then(( LoginEmail ) =>
+      this.bookAPI.GetUserData( LoginEmail ).then(( res ) => {
+        this.data = res;
+        if ( res[2] == null ) {
+          this.ImageFlag = false;
         }
-        else
-        {
-          this.ImageFlag==true;
-        }
-      })
-      );
-      this.storage.get("LoginEmail").then((LoginEmail)=>
-      this.bookAPI.GetUserBook(LoginEmail).then((res)=>{
-        this.Book=res;
-        if(res==false)
-        {
-          this.flag=false;
-          this.errors ="There is no Books To Show";
+        else {
+          this.ImageFlag == true;
         }
       } )
     );
+    this.storage.get( "LoginEmail" ).then(( LoginEmail ) =>
+      this.bookAPI.GetUserBook( LoginEmail ).then(( res ) => {
+        this.Book = res;
+        if ( res == false ) {
+          this.flag = false;
+          this.errors = "There is no Books To Show";
+        }
+      } )
+    );
+  }
+
+  editBook ( $event, BookID ) {
+    this.navCtrl.push( EditBookPage, BookID );
   }
 }
