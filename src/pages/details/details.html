@@ -28,28 +28,50 @@
                     <ion-list>
                         <ion-item>
                             <h1 *ngIf="DescriptionFlag">Description:{{item.Description}}</h1><br>
+                            <h1 *ngIf="Email ">Email:{{item.Email}}</h1><br>
                         </ion-item>
                         <ion-item>
-                            <h2 *ngIf="OwnerFlag">Owner:{{item.Owner}}</h2><br>
+                            <h2 *ngIf="OwnerFlag ">Owner:{{item.Owner}}</h2><br>
+                            <h2 *ngIf="Phone  ">Phone :{{item.Phone }}</h2><br>
                         </ion-item>
                         <ion-item>
-                            <h2 *ngIf="AvailableFlag">Available:{{item.Available}}</h2>
+                            <h2 *ngIf="AvailableFlag ">Available:{{item.Available}}</h2>
+                            <br>
+                            <h2 *ngIf="Address ">Address:{{item.Address}}</h2>
                             <br>
                         </ion-item>
                         <ion-item>
-                            <h2 *ngIf="ForBorrowFlag">ForBorrow:{{item.ForBorrow}},Duration:{{item.Duration}}Days.
+                            <h2 *ngIf="ForBorrowFlag ">ForBorrow:{{item.ForBorrow}},Duration:{{item.Duration}}Days.
                             </h2><br>
-                            <button *ngIf="ForBorrowFlag" ion-button (click)="Borrow()">Borrow</button>
-
+                            <button *ngIf="ForBorrowFlag " ion-button (click)="Borrow() ">Borrow</button>
+                            <button *ngIf="Email" ion-button (click)="GetBook() ">Show User Book</button>
                         </ion-item>
                         <ion-item>
-                            <h2 *ngIf="ForSaleFlag">ForSale:{{item.ForSale}},Price:{{item.Price}}
+                            <h2 *ngIf="ForSaleFlag ">ForSale:{{item.ForSale}},Price:{{item.Price}}
                             </h2>
-                            <button ion-button *ngIf="ForSaleFlag " (click)="Buy()">Buy</button>
+                            <button ion-button *ngIf="ForSaleFlag " (click)="Buy() ">Buy</button>
 
                         </ion-item>
                     </ion-list>
                 </ion-item>
+            </ion-col>
+            <ion-col>
+                <p #error *ngIf="Flag != true" style="color: #ea6153;" padding-left>{{errors}}</p>
+                <ion-slides pager loop effect="fade" *ngIf="Property">
+                    <ion-slide *ngFor="let item of BookData">
+                        <ion-card>
+                            <ion-card-header>
+                                <h1>User Book</h1>
+                                {{item.Title}}
+                            </ion-card-header>
+                            <ion-card-content>
+                                <img src="data:image/png;base64,{{item.Cover}}" id="Image">
+                                <p>Author:{{item.Author}} <br> Available:{{item.Available}} <br> Description:{{item.Description}}<br> ForBorrow:{{item.ForBorrow}},Duration:{{item.Duration}} <br>ForSale:{{item.ForSale}},Price:{{item.Price}}
+                                </p>
+                            </ion-card-content>
+                        </ion-card>
+                    </ion-slide>
+                </ion-slides>
             </ion-col>
         </ion-row>
     </ion-grid>

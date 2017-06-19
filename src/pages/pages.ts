@@ -8,7 +8,10 @@ export * from './details/details';
 export * from './show-notification/show-notification';
 export * from './pending-list/pending-list';
 export * from './edit-book/edit-book';
+export * from './borrowed/borrowed';
 export * from './add-book/add-book';
+export * from './rejected-list/rejected-list';
+
 
 
 
