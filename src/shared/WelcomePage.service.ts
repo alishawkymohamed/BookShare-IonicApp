@@ -144,5 +144,25 @@ export class BookAPI {
                 .subscribe(res => resolve(res.json()));
         });
     }
+    RejectNotification(NotID: number) {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        let obj = { NotID: NotID };
+        let body = obj;
+        return new Promise(resolve => {
+            this.http.post(`${this.BaseUrl}/RejectNotification`, body, headers)
+                .subscribe(res => resolve(res.json()));
+        });
+    }
+    RejectedList(Email: string) {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        let obj = { Email: Email };
+        let body = obj;
+        return new Promise(resolve => {
+            this.http.post(`${this.BaseUrl}/RejectedList`, body, headers)
+                .subscribe(res => resolve(res.json()));
+        });
+    }
 
 }

@@ -1,3 +1,4 @@
+import { RejectedListPage } from './../pages/rejected-list/rejected-list';
 import { BorrowedPage } from './../pages/borrowed/borrowed';
 import { PendingListPage } from './../pages/pending-list/pending-list';
 import { WelcomeHomePage } from './../pages/welcome-home/welcome-home';
@@ -47,5 +48,9 @@ export class MyApp {
   }
   goToBorrowed() {
     this.nav.push(BorrowedPage);
+  }
+  goToRejected() {
+    this.nav.push(RejectedListPage);
+
   }
 }

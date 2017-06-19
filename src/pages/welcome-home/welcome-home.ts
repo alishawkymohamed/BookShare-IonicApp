@@ -2,64 +2,74 @@ import { ShowNotificationPage } from './../show-notification/show-notification';
 import { HomePage } from './../home/home';
 import { SearchPage } from './../search/search';
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { BookAPI } from '../../shared/shared';
 import { Storage } from '@ionic/storage';
 
-@Component( {
+@Component({
   selector: 'page-welcome-home',
   templateUrl: 'welcome-home.html',
-} )
+})
 export class WelcomeHomePage {
   books = [];
   User = [];
-  CountNot:number;
-  Flag:boolean=false;
+  CountNot: number;
+  Flag: boolean = false;
   UserName: any;
-  constructor( private navCtrl: NavController,
+  constructor(private navCtrl: NavController,
     private navParams: NavParams,
-    private bookAPI: BookAPI, public storage: Storage ) { }
-  ionViewDidLoad () {
-    console.log( "Load" );
-    this.bookAPI.GetMostBorrowedBook().
-      subscribe( data => {
-        this.books = data;
-        console.log( this.books );
-      } );
-    this.bookAPI.GetMostBorrowedUser().
-      subscribe( data => {
-        this.User = data;
-        console.log( this.User );
-      } );
-
+    private bookAPI: BookAPI, public storage: Storage, public loading: LoadingController) { }
+  ionViewDidLoad() {
+    let loader = this.loading.create({
+      content: "Loading.."
+    });
+    loader.present().then(() => {
+      this.bookAPI.GetMostBorrowedBook().
+        subscribe(data => {
+          this.books = data;
+          console.log(this.books);
+        });
+      this.bookAPI.GetMostBorrowedUser().
+        subscribe(data => {
+          this.User = data;
+          console.log(this.User);
+        });
+      loader.dismiss();
+    });
   }
-  ionViewWillEnter () {
-    this.storage.get("LoginEmail").then((LoginEmail)=>{
-    this.bookAPI.ShowNotification(LoginEmail).then((res:Array<any>)=>{
-      if(this.Flag==true)
-      {
-        this.CountNot=null;
-      }
-      else{
-      this.CountNot=res.length;
-      }
-    })});
-    this.storage.get( "LoginEmail" ).then(( LoginEmail ) =>
-      this.bookAPI.GetUserData( LoginEmail ).then(( res ) => {
-        this.UserName = res[0].Name;
-      } )
-    );
+  ionViewWillEnter() {
+    let loader = this.loading.create({
+      content: "Loading.."
+    });
+    loader.present().then(() => {
+      this.storage.get("LoginEmail").then((LoginEmail) => {
+        this.bookAPI.ShowNotification(LoginEmail).then((res: Array<any>) => {
+          if (this.Flag == true) {
+            this.CountNot = null;
+          }
+          else {
+            this.CountNot = res.length;
+          }
+        })
+      });
+      this.storage.get("LoginEmail").then((LoginEmail) =>
+        this.bookAPI.GetUserData(LoginEmail).then((res) => {
+          this.UserName = res[0].Name;
+        })
+      );
+      loader.dismiss();
+    });
   }
-  Search () {
-    this.navCtrl.push( SearchPage );
+  Search() {
+    this.navCtrl.push(SearchPage);
   }
-  LogOut () {
+  LogOut() {
     this.navCtrl.popToRoot();
     this.storage.remove("LoginEmail");
   }
-  notifications () {
-    this.Flag=true;
-    this.CountNot=null;
-    this.navCtrl.push( ShowNotificationPage );
+  notifications() {
+    this.Flag = true;
+    this.CountNot = null;
+    this.navCtrl.push(ShowNotificationPage);
   }
 }

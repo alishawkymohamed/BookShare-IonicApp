@@ -4,7 +4,7 @@ import { IonicApp, IonicErrorHandler, IonicModule, NavController } from 'ionic-a
 import { MyApp } from './app.component';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { BorrowedPage, PendingListPage, LogInPage, HomePage, ProfilePage, RegisterPage, AddBookPage, DetailsPage, SearchPage, ShowNotificationPage, WelcomeHomePage } from "../pages/pages";
+import { RejectedListPage, BorrowedPage, PendingListPage, LogInPage, HomePage, ProfilePage, RegisterPage, AddBookPage, DetailsPage, SearchPage, ShowNotificationPage, WelcomeHomePage } from "../pages/pages";
 import { HttpModule } from "@angular/http";
 import { ReactiveFormsModule } from "@angular/forms";
 import { BookShareApi, BookAPI } from '../shared/shared';
@@ -24,7 +24,8 @@ import { Storage, IonicStorageModule } from '@ionic/storage';
         ShowNotificationPage,
         PendingListPage,
         AddBookPage,
-        BorrowedPage
+        BorrowedPage,
+        RejectedListPage
     ],
     imports: [
         BrowserModule,
@@ -46,7 +47,8 @@ import { Storage, IonicStorageModule } from '@ionic/storage';
         ShowNotificationPage,
         PendingListPage,
         AddBookPage,
-        BorrowedPage
+        BorrowedPage,
+        RejectedListPage
     ],
     providers: [
         StatusBar,
