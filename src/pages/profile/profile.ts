@@ -12,7 +12,6 @@ export class ProfilePage {
   data: any;
   Book: any;
   errors: any;
-  flag: boolean = true;
   ImageFlag: boolean = false;
   @ViewChild( 'error' ) ele: ElementRef;
 
@@ -49,10 +48,6 @@ export class ProfilePage {
       this.storage.get( "LoginEmail" ).then(( LoginEmail ) =>
         this.bookAPI.GetUserBook( LoginEmail ).then(( res ) => {
           this.Book = res;
-          if ( res == false ) {
-            this.flag = false;
-            this.errors = "There is no Books To Show";
-          }
         } )
       );
       loader.dismiss();

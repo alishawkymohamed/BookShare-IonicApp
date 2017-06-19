@@ -12,9 +12,9 @@
                         <img src="data:image/png;base64,{{item.Image}}" id="Imge" *ngIf="ImageFlag==true">
                         <img src="../assets/images .jpg" id="Imge" *ngIf="ImageFlag !=true">
                     </ion-avatar>
-                    <button ion-button icon-left>
+                    <!--<button ion-button icon-left>
                       <ion-icon name="settings"></ion-icon>Edit Profile
-                    </button><br/>
+                    </button><br/>-->
                     <button ion-button icon-left (click)="goToAddBook()">
                       <ion-icon name="add-circle"></ion-icon>Add Book
                     </button>
@@ -28,8 +28,11 @@
                         </ion-card-content>
                     </ion-card>
                 </ion-item>
-                <ion-item *ngIf="Book">
-                    <p #error *ngIf="flag != true" style="color: #ea6153;" padding-left>{{errors}}</p>
+                <ion-item>
+                    <div text-center>
+                        <h4>Your Books</h4>
+                    </div>
+                    <p #error *ngIf="!Book" style="color: #ea6153;" padding-left>{{errors}}</p>
                     <ion-slides pager loop effect="fade">
                         <ion-slide *ngFor="let item of Book">
                             <ion-card>
