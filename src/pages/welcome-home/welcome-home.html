@@ -41,9 +41,9 @@
                                 <h1>Most Active Users
                                 </h1> {{item.Name}} <br> {{item.CityName}}
                             </ion-card-header>
-                            <ion-card-content *ngIf="item.Image">
+                            <ion-card-content>
                                 <img *ngIf="item.Image" src="data:image/png;base64,{{item.Image}}" />
-                                <img *ngIf="!item.Cover" src="../assets/NotPictured.jpg" id="Image" />
+                                <img *ngIf="!item.Image" src="../assets/images.jpg" id="Image" />
                             </ion-card-content>
                         </ion-card>
                     </ion-slide>
