@@ -40,8 +40,8 @@
                                     <h3>{{item.Title}}</h3>
                                 </ion-card-header>
                                 <ion-card-content>
-                                    <img *ngIf="item.Cover" src="data:image/png;base64,{{item.Cover}}" id="Image">
-                                    <img *ngIf="!item.Cover" src="../assets/NotPictured.jpg" id="Image">
+                                    <img *ngIf="item.Cover" src="data:image/png;base64,{{item.Cover}}" id="Image" />
+                                    <img *ngIf="!item.Cover" src="../assets/NotPictured.jpg" id="Image" />
                                     <p>Author : {{item.Author}} <br> Available : {{item.Available}} <br> Description : {{item.Description}}<br/>                                        ForBorrow : {{item.ForBorrow}} <span *ngIf="item.ForBorrow">=> Duration : {{item.Duration}}</span>                                        <br/>ForSale : {{item.ForSale}} <span *ngIf="item.ForSale">=> Price : {{item.Price}}</span>
                                     </p>
                                     <button ion-button (click)='editBook($event,item.BookID)'>Edit</button>

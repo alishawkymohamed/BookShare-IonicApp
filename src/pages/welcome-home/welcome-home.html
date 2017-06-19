@@ -26,7 +26,8 @@
                                 <h1>Most Borrowed Book</h1> {{item.Title}}
                             </ion-card-header>
                             <ion-card-content>
-                                <img src="data:image/png;base64,{{item.Cover}}" id="Image" alt="../assets/NotPictured.jpg">
+                                <img *ngIf="item.Cover" src="data:image/png;base64,{{item.Cover}}" id="Image" />
+                                <img *ngIf="!item.Cover" src="../assets/NotPictured.jpg" id="Image" />
                             </ion-card-content>
                         </ion-card>
                     </ion-slide>
@@ -41,7 +42,8 @@
                                 </h1> {{item.Name}} <br> {{item.CityName}}
                             </ion-card-header>
                             <ion-card-content *ngIf="item.Image">
-                                <img src="data:image/png;base64,{{item.Image}}">
+                                <img *ngIf="item.Image" src="data:image/png;base64,{{item.Image}}" />
+                                <img *ngIf="!item.Cover" src="../assets/NotPictured.jpg" id="Image" />
                             </ion-card-content>
                         </ion-card>
                     </ion-slide>
