@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 import { BookShareApi } from '../../shared/shared';
 import { Storage } from '@ionic/storage';
@@ -22,7 +22,8 @@ export class LogInPage {
     private navParams: NavParams,
     private formBuilder: FormBuilder,
     private bookShareApi: BookShareApi,
-    public storage: Storage
+    public storage: Storage,
+    private loadingController: LoadingController
   ) {
 
 
@@ -34,17 +35,25 @@ export class LogInPage {
   }
 
   onSubmit () {
-    this.data = this.bookShareApi.checkAuth( this.logInForm.value.email, this.logInForm.value.password )
-      .subscribe( res => {
-        this.data = res
-        if ( res == true ) {
-          this.navCtrl.push( WelcomeHomePage );
-          this.storage.set( "LoginEmail", this.logInForm.value.email );
-        }
-        else {
-          this.errors = res;
-        }
-      } );
+    let loader = this.loadingController.create( {
+      content: 'Please Wait ..',
+      dismissOnPageChange: true
+    } );
+    loader.present().then(() => {
+      this.data = this.bookShareApi.checkAuth( this.logInForm.value.email, this.logInForm.value.password )
+        .subscribe( res => {
+          this.data = res
+          if ( res == true ) {
+            this.navCtrl.push( WelcomeHomePage );
+            this.storage.set( "LoginEmail", this.logInForm.value.email );
+          }
+          else {
+            this.errors = res;
+          }
+          loader.dismiss();
+        } );
+    } );
+
 
     // this.bookShareApi.checkAuth( this.logInForm.value.email, this.logInForm.value.password )
     //   .then( data => {

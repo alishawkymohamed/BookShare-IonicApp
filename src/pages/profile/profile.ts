@@ -32,7 +32,7 @@ export class ProfilePage {
   }
   ionViewWillEnter () {
     let loader = this.loading.create( {
-      content: "Loading.."
+      content: "Loading ..."
     } );
     loader.present().then(() => {
       this.storage.get( "LoginEmail" ).then(( LoginEmail ) =>

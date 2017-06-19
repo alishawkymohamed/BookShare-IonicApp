@@ -22,13 +22,13 @@
                 <ion-item>
                     <ion-card>
                         <ion-card-content>
-                            <h3>Address:{{item.Address}}</h3><br>
-                            <h3>Email:{{item.Email}}</h3><br>
-                            <h3>Phone:{{item.Phone}}</h3>
+                            <h3>Address : {{item.Address}}</h3><br>
+                            <h3>Email : {{item.Email}}</h3><br>
+                            <h3>Phone : {{item.Phone}}</h3>
                         </ion-card-content>
                     </ion-card>
                 </ion-item>
-                <ion-item>
+                <ion-item *ngIf="Book">
                     <p #error *ngIf="flag != true" style="color: #ea6153;" padding-left>{{errors}}</p>
                     <ion-slides pager loop effect="fade">
                         <ion-slide *ngFor="let item of Book">
@@ -37,13 +37,11 @@
                                     <h3>{{item.Title}}</h3>
                                 </ion-card-header>
                                 <ion-card-content>
-                                    <img src="data:image/png;base64,{{item.Cover}}" id="Image" alt="../assets/NotPictured.jpg">
+                                    <img *ngIf="item.Cover" src="data:image/png;base64,{{item.Cover}}" id="Image">
+                                    <img *ngIf="!item.Cover" src="../assets/NotPictured.jpg" id="Image">
+                                    <p>Author : {{item.Author}} <br> Available : {{item.Available}} <br> Description : {{item.Description}}<br/>                                        ForBorrow : {{item.ForBorrow}} <span *ngIf="item.ForBorrow">=> Duration : {{item.Duration}}</span>                                        <br/>ForSale : {{item.ForSale}} <span *ngIf="item.ForSale">=> Price : {{item.Price}}</span>
+                                    </p>
                                     <button ion-button (click)='editBook($event,item.BookID)'>Edit</button>
-                                    <img src="data:image/png;base64,{{item.Cover}}" id="Image">
-                                    <p>Author:{{item.Author}} <br> Available:{{item.Available}} <br> Description:{{item.Description}}<br> ForBorrow:{{item.ForBorrow}},Duration:{{item.Duration}} <br>ForSale:{{item.ForSale}},Price:{{item.Price}}
-                                    </p> <button ion-button ion-left>
-                                        <ion-icon name="setting"> </ion-icon> Edit</button>
-
                                 </ion-card-content>
                             </ion-card>
                         </ion-slide>

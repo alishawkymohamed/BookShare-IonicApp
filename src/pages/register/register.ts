@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 import { BookShareApi } from '../../shared/shared';
 import { passwordMatcher } from "../../customValidation/passwordMatcher";
@@ -27,7 +27,8 @@ export class RegisterPage {
         private formBuilder: FormBuilder,
         private bookShareApi: BookShareApi,
         private camera: Camera,
-        private storage: Storage ) {
+        private storage: Storage,
+        private loadingController: LoadingController ) {
 
         this.signUpForm = this.formBuilder.group( {
             name: ['', Validators.compose( [Validators.required, Validators.minLength( 2 ), Validators.maxLength( 100 )] )],
@@ -61,37 +62,58 @@ export class RegisterPage {
     }
 
     ionViewDidLoad () {
-        this.bookShareApi.getGovs()
-            .subscribe( res => {
-                this.govs = res;
-            } );
+        let loader = this.loadingController.create( {
+            content: 'Please Wait ...',
+            dismissOnPageChange: true
+        } );
+        loader.present().then(() => {
+            this.bookShareApi.getGovs()
+                .subscribe( res => {
+                    this.govs = res;
+                } );
+            loader.dismiss();
+        } );
     }
 
     GovDDL_Changed ( govId ) {
-        this.bookShareApi.getCities( govId )
-            .subscribe( res => {
-                this.cities = res;
-            } );
+        let loader = this.loadingController.create( {
+            content: 'Please Wait ...',
+            dismissOnPageChange: true
+        } );
+        loader.present().then(() => {
+            this.bookShareApi.getCities( govId )
+                .subscribe( res => {
+                    this.cities = res;
+                } );
+            loader.dismiss();
+        } );
     }
 
     onSubmit () {
-        console.log( this.signUpForm.value );
-        if ( this.signUpForm.valid ) {
-            let obj: User = new User();
-            obj.Address = this.signUpForm.value.address;
-            obj.Name = this.signUpForm.value.name;
-            obj.phone = this.signUpForm.value.phone;
-            obj.CityID = this.signUpForm.value.city;
-            obj.Email = this.signUpForm.value.email;
-            obj.Password = this.signUpForm.value.passwordFG.password;
-            this.bookShareApi.addUser( obj )
-                .subscribe( res => {
-                    this.addStatus = res;
-                } );
-        }
-        else {
-            let validityError = true;
-        }
+        let loader = this.loadingController.create( {
+            content: 'Please Wait ...',
+            dismissOnPageChange: true
+        } );
+        loader.present().then(() => {
+            console.log( this.signUpForm.value );
+            if ( this.signUpForm.valid ) {
+                let obj: User = new User();
+                obj.Address = this.signUpForm.value.address;
+                obj.Name = this.signUpForm.value.name;
+                obj.phone = this.signUpForm.value.phone;
+                obj.CityID = this.signUpForm.value.city;
+                obj.Email = this.signUpForm.value.email;
+                obj.Password = this.signUpForm.value.passwordFG.password;
+                this.bookShareApi.addUser( obj )
+                    .subscribe( res => {
+                        this.addStatus = res;
+                    } );
+            }
+            else {
+                let validityError = true;
+            }
+            loader.dismiss();
+        } );
         // this.bookShareApi.checkMail( this.signUpForm.value.email )
         //     .subscribe( res => {
         //         let x = res;
