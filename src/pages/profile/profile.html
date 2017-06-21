@@ -4,13 +4,13 @@
     </ion-navbar>
 </ion-header>
 <ion-content padding>
-    <ion-grid>
+    <ion-grid *ngIf="data">
         <ion-row>
-            <ion-col *ngFor="let item of data">
+            <ion-col>
                 <ion-item>
                     <ion-avatar item-left>
-                        <img src="data:image/png;base64,{{item.Image}}" id="Imge" *ngIf="ImageFlag==true">
-                        <img src="https://image.ibb.co/fNy6L5/images.jpg" id="Imge" *ngIf="ImageFlag !=true">
+                        <img src="data:image/png;base64,{{data.Image}}" id="Imge" *ngIf="data.Image">
+                        <img src="https://image.ibb.co/fNy6L5/images.jpg" id="Imge" *ngIf="!data.Image">
                     </ion-avatar>
                     <!--<button ion-button icon-left>
                       <ion-icon name="settings"></ion-icon>Edit Profile
@@ -22,9 +22,9 @@
                 <ion-item>
                     <ion-card>
                         <ion-card-content>
-                            <h3>Address : {{item.Address}}</h3><br>
-                            <h3>Email : {{item.Email}}</h3><br>
-                            <h3>Phone : {{item.Phone}}</h3>
+                            <h3>Address : {{data.Address}}</h3><br>
+                            <h3>Email : {{data.Email}}</h3><br>
+                            <h3>Phone : {{data.Phone}}</h3>
                         </ion-card-content>
                     </ion-card>
                 </ion-item>

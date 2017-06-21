@@ -126,11 +126,6 @@ export class RegisterPage {
 
             loader.dismiss();
         } );
-        // this.bookShareApi.checkMail( this.signUpForm.value.email )
-        //     .subscribe( res => {
-        //         let x = res;
-        //         console.log( x );
-        //     } )
     }
     continue () {
         this.navCtrl.popToRoot();

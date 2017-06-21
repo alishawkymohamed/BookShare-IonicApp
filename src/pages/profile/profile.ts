@@ -1,4 +1,3 @@
-import { WelcomeHomePage } from './../welcome-home/welcome-home';
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { BookAPI } from '../../shared/shared';
@@ -27,22 +26,17 @@ export class ProfilePage {
   }
 
   ionViewDidLoad () {
-    console.log( 'ionViewDidLoad ProfilePage' );
+
   }
   ionViewWillEnter () {
     let loader = this.loading.create( {
-      content: "Loading ..."
+      content: "Loading Profile Data ..."
     } );
     loader.present().then(() => {
       this.storage.get( "LoginEmail" ).then(( LoginEmail ) =>
         this.bookAPI.GetUserData( LoginEmail ).then(( res ) => {
           this.data = res;
-          if ( res[2] == null ) {
-            this.ImageFlag = false;
-          }
-          else {
-            this.ImageFlag == true;
-          }
+          console.log( this.data );
         } )
       );
       this.storage.get( "LoginEmail" ).then(( LoginEmail ) =>
@@ -50,7 +44,9 @@ export class ProfilePage {
           this.Book = res;
         } )
       );
-      loader.dismiss();
+      setTimeout( function () {
+        loader.dismiss();
+      }, 2000 );
     } );
   }
 
