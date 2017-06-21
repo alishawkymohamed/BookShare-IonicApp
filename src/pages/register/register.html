@@ -16,7 +16,7 @@
     </div>
 
     <ion-list no-lines>
-        <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+        <form [formGroup]="signUpForm">
 
             <div>
                 <ion-item>
@@ -108,13 +108,13 @@
             <div text-center>
                 <ion-label>
                     <ion-icon name="images"></ion-icon>&nbsp; Photo</ion-label>
-                <button ion-button ng-click="getImage()">Upload Photo</button>
+                <button ion-button (click)="getImage()">Upload Photo</button>
                 <hr/>
                 <img width="125" height="125" *ngIf="image" src="{{image}}" />
             </div>
             <hr/>
             <ion-item *ngIf="!addStatus">
-                <button ion-button full large color="primary" type="submit" [disabled]='!signUpForm.valid || emailExist'>
+                <button ion-button full large color="primary" type="submit" (click)="onSubmit()" [disabled]='!signUpForm.valid || emailExist'>
                 <ion-icon name="create-outline"></ion-icon> &nbsp;&nbsp;&nbsp;Sign Up</button>
             </ion-item>
         </form>

@@ -99,6 +99,7 @@ export class RegisterPage {
     }
 
     onSubmit () {
+        console.log( "submit" );
         let loader = this.loadingController.create( {
             content: 'Please Wait ...',
             dismissOnPageChange: true
@@ -115,6 +116,7 @@ export class RegisterPage {
                         obj.Email = this.signUpForm.value.email;
                         obj.Password = this.signUpForm.value.passwordFG.password;
                         obj.image = res;
+                        console.log( obj );
                         this.bookShareApi.addUser( obj )
                             .subscribe( res => {
                                 this.addStatus = res;
