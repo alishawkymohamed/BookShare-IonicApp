@@ -21,7 +21,6 @@ export class BookAPI {
         return this.http.get( `${ this.BaseUrl }/GetMostBorrowedBook` )
             .map(( responce: Response ) => {
                 this.CurrentBooks = responce.json();
-                console.log( responce );
                 return this.CurrentBooks;
 
             } );
@@ -30,7 +29,6 @@ export class BookAPI {
         return this.http.get( `${ this.BaseUrl }/GetMostBorrowedUser` )
             .map(( responce: Response ) => {
                 this.CurrentUsers = responce.json();
-                console.log( responce );
                 return this.CurrentUsers;
 
             } );
