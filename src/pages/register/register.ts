@@ -90,8 +90,8 @@ export class RegisterPage {
             this.bookShareApi.getCities( govId )
                 .subscribe( res => {
                     this.cities = res;
-                } );
-            loader.dismiss();
+                } )
+            
         } );
     }
 

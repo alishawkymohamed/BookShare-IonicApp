@@ -114,7 +114,7 @@
             </div>
             <hr/>
             <ion-item *ngIf="!addStatus">
-                <button ion-button full large color="primary" [disabled]='!signUpForm.valid || emailExist'>
+                <button ion-button full large color="primary" type="submit" [disabled]='!signUpForm.valid || emailExist'>
                 <ion-icon name="create-outline"></ion-icon> &nbsp;&nbsp;&nbsp;Sign Up</button>
             </ion-item>
         </form>
