@@ -21,6 +21,19 @@
         <ion-row>
             <ion-col>
                 <ion-slides pager loop effect="fade">
+                    <ion-slide *ngIf="DataFlag">
+                        <ion-card>
+                            <ion-card-header>
+                                <h1>Most Borrowed Book</h1> Sorry,There is No Data Yet
+                            </ion-card-header>
+                            <ion-card-content>
+                                <img src="https://image.ibb.co/k3kLf5/book1.jpg" />
+                            </ion-card-content>
+                        </ion-card>
+                    </ion-slide>
+                </ion-slides>
+
+                <ion-slides pager loop effect="fade">
                     <ion-slide *ngFor="let item of books">
                         <ion-card>
                             <ion-card-header>
@@ -35,6 +48,18 @@
                 </ion-slides>
             </ion-col>
             <ion-col>
+                <ion-slides pager loop effect="fade">
+                    <ion-slide *ngIf="UserFlag">
+                        <ion-card>
+                            <ion-card-header>
+                                <h1>Most Active Users</h1> Sorry,There is No Data Yet
+                            </ion-card-header>
+                            <ion-card-content>
+                                <img src="https://image.ibb.co/fNy6L5/images.jpg" id="UserImg" />
+                            </ion-card-content>
+                        </ion-card>
+                    </ion-slide>
+                </ion-slides>
                 <ion-slides pager loop effect="fade">
                     <ion-slide *ngFor="let item of User">
                         <ion-card>

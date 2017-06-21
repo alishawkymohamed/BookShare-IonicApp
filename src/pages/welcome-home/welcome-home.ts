@@ -11,11 +11,13 @@ import { Storage } from '@ionic/storage';
   templateUrl: 'welcome-home.html',
 })
 export class WelcomeHomePage {
-  books = [];
-  User = [];
+  books: any;
+  User: any;
   CountNot: number;
   Flag: boolean = false;
   UserName: any;
+  DataFlag: boolean;
+  UserFlag: boolean;
   constructor(private navCtrl: NavController,
     private navParams: NavParams,
     private bookAPI: BookAPI, public storage: Storage, public loading: LoadingController) { }
@@ -27,20 +29,27 @@ export class WelcomeHomePage {
       this.bookAPI.GetMostBorrowedBook().
         subscribe(data => {
           this.books = data;
-          console.log(this.books);
+          if (this.books.length == 0) {
+            this.DataFlag = true;
+          }
         });
       this.bookAPI.GetMostBorrowedUser().
         subscribe(data => {
           this.User = data;
-          console.log(this.User);
+          if (this.User.length == 0) {
+            this.UserFlag = true;
+          }
         });
       loader.dismiss();
     });
+
   }
   ionViewWillEnter() {
     let loader = this.loading.create({
       content: "Loading.."
     });
+
+
     loader.present().then(() => {
       this.storage.get("LoginEmail").then((LoginEmail) => {
         this.bookAPI.ShowNotification(LoginEmail).then((res: Array<any>) => {
