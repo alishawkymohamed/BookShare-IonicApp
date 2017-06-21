@@ -47,6 +47,7 @@ export class RegisterPage {
     }
 
     getImage () {
+        console.log( "inside getting image" );
         const options: CameraOptions = {
             quality: 50,
             destinationType: this.camera.DestinationType.DATA_URL,
@@ -86,11 +87,15 @@ export class RegisterPage {
             content: 'Please Wait ...',
             dismissOnPageChange: true
         } );
-        loader.present();
-        this.bookShareApi.getCities( govId )
-            .subscribe( res => {
-                this.cities = res;
-            } );
+        loader.present().then(() => {
+            this.bookShareApi.getCities( govId )
+                .subscribe( res => {
+                    this.cities = res;
+                } );
+            setTimeout(() => {
+                loader.dismiss();
+            }, 1000 );
+        } );
     }
 
     onSubmit () {

@@ -108,7 +108,7 @@
             <div text-center>
                 <ion-label>
                     <ion-icon name="images"></ion-icon>&nbsp; Photo</ion-label>
-                <button ion-button (click)="getImage()">Upload Photo</button>
+                <button ion-button ng-click="getImage()">Upload Photo</button>
                 <hr/>
                 <img width="125" height="125" *ngIf="image" src="{{image}}" />
             </div>
