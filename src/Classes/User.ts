@@ -5,4 +5,5 @@ export class User {
     CityID: number;
     Email: string;
     phone: number;
+    image: any;
 }

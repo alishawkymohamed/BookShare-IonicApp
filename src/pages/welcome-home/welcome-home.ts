@@ -18,12 +18,13 @@ export class WelcomeHomePage {
   UserName: any;
   DataFlag: boolean;
   UserFlag: boolean;
+  Userr: any;
   constructor(private navCtrl: NavController,
     private navParams: NavParams,
     private bookAPI: BookAPI, public storage: Storage, public loading: LoadingController) { }
   ionViewDidLoad() {
     let loader = this.loading.create({
-      content: "Loading.."
+      content: "Loading ..."
     });
     loader.present().then(() => {
       this.bookAPI.GetMostBorrowedBook().
@@ -63,10 +64,14 @@ export class WelcomeHomePage {
       });
       this.storage.get("LoginEmail").then((LoginEmail) =>
         this.bookAPI.GetUserData(LoginEmail).then((res) => {
-          this.UserName = res[0].Name;
+          this.Userr = res;
+          console.log(res);
+          console.log(this.Userr);
         })
       );
-      loader.dismiss();
+      setTimeout(function () {
+        loader.dismiss();
+      }, 2000);
     });
   }
   Search() {

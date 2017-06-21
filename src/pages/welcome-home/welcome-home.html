@@ -1,6 +1,6 @@
 <ion-header>
     <ion-toolbar>
-        <ion-title>Welcome {{UserName}}</ion-title>
+        <ion-title *ngIf="Userr">Welcome {{Userr.Name}}</ion-title>
         <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
