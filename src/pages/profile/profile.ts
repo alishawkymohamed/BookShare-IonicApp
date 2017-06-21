@@ -36,7 +36,6 @@ export class ProfilePage {
       this.storage.get( "LoginEmail" ).then(( LoginEmail ) =>
         this.bookAPI.GetUserData( LoginEmail ).then(( res ) => {
           this.data = res;
-          console.log( this.data );
         } )
       );
       this.storage.get( "LoginEmail" ).then(( LoginEmail ) =>
