@@ -57,7 +57,7 @@ export class RegisterPage {
         this.camera.getPicture( options ).then(( imageData ) => {
             let base64Image = 'data:image/jpeg;base64,' + imageData;
             this.image = base64Image;
-            this.storage.set( "base64Image", base64Image );
+            this.storage.set( "base64Image", imageData );
         }, ( err ) => {
             console.log( "error" );
         } );
@@ -101,23 +101,24 @@ export class RegisterPage {
             dismissOnPageChange: true
         } );
         loader.present().then(() => {
-            console.log( this.signUpForm.value );
-            if ( this.signUpForm.valid ) {
-                let obj: User = new User();
-                obj.Address = this.signUpForm.value.address;
-                obj.Name = this.signUpForm.value.name;
-                obj.phone = this.signUpForm.value.phone;
-                obj.CityID = this.signUpForm.value.city;
-                obj.Email = this.signUpForm.value.email;
-                obj.Password = this.signUpForm.value.passwordFG.password;
-                this.bookShareApi.addUser( obj )
-                    .subscribe( res => {
-                        this.addStatus = res;
-                    } );
-            }
-            else {
-                let validityError = true;
-            }
+            this.storage.get( "base64Image" )
+                .then( res => {
+                    if ( this.signUpForm.valid ) {
+                        let obj: User = new User();
+                        obj.Address = this.signUpForm.value.address;
+                        obj.Name = this.signUpForm.value.name;
+                        obj.phone = this.signUpForm.value.phone;
+                        obj.CityID = this.signUpForm.value.city;
+                        obj.Email = this.signUpForm.value.email;
+                        obj.Password = this.signUpForm.value.passwordFG.password;
+                        obj.image = res;
+                        this.bookShareApi.addUser( obj )
+                            .subscribe( res => {
+                                this.addStatus = res;
+                            } );
+                    }
+                } )
+
             loader.dismiss();
         } );
         // this.bookShareApi.checkMail( this.signUpForm.value.email )
