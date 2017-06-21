@@ -37,10 +37,7 @@ export class DetailsPage {
 
   ionViewDidLoad () {
 
-<<<<<<< HEAD
-=======
     console.log( 'ionViewDidLoad DetailsPage' );
->>>>>>> dcb9ab1f13e9b8250818138c0c5649d173a9b1b7
   }
   Buy () {
     let loader = this.loading.create( {
@@ -147,14 +144,7 @@ export class DetailsPage {
               this.Email = res[0].Email;
               this.Phone = res[0].Phone;
               this.Address = res[0].Address;
-<<<<<<< HEAD
             });
-=======
-              this.storage.get( "LoginEmail" ).then(( LoginEmail ) => console.log( LoginEmail ) );
-              console.log( this.AuthorFlag, this.AvailableFlag, this.DescriptionFlag,
-                this.DurationFlag, this.ForBorrowFlag, this.ForSaleFlag, this.OwnerFlag );
-            } );
->>>>>>> dcb9ab1f13e9b8250818138c0c5649d173a9b1b7
           loader.dismiss();
         } );
     } );
