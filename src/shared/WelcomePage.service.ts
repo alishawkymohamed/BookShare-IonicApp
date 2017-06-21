@@ -7,162 +7,162 @@ import { Storage } from '@ionic/storage';
 
 @Injectable()
 export class BookAPI {
-    private BaseUrl = 'http://localhost:2725/api/Book';
+    private BaseUrl = 'http://bookshareapi-service20170619054337.azurewebsites.net/api/book';
     CurrentBooks: any = {};
     CurrentUsers: any = {};
     searchdata: any = {};
     DetailsData: any = {};
 
 
-    constructor(private http: Http, public storage: Storage) {
+    constructor( private http: Http, public storage: Storage ) {
     }
 
-    GetMostBorrowedBook() {
-        return this.http.get(`${this.BaseUrl}/GetMostBorrowedBook`)
-            .map((responce: Response) => {
+    GetMostBorrowedBook () {
+        return this.http.get( `${ this.BaseUrl }/GetMostBorrowedBook` )
+            .map(( responce: Response ) => {
                 this.CurrentBooks = responce.json();
-                console.log(responce);
+                console.log( responce );
                 return this.CurrentBooks;
 
-            });
+            } );
     }
-    GetMostBorrowedUser() {
-        return this.http.get(`${this.BaseUrl}/GetMostBorrowedUser`)
-            .map((responce: Response) => {
+    GetMostBorrowedUser () {
+        return this.http.get( `${ this.BaseUrl }/GetMostBorrowedUser` )
+            .map(( responce: Response ) => {
                 this.CurrentUsers = responce.json();
-                console.log(responce);
+                console.log( responce );
                 return this.CurrentUsers;
 
-            });
+            } );
     }
-    Search(Search_txt: string, Search_By: string, Email: String): Observable<any> {
+    Search ( Search_txt: string, Search_By: string, Email: String ): Observable<any> {
         let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
+        headers.append( 'Content-Type', 'application/json' );
         let obj = { Search_txt: Search_txt, Search_By: Search_By, Email: Email };
         let body = obj;
-        return this.http.post(`${this.BaseUrl}/Search`, body, headers)
-            .map(res => {
+        return this.http.post( `${ this.BaseUrl }/Search`, body, headers )
+            .map( res => {
                 this.searchdata = res.json();
                 return this.searchdata;
-            });
+            } );
     }
 
-    Details(ID: number, SearchBy: string) {
+    Details ( ID: number, SearchBy: string ) {
         let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
+        headers.append( 'Content-Type', 'application/json' );
         let obj = { ID: ID, SearchBy: SearchBy };
         let body = obj;
-        return new Promise(resolve => {
+        return new Promise( resolve => {
             //         this._http.post( `${ this.baseUrl }/checkAuth`, body, headers )
             //             .subscribe( res => resolve( res.json() ) );
             //     
-            this.http.post(`${this.BaseUrl}/Details`, body, headers)
+            this.http.post( `${ this.BaseUrl }/Details`, body, headers )
                 //  .map( res => {
-                .subscribe(res => resolve(res.json()));
+                .subscribe( res => resolve( res.json() ) );
             // this.DetailsData = res.json();
             //return this.DetailsData;
-        });
+        } );
     }
-    GetUserData(Email: string) {
+    GetUserData ( Email: string ) {
         let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
+        headers.append( 'Content-Type', 'application/json' );
         let obj = { Email: Email };
         let body = obj;
-        return new Promise(resolve => {
-            this.http.post(`${this.BaseUrl}/GetUserData`, body, headers)
-                .subscribe(res => resolve(res.json()));
-        });
+        return new Promise( resolve => {
+            this.http.post( `${ this.BaseUrl }/GetUserData`, body, headers )
+                .subscribe( res => resolve( res.json() ) );
+        } );
     }
 
-    GetUserBook(Email: string) {
+    GetUserBook ( Email: string ) {
         let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
+        headers.append( 'Content-Type', 'application/json' );
         let obj = { Email: Email };
         let body = obj;
-        return new Promise(resolve => {
-            this.http.post(`${this.BaseUrl}/GetUserBook`, body, headers)
-                .subscribe(res => resolve(res.json()));
-        });
+        return new Promise( resolve => {
+            this.http.post( `${ this.BaseUrl }/GetUserBook`, body, headers )
+                .subscribe( res => resolve( res.json() ) );
+        } );
     }
-    BuyBorrow(SenderMail: string, BookID: number, Action: number) {
+    BuyBorrow ( SenderMail: string, BookID: number, Action: number ) {
         let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
+        headers.append( 'Content-Type', 'application/json' );
         let obj = { SenderMail: SenderMail, BookID: BookID, Action: Action };
         let body = obj;
-        return new Promise(resolve => {
-            this.http.post(`${this.BaseUrl}/BuyBorrow`, body, headers)
-                .subscribe(res => resolve(res.json()));
-        });
+        return new Promise( resolve => {
+            this.http.post( `${ this.BaseUrl }/BuyBorrow`, body, headers )
+                .subscribe( res => resolve( res.json() ) );
+        } );
     }
-    ShowNotification(Email: string) {
+    ShowNotification ( Email: string ) {
         let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
+        headers.append( 'Content-Type', 'application/json' );
         let obj = { Email: Email };
         let body = obj;
-        return new Promise(resolve => {
-            this.http.post(`${this.BaseUrl}/ShowNotification`, body, headers)
-                .subscribe(res => resolve(res.json()));
-        });
+        return new Promise( resolve => {
+            this.http.post( `${ this.BaseUrl }/ShowNotification`, body, headers )
+                .subscribe( res => resolve( res.json() ) );
+        } );
     }
-    AcceptNotication(NotID: number) {
+    AcceptNotication ( NotID: number ) {
         let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
+        headers.append( 'Content-Type', 'application/json' );
         let obj = { NotID: NotID };
         let body = obj;
-        return new Promise(resolve => {
-            this.http.post(`${this.BaseUrl}/AcceptNotication`, body, headers)
-                .subscribe(res => resolve(res.json()));
-        });
+        return new Promise( resolve => {
+            this.http.post( `${ this.BaseUrl }/AcceptNotication`, body, headers )
+                .subscribe( res => resolve( res.json() ) );
+        } );
     }
-    PendingList(Email: string) {
+    PendingList ( Email: string ) {
         let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
+        headers.append( 'Content-Type', 'application/json' );
         let obj = { Email: Email };
         let body = obj;
-        return new Promise(resolve => {
-            this.http.post(`${this.BaseUrl}/PendingList`, body, headers)
-                .subscribe(res => resolve(res.json()));
-        });
+        return new Promise( resolve => {
+            this.http.post( `${ this.BaseUrl }/PendingList`, body, headers )
+                .subscribe( res => resolve( res.json() ) );
+        } );
     }
-    CancelNot(NotID: number, Email: string) {
+    CancelNot ( NotID: number, Email: string ) {
         let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
+        headers.append( 'Content-Type', 'application/json' );
         let obj = { NotID: NotID, Email: Email };
         let body = obj;
-        return new Promise(resolve => {
-            this.http.post(`${this.BaseUrl}/CancelNot`, body, headers)
-                .subscribe(res => resolve(res.json()));
-        });
+        return new Promise( resolve => {
+            this.http.post( `${ this.BaseUrl }/CancelNot`, body, headers )
+                .subscribe( res => resolve( res.json() ) );
+        } );
     }
-    UserBorrowed(Email: string) {
+    UserBorrowed ( Email: string ) {
         let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
+        headers.append( 'Content-Type', 'application/json' );
         let obj = { Email: Email };
         let body = obj;
-        return new Promise(resolve => {
-            this.http.post(`${this.BaseUrl}/UserBorrowed`, body, headers)
-                .subscribe(res => resolve(res.json()));
-        });
+        return new Promise( resolve => {
+            this.http.post( `${ this.BaseUrl }/UserBorrowed`, body, headers )
+                .subscribe( res => resolve( res.json() ) );
+        } );
     }
-    RejectNotification(NotID: number) {
+    RejectNotification ( NotID: number ) {
         let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
+        headers.append( 'Content-Type', 'application/json' );
         let obj = { NotID: NotID };
         let body = obj;
-        return new Promise(resolve => {
-            this.http.post(`${this.BaseUrl}/RejectNotification`, body, headers)
-                .subscribe(res => resolve(res.json()));
-        });
+        return new Promise( resolve => {
+            this.http.post( `${ this.BaseUrl }/RejectNotification`, body, headers )
+                .subscribe( res => resolve( res.json() ) );
+        } );
     }
-    RejectedList(Email: string) {
+    RejectedList ( Email: string ) {
         let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
+        headers.append( 'Content-Type', 'application/json' );
         let obj = { Email: Email };
         let body = obj;
-        return new Promise(resolve => {
-            this.http.post(`${this.BaseUrl}/RejectedList`, body, headers)
-                .subscribe(res => resolve(res.json()));
-        });
+        return new Promise( resolve => {
+            this.http.post( `${ this.BaseUrl }/RejectedList`, body, headers )
+                .subscribe( res => resolve( res.json() ) );
+        } );
     }
 
 }

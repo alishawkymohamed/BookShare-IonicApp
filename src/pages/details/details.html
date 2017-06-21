@@ -19,7 +19,8 @@
             <ion-col *ngFor="let item of data">
                 <ion-item>
                     <ion-avatar item-left>
-                        <img src="data:image/png;base64,{{item.cover}}" id="Cover">
+                        <img *ngIf="item.cover" src="data:image/png;base64,{{item.cover}}" id="Cover">
+                        <img *ngIf="!item.cover" src="https://image.ibb.co/dCLLf5/noimagefound.jpg" id="Cover">
                     </ion-avatar>
                     {{item.name}}
                     <p *ngIf="AuthorFlag">{{item.Author}}</p>
@@ -27,8 +28,8 @@
                 <ion-item>
                     <ion-list>
                         <ion-item>
-                            <h1 *ngIf="DescriptionFlag">Description:{{item.Description}}</h1><br>
-                            <h1 *ngIf="Email ">Email:{{item.Email}}</h1><br>
+                            <h2 *ngIf="DescriptionFlag">Description:{{item.Description}}</h2><br>
+                            <h2 *ngIf="Email ">Email:{{item.Email}}</h2><br>
                         </ion-item>
                         <ion-item>
                             <h2 *ngIf="OwnerFlag ">Owner:{{item.Owner}}</h2><br>
@@ -57,7 +58,7 @@
             </ion-col>
             <ion-col>
                 <p #error *ngIf="Flag != true" style="color: #ea6153;" padding-left>{{errors}}</p>
-                <ion-slides pager loop effect="fade" *ngIf="Property">
+                <ion-slides pager loop effect="fade">
                     <ion-slide *ngFor="let item of BookData">
                         <ion-card>
                             <ion-card-header>
@@ -65,8 +66,9 @@
                                 {{item.Title}}
                             </ion-card-header>
                             <ion-card-content>
-                                <img src="data:image/png;base64,{{item.Cover}}" id="Image">
-                                <p>Author:{{item.Author}} <br> Available:{{item.Available}} <br> Description:{{item.Description}}<br> ForBorrow:{{item.ForBorrow}},Duration:{{item.Duration}} <br>ForSale:{{item.ForSale}},Price:{{item.Price}}
+                                <img *ngIf="item.Cover" src="data:image/png;base64,{{item.Cover}}" id="Image">
+                                <img *ngIf="!item.Cover" src="https://image.ibb.co/dCLLf5/noimagefound.jpg" id="Image">
+                                <p>Author:{{item.Author}} <br> Available:{{item.Available}} <br> Description:{{item.Description}}<br>                                    ForBorrow:{{item.ForBorrow}},Duration:{{item.Duration}} <br>ForSale:{{item.ForSale}},Price:{{item.Price}}
                                 </p>
                             </ion-card-content>
                         </ion-card>

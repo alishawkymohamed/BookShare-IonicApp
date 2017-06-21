@@ -1,6 +1,38 @@
-page-welcome-home {}
 
 #Image {
     height: 300px;
     width: 250px
+}
+
+.card-background-page {
+
+  ion-card {
+    position: relative;
+    text-align: center;
+  }
+
+  .card-title {
+    position: absolute;
+    top: 15%;
+    font-size: 50px;
+    width: 100%;
+    font-weight: bold;
+    color: #333;
+  }
+
+  .card-subtitle {
+    font-size: 30px;
+    position: absolute;
+    top: 40%;
+    width: 100%;
+    color: lightslategrey;
+  }
+ion-card img{
+  -webkit-filter: blur(3px);
+  -moz-filter: blur(3px);
+  -o-filter: blur(3px);
+  -ms-filter: blur(3px);
+  filter: blur(3px);
+  height: 500px;
+}
 }

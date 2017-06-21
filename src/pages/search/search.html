@@ -41,7 +41,7 @@
                 <ion-card-content>
                     <p> Owner:{{item.Name}}</p>
                     <ion-avatar item-left>
-                        <img *ngIf="!item.Cover" src="../assets/NotPictured.jpg" id="Image" />
+                        <img *ngIf="!item.Cover" src="https://image.ibb.co/dCLLf5/noimagefound.jpg" id="Image" />
                         <img *ngIf="item.Cover" src="data:image/png;base64,{{item.Cover}}" />
                     </ion-avatar>
                     <button ion-button full id="{{item.id}}" (click)="Details($event)">Details</button>

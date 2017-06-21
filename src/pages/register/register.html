@@ -34,12 +34,13 @@
                 <ion-item>
                     <ion-label floating>
                         <ion-icon name="at"></ion-icon>&nbsp; E-Mail</ion-label>
-                    <ion-input formControlName="email" type="email"></ion-input>
+                    <ion-input #email formControlName="email" type="email" (keyup)="checkEmail(email.value)"></ion-input>
                 </ion-item>
                 <p *ngIf="(signUpForm.get('email').touched && signUpForm.get('email').errors) && signUpForm.get('email').errors.required"
                     style="color: #ea6153;" padding-left>E-Mail is Required !!</p>
                 <p *ngIf="(signUpForm.get('email').touched && signUpForm.get('email').errors) && signUpForm.get('email').errors.pattern"
                     style="color: #ea6153;" padding-left>Please Enter Correct E-mail !!</p>
+                <p *ngIf="emailExist" style="color: #ea6153;" padding-left>Email is already Exist .. Try another One !!</p>
             </div>
 
             <div formGroupName="passwordFG">
@@ -103,20 +104,20 @@
                     <ion-input formControlName="address" type="text"></ion-input>
                 </ion-item>
             </div>
-            <!--<hr/>
+            <hr/>
             <hr/>
             <div text-center>
                 <ion-label>
                     <ion-icon name="images"></ion-icon>&nbsp; Photo</ion-label>
                 <button ion-button (click)="getImage()">Upload Photo</button>
                 <hr/>
-                <img *ngIf="image" [src]="image" />
+                <img *ngIf="image" src="{{image}}" />
             </div>
-            <hr/>-->
+            <hr/>
 
             <hr/>
             <ion-item *ngIf="!addStatus">
-                <button ion-button full large color="primary" [disabled]='!signUpForm.valid'>
+                <button ion-button full large color="primary" [disabled]='!signUpForm.valid || emailExist'>
                 <ion-icon name="create-outline"></ion-icon> &nbsp;&nbsp;&nbsp;Sign Up</button>
             </ion-item>
         </form>

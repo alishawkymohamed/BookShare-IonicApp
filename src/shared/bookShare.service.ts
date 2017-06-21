@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http'
+import { Http } from '@angular/http';
 import 'rxjs';
 import { Observable } from 'rxjs/Observable';
 import { User } from "../Classes/User";
@@ -8,13 +8,15 @@ import { Book } from "../Classes/Book";
 @Injectable()
 export class BookShareApi {
 
-    baseUrl: string = "http://localhost:2725/api/user";
+    baseUrl: string = "http://bookshareapi-service20170619054337.azurewebsites.net/api/user";
     authData: any;
     Govs: any[];
     Cities: any[];
     userAddingStatus: any;
     book: any;
     updateFlag: boolean;
+    emails: any;
+
     constructor( private _http: Http ) {
     }
 
@@ -86,21 +88,17 @@ export class BookShareApi {
                 return this.updateFlag;
             } );
     }
+
+    getEmails () {
+        return this._http.get( `${ this.baseUrl }/getEmails` )
+            .map( res => {
+                this.emails = res.json();
+                return this.emails;
+            } );
+    }
 }
 
-    // checkMail ( emailz: string ): Observable<any> {
-    //     let headers = new Headers();
-    //     headers.append( 'Content-Type', 'application/json' );
-    //     let obj = { email: emailz };
-    //     let body = new FormData();
-    //     body.append( "email", emailz );
 
-    //     return this._http.post( `${ this.baseUrl }/checkemail`, body, headers )
-    //         .map( res => {
-    //             let emailExistance = res.json();
-    //             return emailExistance;
-    //         } );
-    // }
     // checkAuth ( email: string, pass: string ) {
     //     let headers = new Headers();
     //     headers.append( 'Content-Type', 'application/json' );

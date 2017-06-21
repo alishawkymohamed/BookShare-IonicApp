@@ -21,6 +21,8 @@ export class RegisterPage {
     cities: any[];
     image: any;
     addStatus = false;
+    emailExist: boolean = false;
+    emails: any[];
 
     constructor( private navCtrl: NavController,
         private navParams: NavParams,
@@ -28,8 +30,8 @@ export class RegisterPage {
         private bookShareApi: BookShareApi,
         private camera: Camera,
         private storage: Storage,
-        private loadingController: LoadingController ) {
-
+        private loadingController: LoadingController
+    ) {
         this.signUpForm = this.formBuilder.group( {
             name: ['', Validators.compose( [Validators.required, Validators.minLength( 2 ), Validators.maxLength( 100 )] )],
             email: ['', Validators.compose( [Validators.required, Validators.pattern( this.emailRegex )] )],
@@ -70,6 +72,10 @@ export class RegisterPage {
             this.bookShareApi.getGovs()
                 .subscribe( res => {
                     this.govs = res;
+                } );
+            this.bookShareApi.getEmails()
+                .subscribe( res => {
+                    this.storage.set( 'emails', res );
                 } );
             loader.dismiss();
         } );
@@ -122,5 +128,18 @@ export class RegisterPage {
     }
     continue () {
         this.navCtrl.popToRoot();
+    }
+
+    checkEmail ( email: string ) {
+        console.log( email );
+        this.storage.get( 'emails' ).then( res => {
+            this.emails = res;
+            if ( this.emails.indexOf( email.toUpperCase() ) != -1 ) {
+                this.emailExist = true;
+            }
+            else {
+                this.emailExist = false;
+            }
+        } );
     }
 }
