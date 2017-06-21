@@ -86,13 +86,11 @@ export class RegisterPage {
             content: 'Please Wait ...',
             dismissOnPageChange: true
         } );
-        loader.present().then(() => {
-            this.bookShareApi.getCities( govId )
-                .subscribe( res => {
-                    this.cities = res;
-                } )
-            
-        } );
+        loader.present();
+        this.bookShareApi.getCities( govId )
+            .subscribe( res => {
+                this.cities = res;
+            } );
     }
 
     onSubmit () {
