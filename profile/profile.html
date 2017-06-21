@@ -10,7 +10,7 @@
                 <ion-item>
                     <ion-avatar item-left>
                         <img src="data:image/png;base64,{{item.Image}}" id="Imge" *ngIf="ImageFlag==true">
-                        <img src="https://image.ibb.co/fNy6L5/images.jpg" id="Imge" *ngIf="ImageFlag !=true">
+                        <img src="../assets/images .jpg" id="Imge" *ngIf="ImageFlag !=true">
                     </ion-avatar>
                     <!--<button ion-button icon-left>
                       <ion-icon name="settings"></ion-icon>Edit Profile
@@ -41,7 +41,7 @@
                                 </ion-card-header>
                                 <ion-card-content>
                                     <img *ngIf="item.Cover" src="data:image/png;base64,{{item.Cover}}" id="Image" />
-                                    <img *ngIf="!item.Cover" src="https://image.ibb.co/fNy6L5/images.jpg" id="Image" />
+                                    <img *ngIf="!item.Cover" src="../assets/NotPictured.jpg" id="Image" />
                                     <p>Author : {{item.Author}} <br> Available : {{item.Available}} <br> Description : {{item.Description}}<br/>                                        ForBorrow : {{item.ForBorrow}} <span *ngIf="item.ForBorrow">=> Duration : {{item.Duration}}</span>                                        <br/>ForSale : {{item.ForSale}} <span *ngIf="item.ForSale">=> Price : {{item.Price}}</span>
                                     </p>
                                     <button ion-button (click)='editBook($event,item.BookID)'>Edit</button>

@@ -4,10 +4,10 @@ import { Storage } from '@ionic/storage';
 import { BookAPI } from '../../shared/shared';
 import { AlertController } from 'ionic-angular';
 
-@Component({
+@Component( {
   selector: 'page-details',
   templateUrl: 'details.html',
-})
+} )
 export class DetailsPage {
   buy: any;
   borrow: any;
@@ -28,105 +28,116 @@ export class DetailsPage {
   Address: any;
   BookData: any;
   Clicked: boolean = false;
-  @ViewChild('error') ele: ElementRef;
+  @ViewChild( 'error' ) ele: ElementRef;
   errors: any;
   Flag: boolean = true;
-  constructor(public navCtrl: NavController, public navParams: NavParams
-    , public bookApi: BookAPI, public storage: Storage, public alertCtrl: AlertController, public loading: LoadingController) {
+  constructor( public navCtrl: NavController, public navParams: NavParams
+    , public bookApi: BookAPI, public storage: Storage, public alertCtrl: AlertController, public loading: LoadingController ) {
   }
 
-  ionViewDidLoad() {
+  ionViewDidLoad () {
 
+<<<<<<< HEAD
+=======
+    console.log( 'ionViewDidLoad DetailsPage' );
+>>>>>>> dcb9ab1f13e9b8250818138c0c5649d173a9b1b7
   }
-  Buy() {
-    let loader = this.loading.create({
-      content: "loading"
-    });
+  Buy () {
+    let loader = this.loading.create( {
+      content: "Loading ..."
+    } );
     loader.present().then(() => {
-      Promise.all([this.storage.get("LoginEmail"), this.storage.get('ID')]).
-        then((val) => {
-          this.bookApi.BuyBorrow(val[0], val[1], 0).then((res) => {
+      Promise.all( [this.storage.get( "LoginEmail" ), this.storage.get( 'ID' )] ).
+        then(( val ) => {
+          this.bookApi.BuyBorrow( val[0], val[1], 0 ).then(( res ) => {
             this.buy = res;
-            if (res == true) {
-              let alert = this.alertCtrl.create({
+            if ( res == true ) {
+              let alert = this.alertCtrl.create( {
                 title: 'New Request!',
                 subTitle: 'Your Request Has been sent successfully!',
                 buttons: ['OK']
-              });
+              } );
               alert.present();
               this.ForSaleFlag = false;
             }
             else {
-              if (res == false) {
-                let alert = this.alertCtrl.create({
+              if ( res == false ) {
+                let alert = this.alertCtrl.create( {
                   title: 'Error!',
                   subTitle: 'There is An error..We are very sorry we will fix it soon..!',
                   buttons: ['OK']
-                });
+                } );
                 alert.present();
               }
               else {
-                let alert = this.alertCtrl.create({
+                let alert = this.alertCtrl.create( {
                   title: 'Error!',
                   subTitle: 'You Can\'t Send Two Request.!',
                   buttons: ['OK']
-                });
+                } );
                 alert.present();
               }
 
             }
 
-          });
+          } );
           loader.dismiss();
-        });
-    });
+        } );
+    } );
   }
-  Borrow() {
-    let loader = this.loading.create({
+  Borrow () {
+    let loader = this.loading.create( {
       content: "loading"
-    });
+    } );
     loader.present().then(() => {
+<<<<<<< HEAD
       Promise.all([this.storage.get("LoginEmail"), this.storage.get('ID')]).
         then((val) => {
           this.bookApi.BuyBorrow(val[0], val[1], 1).then((res) => {
+=======
+      Promise.all( [this.storage.get( "LoginEmail" ), this.storage.get( 'ID' )] ).
+        then(( val ) => {
+          console.log( val[0], val[1] );
+          this.bookApi.BuyBorrow( val[0], val[1], 1 ).then(( res ) => {
+>>>>>>> dcb9ab1f13e9b8250818138c0c5649d173a9b1b7
             this.buy = res;
-            if (res == true) {
-              let alert = this.alertCtrl.create({
+            if ( res == true ) {
+              let alert = this.alertCtrl.create( {
                 title: 'New Request!',
                 subTitle: 'Your Request Has been sent successfully!',
                 buttons: ['OK']
-              });
+              } );
               alert.present();
               this.ForBorrowFlag = false;
 
             }
             else {
-              if (res == false) {
-                let alert = this.alertCtrl.create({
+              if ( res == false ) {
+                let alert = this.alertCtrl.create( {
                   title: 'Error!',
                   subTitle: 'There is An error..We are very sorry we will fix it soon..!',
                   buttons: ['OK']
-                });
+                } );
                 alert.present();
               }
               else {
-                let alert = this.alertCtrl.create({
+                let alert = this.alertCtrl.create( {
                   title: 'Error!',
                   subTitle: 'You Can\'t Send Two Request.!',
                   buttons: ['OK']
-                });
+                } );
                 alert.present();
               }
             }
-          });
+          } );
           loader.dismiss();
-        });
-    });
+        } );
+    } );
   }
-  ionViewWillEnter() {
-    let loader = this.loading.create({
+  ionViewWillEnter () {
+    let loader = this.loading.create( {
       content: "loading"
-    });
+    } );
     loader.present().then(() => {
       Promise.all([this.storage.get('ID'), this.storage.get('SearchBy')])
         .then((val) => {
@@ -143,26 +154,34 @@ export class DetailsPage {
               this.Email = res[0].Email;
               this.Phone = res[0].Phone;
               this.Address = res[0].Address;
+<<<<<<< HEAD
             });
+=======
+              this.storage.get( "LoginEmail" ).then(( LoginEmail ) => console.log( LoginEmail ) );
+              console.log( this.AuthorFlag, this.AvailableFlag, this.DescriptionFlag,
+                this.DurationFlag, this.ForBorrowFlag, this.ForSaleFlag, this.OwnerFlag );
+            } );
+>>>>>>> dcb9ab1f13e9b8250818138c0c5649d173a9b1b7
           loader.dismiss();
-        });
-    });
+        } );
+    } );
 
   }
-  GetBook() {
+  GetBook () {
     this.Clicked = true;
-    let loader = this.loading.create({
+    let loader = this.loading.create( {
       content: "loading"
-    });
+    } );
     loader.present().then(() => {
-      this.bookApi.GetUserBook(this.Email).then((res) => {
+      this.bookApi.GetUserBook( this.Email ).then(( res ) => {
         this.BookData = res;
-        if (this.BookData == false) {
+        console.log( res ,this.BookData);
+        if ( this.BookData == false ) {
           this.Flag = false;
           this.errors = "There is no Books To Show";
         }
         loader.dismiss();
-      });
-    });
+      } );
+    } );
   }
 }
