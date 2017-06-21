@@ -90,16 +90,9 @@ export class DetailsPage {
       content: "loading"
     } );
     loader.present().then(() => {
-<<<<<<< HEAD
       Promise.all([this.storage.get("LoginEmail"), this.storage.get('ID')]).
         then((val) => {
           this.bookApi.BuyBorrow(val[0], val[1], 1).then((res) => {
-=======
-      Promise.all( [this.storage.get( "LoginEmail" ), this.storage.get( 'ID' )] ).
-        then(( val ) => {
-          console.log( val[0], val[1] );
-          this.bookApi.BuyBorrow( val[0], val[1], 1 ).then(( res ) => {
->>>>>>> dcb9ab1f13e9b8250818138c0c5649d173a9b1b7
             this.buy = res;
             if ( res == true ) {
               let alert = this.alertCtrl.create( {
