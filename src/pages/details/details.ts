@@ -37,7 +37,6 @@ export class DetailsPage {
 
   ionViewDidLoad() {
 
-    console.log('ionViewDidLoad DetailsPage');
   }
   Buy() {
     let loader = this.loading.create({
@@ -89,7 +88,6 @@ export class DetailsPage {
     loader.present().then(() => {
       Promise.all([this.storage.get("LoginEmail"), this.storage.get('ID')]).
         then((val) => {
-          console.log(val[0], val[1]);
           this.bookApi.BuyBorrow(val[0], val[1], 1).then((res) => {
             this.buy = res;
             if (res == true) {
@@ -132,7 +130,6 @@ export class DetailsPage {
     loader.present().then(() => {
       Promise.all([this.storage.get('ID'), this.storage.get('SearchBy')])
         .then((val) => {
-          console.log(val[0], val[1]);
           this.bookApi.Details(val[0], val[1])
             .then((res) => {
               this.data = res;
@@ -146,9 +143,6 @@ export class DetailsPage {
               this.Email = res[0].Email;
               this.Phone = res[0].Phone;
               this.Address = res[0].Address;
-              this.storage.get("LoginEmail").then((LoginEmail) => console.log(LoginEmail));
-              console.log(this.AuthorFlag, this.AvailableFlag, this.DescriptionFlag,
-                this.DurationFlag, this.ForBorrowFlag, this.ForSaleFlag, this.OwnerFlag);
             });
           loader.dismiss();
         });

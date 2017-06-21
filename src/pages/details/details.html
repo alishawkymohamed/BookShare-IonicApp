@@ -28,7 +28,7 @@
                     <ion-list>
                         <ion-item>
                             <h1 *ngIf="DescriptionFlag">Description:{{item.Description}}</h1><br>
-                            <h1 *ngIf="Email ">Email:{{item.Email}}</h1><br>
+                            <h3 *ngIf="Email ">Email:{{item.Email}}</h3><br>
                         </ion-item>
                         <ion-item>
                             <h2 *ngIf="OwnerFlag ">Owner:{{item.Owner}}</h2><br>
@@ -61,7 +61,7 @@
                     <ion-slide *ngFor="let item of BookData">
                         <ion-card>
                             <ion-card-header>
-                                <h1>User Book</h1>
+                                <h3>User Book</h3>
                                 {{item.Title}}
                             </ion-card-header>
                             <ion-card-content>

@@ -39,7 +39,7 @@
                     Result
                 </ion-card-header>
                 <ion-card-content>
-                    <p> Owner:{{item.Name}}</p>
+                    <p> {{item.Name}}</p>
                     <ion-avatar item-left>
                         <img *ngIf="!item.Cover" src="../assets/NotPictured.jpg" id="Image" />
                         <img *ngIf="item.Cover" src="data:image/png;base64,{{item.Cover}}" />
