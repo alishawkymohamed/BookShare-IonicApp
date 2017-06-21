@@ -37,7 +37,10 @@ export class DetailsPage {
 
   ionViewDidLoad () {
 
+<<<<<<< HEAD
+=======
     console.log( 'ionViewDidLoad DetailsPage' );
+>>>>>>> dcb9ab1f13e9b8250818138c0c5649d173a9b1b7
   }
   Buy () {
     let loader = this.loading.create( {
@@ -87,10 +90,16 @@ export class DetailsPage {
       content: "loading"
     } );
     loader.present().then(() => {
+<<<<<<< HEAD
+      Promise.all([this.storage.get("LoginEmail"), this.storage.get('ID')]).
+        then((val) => {
+          this.bookApi.BuyBorrow(val[0], val[1], 1).then((res) => {
+=======
       Promise.all( [this.storage.get( "LoginEmail" ), this.storage.get( 'ID' )] ).
         then(( val ) => {
           console.log( val[0], val[1] );
           this.bookApi.BuyBorrow( val[0], val[1], 1 ).then(( res ) => {
+>>>>>>> dcb9ab1f13e9b8250818138c0c5649d173a9b1b7
             this.buy = res;
             if ( res == true ) {
               let alert = this.alertCtrl.create( {
@@ -130,11 +139,10 @@ export class DetailsPage {
       content: "loading"
     } );
     loader.present().then(() => {
-      Promise.all( [this.storage.get( 'ID' ), this.storage.get( 'SearchBy' )] )
-        .then(( val ) => {
-          console.log( val[0], val[1] );
-          this.bookApi.Details( val[0], val[1] )
-            .then(( res ) => {
+      Promise.all([this.storage.get('ID'), this.storage.get('SearchBy')])
+        .then((val) => {
+          this.bookApi.Details(val[0], val[1])
+            .then((res) => {
               this.data = res;
               this.AuthorFlag = res[0].Author;
               this.AvailableFlag = res[0].Available;
@@ -146,10 +154,14 @@ export class DetailsPage {
               this.Email = res[0].Email;
               this.Phone = res[0].Phone;
               this.Address = res[0].Address;
+<<<<<<< HEAD
+            });
+=======
               this.storage.get( "LoginEmail" ).then(( LoginEmail ) => console.log( LoginEmail ) );
               console.log( this.AuthorFlag, this.AvailableFlag, this.DescriptionFlag,
                 this.DurationFlag, this.ForBorrowFlag, this.ForSaleFlag, this.OwnerFlag );
             } );
+>>>>>>> dcb9ab1f13e9b8250818138c0c5649d173a9b1b7
           loader.dismiss();
         } );
     } );
