@@ -14,10 +14,12 @@ export class WelcomeHomePage {
 
   books: any[];
   User: any;
-  Userr: any;
   CountNot: number;
   Flag: boolean = false;
   UserName: any;
+  DataFlag: boolean;
+  UserFlag: boolean;
+  Userr: any;
 
   constructor(private navCtrl: NavController,
     private navParams: NavParams,
