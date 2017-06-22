@@ -3,53 +3,53 @@ import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { BookAPI } from '../../shared/shared';
 import { Storage } from '@ionic/storage';
 import { AddBookPage, EditBookPage } from "../pages";
-@Component( {
+@Component({
   selector: 'page-profile',
   templateUrl: 'profile.html',
-} )
+})
 export class ProfilePage {
   data: any;
   Book: any;
   errors: any;
   ImageFlag: boolean = false;
-  @ViewChild( 'error' ) ele: ElementRef;
+  @ViewChild('error') ele: ElementRef;
 
-  constructor( private navCtrl: NavController,
-    private navParams: NavParams, private bookAPI: BookAPI, public storage: Storage, public loading: LoadingController ) {
+  constructor(private navCtrl: NavController,
+    private navParams: NavParams, private bookAPI: BookAPI, public storage: Storage, public loading: LoadingController) {
   }
 
-  goToAddBook () {
-    this.storage.get( "LoginEmail" )
-      .then(( LoginEmail ) => {
-        this.navCtrl.push( AddBookPage, LoginEmail );
-      } );
+  goToAddBook() {
+    this.storage.get("LoginEmail")
+      .then((LoginEmail) => {
+        this.navCtrl.push(AddBookPage, LoginEmail);
+      });
   }
 
-  ionViewDidLoad () {
+  ionViewDidLoad() {
 
   }
-  ionViewWillEnter () {
-    let loader = this.loading.create( {
+  ionViewWillEnter() {
+    let loader = this.loading.create({
       content: "Loading Profile Data ..."
-    } );
+    });
     loader.present().then(() => {
-      this.storage.get( "LoginEmail" ).then(( LoginEmail ) =>
-        this.bookAPI.GetUserData( LoginEmail ).then(( res ) => {
+      this.storage.get("LoginEmail").then((LoginEmail) =>
+        this.bookAPI.GetUserData(LoginEmail).then((res) => {
           this.data = res;
-        } )
+        })
       );
-      this.storage.get( "LoginEmail" ).then(( LoginEmail ) =>
-        this.bookAPI.GetUserBook( LoginEmail ).then(( res ) => {
+      this.storage.get("LoginEmail").then((LoginEmail) =>
+        this.bookAPI.GetUserBook(LoginEmail).then((res) => {
           this.Book = res;
-        } )
+          if (this.Book) {
+            loader.dismiss();
+          }
+        })
       );
-      setTimeout( function () {
-        loader.dismiss();
-      }, 2000 );
-    } );
+    });
   }
 
-  editBook ( $event, BookID ) {
-    this.navCtrl.push( EditBookPage, BookID );
+  editBook($event, BookID) {
+    this.navCtrl.push(EditBookPage, BookID);
   }
 }

@@ -14,7 +14,7 @@
   </ion-card>
 
   <ion-list no-lines>
-    <form [formGroup]="addBookForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="addBookForm">
 
       <div>
         <ion-item>
@@ -89,8 +89,17 @@
         </ion-item>
       </div>
 
+      <div text-center>
+        <ion-label>
+          <ion-icon name="images"></ion-icon>&nbsp; Cover</ion-label>
+        <button ion-button (click)="getImage()" [disabled]="addStatus">Upload Cover</button>
+        <hr/>
+        <img width="200" height="200" *ngIf="image" src="{{image}}" />
+      </div>
+      <hr/>
+
       <ion-item *ngIf="!addStatus">
-        <button ion-button full large color="primary" [disabled]='!addBookForm.valid || (forsale.checked == true && addBookForm.get("price").pristine) || (forBorrow.checked == true && addBookForm.get("duration").pristine)'>
+        <button ion-button full large color="primary" (click)="onSubmit()" [disabled]='!addBookForm.valid || (forsale.checked == true && addBookForm.get("price").pristine) || (forBorrow.checked == true && addBookForm.get("duration").pristine)'>
                 <ion-icon name="create-outline"></ion-icon> &nbsp;&nbsp;&nbsp;Create Book</button>
       </ion-item>
     </form>

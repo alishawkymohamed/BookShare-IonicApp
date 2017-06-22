@@ -16,7 +16,7 @@
           <ion-item>
             <ion-label floating>
               <ion-icon name="book"></ion-icon>&nbsp; Title</ion-label>
-            <ion-input formControlName="title" type="text" [value]="book.Title"></ion-input>
+            <ion-input formControlName="title" type="text"></ion-input>
           </ion-item>
           <p *ngIf="(editBookForm.get('title').touched && editBookForm.get('title').errors) && editBookForm.get('title').errors.required"
             style="color: #ea6153;" padding-left>Title is Required !!</p>
@@ -28,7 +28,7 @@
           <ion-item>
             <ion-label floating>
               <ion-icon name="person"></ion-icon>&nbsp; Author</ion-label>
-            <ion-input formControlName="author" type="text" [value]='book.Author'></ion-input>
+            <ion-input formControlName="author" type="text"></ion-input>
           </ion-item>
           <p *ngIf="(editBookForm.get('author').touched && editBookForm.get('author').errors) && editBookForm.get('author').errors.required"
             style="color: #ea6153;" padding-left>Author is Required !!</p>
@@ -40,7 +40,7 @@
           <ion-item>
             <ion-label floating>
               <ion-icon name="card"></ion-icon>&nbsp; Discription</ion-label>
-            <ion-textarea #disc formControlName="discription" [value]='book.Description'></ion-textarea>
+            <ion-textarea #disc formControlName="discription"></ion-textarea>
           </ion-item>
           <p *ngIf="(editBookForm.get('discription').touched && editBookForm.get('discription').errors) && editBookForm.get('discription').errors.minlength"
             style="color: #ea6153;" padding-left>Too Short !!</p>
@@ -59,7 +59,7 @@
           <ion-item>
             <ion-label floating>
               <ion-icon name="logo-bitcoin"></ion-icon>&nbsp; Price</ion-label>
-            <ion-input formControlName="price" type="text" [value]='book.Price'></ion-input>
+            <ion-input formControlName="price" type="text"></ion-input>
           </ion-item>
         </div>
 
@@ -74,7 +74,7 @@
           <ion-item>
             <ion-label floating>
               <ion-icon name="logo-bitcoin"></ion-icon>&nbsp; Duration</ion-label>
-            <ion-input formControlName="duration" type="text" [value]='book.Duration'></ion-input>
+            <ion-input formControlName="duration" type="text"></ion-input>
           </ion-item>
         </div>
 
@@ -86,7 +86,8 @@
         </div>
 
         <ion-item *ngIf="!addStatus">
-          <button ion-button full large color="primary" [disabled]='!editBookForm.valid || (forsale.checked == true && editBookForm.get("price").pristine) || (forBorrow.checked == true && editBookForm.get("duration").pristine)'>
+          <button ion-button full large color="primary" [disabled]='!editBookForm.valid'>
+             <!--|| (forsale.checked == true && editBookForm.get("price").pristine) || (forBorrow.checked == true && editBookForm.get("duration").pristine)-->
                 <ion-icon name="create-outline"></ion-icon> &nbsp;&nbsp;&nbsp;Update Book</button>
         </ion-item>
       </form>

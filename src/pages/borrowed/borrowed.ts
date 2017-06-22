@@ -16,11 +16,11 @@ export class BorrowedPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad BorrowedPage');
+    
   }
   ionViewWillEnter() {
     let loader = this.loading.create({
-      content: "loading.."
+      content: "Loading ..."
     });
     loader.present().then(() => {
       this.storage.get("LoginEmail").then((LoginEmail) => {

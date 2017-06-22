@@ -3,11 +3,12 @@ import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { BookAPI, BookShareApi } from '../../shared/shared';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Book } from "../../Classes/Book";
+import { Storage } from '@ionic/storage';
 
-@Component( {
+@Component({
   selector: 'page-edit-book',
   templateUrl: 'edit-book.html',
-} )
+})
 export class EditBookPage {
 
   book: any;
@@ -17,84 +18,112 @@ export class EditBookPage {
   forSaleFlag: boolean = false;
   forBorrowFlag: boolean = false;
   addStatus: boolean = false;
+  returnBook: any;
 
   constructor(
     private navCtrl: NavController,
     private navParams: NavParams,
     private loadingController: LoadingController,
     private bookShareApi: BookShareApi,
-    private formBuilder: FormBuilder ) {
-
-    this.editBookForm = this.formBuilder.group( {
-      title: ['', Validators.compose( [Validators.required, Validators.minLength( 3 )] )],
-      author: ['', Validators.compose( [Validators.required, Validators.minLength( 3 )] )],
-      discription: ['', Validators.compose( [Validators.required, Validators.minLength( 3 ), Validators.maxLength( 200 )] )],
-      forSale: [''],
-      price: ['', Validators.compose( [Validators.pattern( /[0-9]/ )] )],
-      forBorrow: [''],
-      duration: ['', Validators.compose( [Validators.pattern( /[0-9]/ )] )],
-      available: ['']
-    } );
+    private formBuilder: FormBuilder,
+    private storage: Storage) {
 
   }
 
-  ionViewDidLoad () {
+  ionViewWillEnter() {
+    this.storage.remove('book');
+    this.storage.get('book').then((res) => {
+    });
     this.bookId = this.navParams.data;
-    let loader = this.loadingController.create( {
-      content: 'Loading Book Data ..',
-      dismissOnPageChange: true
-    } );
+    let loader = this.loadingController.create({
+      content: 'Loading Book Data ..'
+    });
     loader.present().then(() => {
-      this.bookShareApi.getBook( this.bookId )
-        .subscribe( res => {
+      this.bookShareApi.getBook(this.bookId)
+        .subscribe(res => {
           this.book = res;
-          console.log( this.book );
-        } );
-    } );
+          this.storage.set('book', this.book);
+          if (this.book) {
+            loader.dismiss();
+          }
+        });
+    });
+    this.storage.get('book').then((res) => {
+      this.returnBook = res;
+      console.log(this.returnBook);
+      if (this.returnBook) {
+        this.editBookForm = this.formBuilder.group({
+          title: [this.returnBook.Title, Validators.compose([Validators.required, Validators.minLength(3)])],
+          author: [this.returnBook.Author, Validators.compose([Validators.required, Validators.minLength(3)])],
+          discription: [this.returnBook.Description, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(200)])],
+          forSale: [''],
+          price: [this.returnBook.Price, Validators.compose([Validators.pattern(/[0-9]/)])],
+          forBorrow: [''],
+          duration: [this.returnBook.Duration, Validators.compose([Validators.pattern(/[0-9]/)])],
+          available: ['']
+        });
+        this.availableFlag = this.returnBook.Available;
+        this.forSaleFlag = this.returnBook.ForSale;
+        this.forBorrowFlag = this.returnBook.ForBorrow;
+      }
+    });
+  }
+  ionViewWillLeave() {
+    this.storage.remove('book');
   }
 
-  changeAvailable () {
+  ionViewWillUnload() {
+    this.storage.remove('book');
+  }
+
+  ionViewDidLoad() {
+
+  }
+
+  changeAvailable() {
     this.availableFlag = !this.availableFlag;
   }
 
-  changeForBorrow () {
+  changeForBorrow() {
     this.forBorrowFlag = !this.forBorrowFlag;
   }
 
-  changeForSale () {
+  changeForSale() {
     this.forSaleFlag = !this.forSaleFlag;
   }
 
-  continue () {
+  continue() {
     this.navCtrl.pop();
   }
 
-  onSubmit () {
+  onSubmit() {
 
     let book = new Book();
     book.BookId = this.navParams.data;
-    book.Author = this.editBookForm.value.title;
+    book.Author = this.editBookForm.value.author;
     book.Available = this.availableFlag;
     book.Description = this.editBookForm.value.discription;
-    book.Duration = ( this.forBorrowFlag == false ) ? false : this.editBookForm.value.duration;
+    book.Duration = (this.forBorrowFlag == false) ? '' : this.editBookForm.value.duration;
     book.ForBorrow = this.forBorrowFlag;
     book.ForSale = this.forSaleFlag;
-    book.Price = ( this.forSaleFlag == false ) ? false : this.editBookForm.value.price;
+    book.Price = (this.forSaleFlag == false) ? '' : this.editBookForm.value.price;
     book.Title = this.editBookForm.value.title;
 
-    console.log( book );
+    console.log(book);
 
-    let loader = this.loadingController.create( {
-      content: 'Updating Your Book ..',
-      dismissOnPageChange: true
-    } );
+    let loader = this.loadingController.create({
+      content: 'Updating Your Book ..'
+    });
     loader.present().then(() => {
-      this.bookShareApi.editBook( book )
-        .subscribe( res => {
+      this.bookShareApi.editBook(book)
+        .subscribe(res => {
           this.addStatus = res;
-          loader.dismiss();
-        } );
-    } );
+          if (this.addStatus) {
+            loader.dismiss();
+            this.storage.remove('book');
+          }
+        });
+    });
   }
 
 }

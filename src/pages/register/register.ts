@@ -7,10 +7,10 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Storage } from '@ionic/storage';
 import { User } from "../../Classes/User";
 
-@Component( {
+@Component({
     selector: 'page-register',
     templateUrl: 'register.html',
-} )
+})
 export class RegisterPage {
 
     signUpForm: FormGroup;
@@ -24,7 +24,7 @@ export class RegisterPage {
     emailExist: boolean = false;
     emails: any[];
 
-    constructor( private navCtrl: NavController,
+    constructor(private navCtrl: NavController,
         private navParams: NavParams,
         private formBuilder: FormBuilder,
         private bookShareApi: BookShareApi,
@@ -32,22 +32,21 @@ export class RegisterPage {
         private storage: Storage,
         private loadingController: LoadingController
     ) {
-        this.signUpForm = this.formBuilder.group( {
-            name: ['', Validators.compose( [Validators.required, Validators.minLength( 2 ), Validators.maxLength( 100 )] )],
-            email: ['', Validators.compose( [Validators.required, Validators.pattern( this.emailRegex )] )],
-            passwordFG: this.formBuilder.group( {
-                password: ['', Validators.compose( [Validators.required, Validators.pattern( this.passwordRegex )] )],
-                confirmPassword: ['', Validators.compose( [Validators.required] )]
-            }, { validator: this.passwordMatch } ),
-            phone: ['', Validators.compose( [Validators.required, Validators.pattern( /[0-9]/ ), Validators.maxLength( 11 ), Validators.minLength( 7 )] )],
+        this.signUpForm = this.formBuilder.group({
+            name: ['', Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(100)])],
+            email: ['', Validators.compose([Validators.required, Validators.pattern(this.emailRegex)])],
+            passwordFG: this.formBuilder.group({
+                password: ['', Validators.compose([Validators.required, Validators.pattern(this.passwordRegex)])],
+                confirmPassword: ['', Validators.compose([Validators.required])]
+            }, { validator: this.passwordMatch }),
+            phone: ['', Validators.compose([Validators.required, Validators.pattern(/[0-9]/), Validators.maxLength(11), Validators.minLength(7)])],
             governorate: [''],
-            city: ['', Validators.compose( [Validators.required] )],
+            city: ['', Validators.compose([Validators.required])],
             address: ['']
-        } );
+        });
     }
 
-    getImage () {
-        console.log( "inside getting image" );
+    getImage() {
         const options: CameraOptions = {
             quality: 50,
             destinationType: this.camera.DestinationType.DATA_URL,
@@ -55,59 +54,57 @@ export class RegisterPage {
             mediaType: this.camera.MediaType.PICTURE,
             sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
         }
-        this.camera.getPicture( options ).then(( imageData ) => {
+        this.camera.getPicture(options).then((imageData) => {
             let base64Image = 'data:image/jpeg;base64,' + imageData;
             this.image = base64Image;
-            this.storage.set( "base64Image", imageData );
-        }, ( err ) => {
-            console.log( "error" );
-        } );
+            this.storage.set("base64Image", imageData);
+        }, (err) => {
+            console.log("error");
+        });
     }
 
-    ionViewDidLoad () {
-        let loader = this.loadingController.create( {
-            content: 'Please Wait ...',
-            dismissOnPageChange: true
-        } );
+    ionViewDidLoad() {
+        let loader = this.loadingController.create({
+            content: 'Please Wait ...'
+        });
         loader.present().then(() => {
             this.bookShareApi.getGovs()
-                .subscribe( res => {
+                .subscribe(res => {
                     this.govs = res;
-                } );
+                    if (this.govs) {
+                        loader.dismiss();
+                    }
+                });
             this.bookShareApi.getEmails()
-                .subscribe( res => {
-                    this.storage.set( 'emails', res );
-                } );
-            loader.dismiss();
-        } );
+                .subscribe(res => {
+                    this.storage.set('emails', res);
+                });
+        });
     }
 
-    GovDDL_Changed ( govId ) {
-        let loader = this.loadingController.create( {
-            content: 'Please Wait ...',
-            dismissOnPageChange: true
-        } );
+    GovDDL_Changed(govId) {
+        let loader = this.loadingController.create({
+            content: 'Please Wait ...'
+        });
         loader.present().then(() => {
-            this.bookShareApi.getCities( govId )
-                .subscribe( res => {
+            this.bookShareApi.getCities(govId)
+                .subscribe(res => {
                     this.cities = res;
-                } );
-            setTimeout(() => {
-                loader.dismiss();
-            }, 1000 );
-        } );
+                    if (this.cities) {
+                        loader.dismiss();
+                    }
+                });
+        });
     }
 
-    onSubmit () {
-        console.log( "submit" );
-        let loader = this.loadingController.create( {
-            content: 'Please Wait ...',
-            dismissOnPageChange: true
-        } );
+    onSubmit() {
+        let loader = this.loadingController.create({
+            content: 'Please Wait ...'
+        });
         loader.present().then(() => {
-            this.storage.get( "base64Image" )
-                .then( res => {
-                    if ( this.signUpForm.valid ) {
+            this.storage.get("base64Image")
+                .then(res => {
+                    if (this.signUpForm.valid) {
                         let obj: User = new User();
                         obj.Address = this.signUpForm.value.address;
                         obj.Name = this.signUpForm.value.name;
@@ -116,31 +113,31 @@ export class RegisterPage {
                         obj.Email = this.signUpForm.value.email;
                         obj.Password = this.signUpForm.value.passwordFG.password;
                         obj.image = res;
-                        console.log( obj );
-                        this.bookShareApi.addUser( obj )
-                            .subscribe( res => {
+                        this.bookShareApi.addUser(obj)
+                            .subscribe(res => {
                                 this.addStatus = res;
-                            } );
+                                if (this.addStatus) {
+                                    loader.dismiss();
+                                    this.storage.remove("base64Image");
+                                }
+                            });
                     }
-                } )
-
-            loader.dismiss();
-        } );
+                })
+        });
     }
-    continue () {
+    continue() {
         this.navCtrl.popToRoot();
     }
 
-    checkEmail ( email: string ) {
-        console.log( email );
-        this.storage.get( 'emails' ).then( res => {
+    checkEmail(email: string) {
+        this.storage.get('emails').then(res => {
             this.emails = res;
-            if ( this.emails.indexOf( email.toUpperCase() ) != -1 ) {
+            if (this.emails.indexOf(email.toUpperCase()) != -1) {
                 this.emailExist = true;
             }
             else {
                 this.emailExist = false;
             }
-        } );
+        });
     }
 }
