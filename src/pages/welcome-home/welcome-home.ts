@@ -1,5 +1,4 @@
 import { ShowNotificationPage } from './../show-notification/show-notification';
-import { HomePage } from './../home/home';
 import { SearchPage } from './../search/search';
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController } from 'ionic-angular';
