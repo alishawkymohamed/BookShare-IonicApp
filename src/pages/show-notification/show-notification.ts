@@ -1,3 +1,6 @@
+import { RejectedListPage } from './../rejected-list/rejected-list';
+import { BorrowedPage } from './../borrowed/borrowed';
+import { PendingListPage } from './../pending-list/pending-list';
 import { Component } from '@angular/core';
 import { NavController, NavParams, ActionSheetController, AlertController, LoadingController } from 'ionic-angular';
 import { BookAPI } from '../../shared/shared';
@@ -13,6 +16,7 @@ export class ShowNotificationPage {
   notID: any;
   flag: boolean = false;
   errors: any = true;
+
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private bookAPI: BookAPI, public storage: Storage,
     public actionSheetCtrl: ActionSheetController, public alertCtrl: AlertController, public loading: LoadingController) {
@@ -30,6 +34,9 @@ export class ShowNotificationPage {
       this.storage.get("LoginEmail").then((LoginEmail) => {
         this.bookAPI.ShowNotification(LoginEmail).then((res: Array<any>) => {
           this.data = res;
+          if (this.data) {
+            loader.dismiss();
+          }
           for (var index = 0; index < res.length; index++) {
             if (res[index].Action == 0) {
               res[index].Action = "Borrows";
@@ -43,10 +50,10 @@ export class ShowNotificationPage {
           if (this.data == false) {
             this.flag = true;
             this.errors = "There is No Notification to Show!";
+            loader.dismiss();
           }
         })
       });
-      loader.dismiss();
     });
   }
   AcceptNot() {
@@ -61,30 +68,42 @@ export class ShowNotificationPage {
               content: "Loading.."
             });
             loader.present().then(() => {
-              this.storage.get("NotID").then((NotID) => {
-                this.bookAPI.AcceptNotication(NotID).then(res => {
-                  if (res == true) {
-                    let alert = this.alertCtrl.create({
-                      title: 'Success!',
-                      subTitle: 'You have Just accepted the request!',
-                      buttons: ['OK']
-                    });
-                    alert.present();
-                    this.ionViewWillEnter();
-                  }
-                  else {
-                    let alert = this.alertCtrl.create({
-                      title: 'Error !',
-                      subTitle: 'There is an Error.. We are very sorry..We will fix this soon!',
-                      buttons: ['OK']
-                    });
-                    alert.present();
-                  }
-                })
-              });
+              Promise.all([this.storage.get("NotID"), this.storage.get('LoginEmail')])
+                .then((val) => {
+                  this.bookAPI.AcceptNotication(val[0], val[1]).then(res => {
+                    if (res == true) {
+                      let alert = this.alertCtrl.create({
+                        title: 'Success!',
+                        subTitle: 'You have Just accepted the request!',
+                        buttons: ['OK']
+                      });
+                      alert.present();
+                      this.flag = true;
+                      this.errors = "There is No Notification to Show!";
+                    }
+                    else if (res == false) {
+                      let alert = this.alertCtrl.create({
+                        title: 'Error !',
+                        subTitle: 'There is an Error.. We are very sorry..We will fix this soon!',
+                        buttons: ['OK']
+                      });
+                      alert.present();
+                    }
+                    else {
+                      let alert = this.alertCtrl.create({
+                        title: 'success!',
+                        subTitle: 'You have cancel the request!',
+                        buttons: ['OK']
+                      });
+                      alert.present();
+                      this.data = res;
+                      this.flag = false;
+                      loader.dismiss();
+                    }
+                  })
+                });
               loader.dismiss();
             });
-            console.log('Accept clicked');
           }
         }, {
           text: 'Reject',
@@ -117,7 +136,6 @@ export class ShowNotificationPage {
               });
               loader.dismiss();
             });
-            console.log('Cancel clicked');
           }
         }
       ]

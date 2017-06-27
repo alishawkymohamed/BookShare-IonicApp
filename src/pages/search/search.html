@@ -28,11 +28,11 @@
                 </ion-list>
                 <button ion-button full icon-left (click)="Search()">
                    <ion-icon name="search"></ion-icon>Search</button>
-                <p #error *ngIf="flag" style="color:#ea6153;" padding-left>{{errors}}</p>
+                <p #error *ngIf="EFlag" style="color:#ea6153;" padding-left>{{errors}}</p>
             </ion-col>
         </ion-row>
     </ion-grid>
-    <ion-slides pager loop effect="fade" *ngIf="Flag">
+    <ion-slides pager loop effect="fade" *ngIf="!flag">
         <ion-slide *ngFor="let item of data">
             <ion-card>
                 <ion-card-header>

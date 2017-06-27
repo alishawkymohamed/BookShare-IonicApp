@@ -43,14 +43,14 @@ export class MyApp {
   goToProfile() {
     this.nav.push(ProfilePage);
   }
-  goToPending() {
-    this.nav.push(PendingListPage);
-  }
-  goToBorrowed() {
-    this.nav.push(BorrowedPage);
-  }
-  goToRejected() {
-    this.nav.push(RejectedListPage);
+  // goToPending() {
+  //  this.nav.push(PendingListPage);
+  // }
+  // goToBorrowed() {
+  //   this.nav.push(BorrowedPage);
+  //  }
+  //  goToRejected() {
+  //   this.nav.push(RejectedListPage);
 
-  }
+  // }
 }

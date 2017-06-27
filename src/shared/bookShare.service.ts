@@ -17,7 +17,7 @@ export class BookShareApi {
     updateFlag: boolean;
     emails: any;
 
-    constructor( private _http: Http ) {
+    constructor(private _http: Http) {
     }
 
     checkAuth(email: string, pass: string): Observable<any> {
@@ -89,12 +89,12 @@ export class BookShareApi {
             });
     }
 
-    getEmails () {
-        return this._http.get( `${ this.baseUrl }/getEmails` )
-            .map( res => {
+    getEmails() {
+        return this._http.get(`${this.baseUrl}/getEmails`)
+            .map(res => {
                 this.emails = res.json();
                 return this.emails;
-            } );
+            });
     }
 }
 

@@ -16,7 +16,7 @@ export class BorrowedPage {
   }
 
   ionViewDidLoad() {
-    
+
   }
   ionViewWillEnter() {
     let loader = this.loading.create({
@@ -26,11 +26,16 @@ export class BorrowedPage {
       this.storage.get("LoginEmail").then((LoginEmail) => {
         this.bookAPI.UserBorrowed(LoginEmail).then((res) => {
           this.Data = res;
+          console.log(this.Data);
+          if (this.Data) {
+            this.flag = true;
+            loader.dismiss();
+          }
           if (this.Data == false) {
             this.flag = false;
             this.errors = "There is No Books to Show!";
+            loader.dismiss();
           }
-          loader.dismiss();
         })
       });
     });

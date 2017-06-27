@@ -10,7 +10,7 @@ import { BookAPI } from '../../shared/shared';
 })
 export class SearchPage {
   flag: boolean = false;
-  Flag: boolean = true;
+  EFlag: boolean = false;
   searchTxt: string;
   searchby: string;
   data: any;
@@ -23,18 +23,20 @@ export class SearchPage {
 
   Search() {
     this.flag = false;
-    this.Flag = true;
+    this.data = null;
     let loader = this.loading.create({
       content: "Loading.."
     });
     loader.present().then(() => {
       this.storage.get("LoginEmail").then((LoginEmail) => {
         this.bookApi.Search(this.searchTxt, this.searchby, LoginEmail)
-          .subscribe((res: Array<any>) => {
+          .subscribe((res) => {
             this.data = res;
+            console.log(this.searchby);
+            console.log(this.data);
             if (this.data == false) {
               this.errors = "There is No Book Except Yours if you own book named this and you can get it from your profile!";
-              this.flag = true;
+              this.EFlag = true;
             }
           })
       });
@@ -44,6 +46,7 @@ export class SearchPage {
   Details(event) {
     this.storage.set('ID', event.currentTarget.id);
     this.storage.set('SearchBy', this.searchby);
+    console.log(event.currentTarget.id);
     this.navCtrl.push(DetailsPage);
   }
   ionViewDidLoad() {
@@ -52,7 +55,7 @@ export class SearchPage {
   ionViewWillEnter() {
     this.searchby = null;
     this.searchTxt = null;
-    this.Flag = false;
-
+    this.flag = true;
+    this.EFlag = false;
   }
 }

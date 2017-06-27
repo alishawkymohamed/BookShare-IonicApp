@@ -2,25 +2,22 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { BookAPI } from '../../shared/shared';
 import { Storage } from '@ionic/storage';
-
 @Component({
-  selector: 'page-rejected-list',
-  templateUrl: 'rejected-list.html',
+  selector: 'page-accepted-not',
+  templateUrl: 'accepted-not.html',
 })
-export class RejectedListPage {
-  data: any;
-  Action: any;
+export class AcceptedNotPage {
   flag: boolean = false;
   errors: any = true;
-  constructor(public navCtrl: NavController,
-    public navParams: NavParams,
+  data: any;
+  constructor(public navCtrl: NavController, public navParams: NavParams,
     private bookAPI: BookAPI,
     public storage: Storage,
     public loading: LoadingController) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad RejectedListPage');
+    console.log('ionViewDidLoad AcceptedNotPage');
   }
   ionViewWillEnter() {
     let loader = this.loading.create({
@@ -28,8 +25,9 @@ export class RejectedListPage {
     });
     loader.present().then(() => {
       this.storage.get("LoginEmail").then((LoginEmail) => {
-        this.bookAPI.RejectedList(LoginEmail).then((res: Array<any>) => {
+        this.bookAPI.AcceptedList(LoginEmail).then((res: Array<any>) => {
           this.data = res;
+          console.log(this.data, res);
           if (this.data) {
             loader.dismiss();
           }
