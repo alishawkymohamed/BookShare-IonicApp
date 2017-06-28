@@ -27,12 +27,8 @@ import { IonicStorageModule } from '@ionic/storage';
         EditBookPage,
         BorrowedPage,
         RejectedListPage,
-<<<<<<< HEAD
-        EditProfilePage
-=======
         NotTabsPage,
         AcceptedNotPage
->>>>>>> e8d31213b1f28f01925a9dcec658673d0af8a6c2
     ],
     imports: [
         BrowserModule,
@@ -57,12 +53,8 @@ import { IonicStorageModule } from '@ionic/storage';
         EditBookPage,
         BorrowedPage,
         RejectedListPage,
-<<<<<<< HEAD
-        EditProfilePage
-=======
         NotTabsPage,
         AcceptedNotPage
->>>>>>> e8d31213b1f28f01925a9dcec658673d0af8a6c2
     ],
     providers: [
         StatusBar,
