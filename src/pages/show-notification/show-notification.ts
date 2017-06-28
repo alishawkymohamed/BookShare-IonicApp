@@ -72,6 +72,7 @@ export class ShowNotificationPage {
                 .then((val) => {
                   this.bookAPI.AcceptNotication(val[0], val[1]).then(res => {
                     if (res == true) {
+                      console.log("true");
                       let alert = this.alertCtrl.create({
                         title: 'Success!',
                         subTitle: 'You have Just accepted the request!',
@@ -80,23 +81,28 @@ export class ShowNotificationPage {
                       alert.present();
                       this.flag = true;
                       this.errors = "There is No Notification to Show!";
+                      loader.dismiss();
                     }
                     else if (res == false) {
+                      console.log("False");
                       let alert = this.alertCtrl.create({
                         title: 'Error !',
                         subTitle: 'There is an Error.. We are very sorry..We will fix this soon!',
                         buttons: ['OK']
                       });
                       alert.present();
+                      loader.dismiss();
                     }
                     else {
+                      console.log("Dataaa");
                       let alert = this.alertCtrl.create({
                         title: 'success!',
-                        subTitle: 'You have cancel the request!',
+                        subTitle: 'You have accpeted the request!',
                         buttons: ['OK']
                       });
                       alert.present();
                       this.data = res;
+                      console.log(this.data);
                       this.flag = false;
                       loader.dismiss();
                     }
@@ -113,27 +119,45 @@ export class ShowNotificationPage {
               content: "Loading.."
             });
             loader.present().then(() => {
-              this.storage.get("NotID").then((NotID) => {
-                this.bookAPI.RejectNotification(NotID).then(res => {
-                  if (res == true) {
-                    let alert = this.alertCtrl.create({
-                      title: 'Success!',
-                      subTitle: 'You have Just rejqcted the request!',
-                      buttons: ['OK']
-                    });
-                    alert.present();
-                    this.ionViewWillEnter();
-                  }
-                  else {
-                    let alert = this.alertCtrl.create({
-                      title: 'Error !',
-                      subTitle: 'There is an Error.. We are very sorry..We will fix this soon!',
-                      buttons: ['OK']
-                    });
-                    alert.present();
-                  }
-                })
-              });
+              Promise.all([this.storage.get("NotID"), this.storage.get('LoginEmail')])
+                .then((val) => {
+                  this.bookAPI.RejectNotification(val[0], val[1]).then(res => {
+                    if (res == true) {
+                      let alert = this.alertCtrl.create({
+                        title: 'Success!',
+                        subTitle: 'You have Just rejected the request!',
+                        buttons: ['OK']
+                      });
+                      alert.present();
+                      this.flag = true;
+                      this.errors = "There is No Notification to Show!";
+                      loader.dismiss();
+                    }
+                    else if (res == false) {
+                      console.log("False");
+                      let alert = this.alertCtrl.create({
+                        title: 'Error !',
+                        subTitle: 'There is an Error.. We are very sorry..We will fix this soon!',
+                        buttons: ['OK']
+                      });
+                      alert.present();
+                      loader.dismiss();
+                    }
+                    else {
+                      console.log("Dataaa");
+                      let alert = this.alertCtrl.create({
+                        title: 'success!',
+                        subTitle: 'You have rejected the request!',
+                        buttons: ['OK']
+                      });
+                      alert.present();
+                      this.data = res;
+                      console.log(this.data);
+                      this.flag = false;
+                      loader.dismiss();
+                    }
+                  })
+                });
               loader.dismiss();
             });
           }

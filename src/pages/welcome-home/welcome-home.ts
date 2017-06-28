@@ -1,3 +1,4 @@
+import { NotTabsPage } from './../not-tabs/not-tabs';
 import { ShowNotificationPage } from './../show-notification/show-notification';
 import { SearchPage } from './../search/search';
 import { Component } from '@angular/core';
@@ -32,6 +33,7 @@ export class WelcomeHomePage {
         subscribe(data => {
           this.books = data;
           if (this.books) {
+            this.DataFlag = false;
             loader.dismiss();
           }
         });
@@ -40,6 +42,7 @@ export class WelcomeHomePage {
           subscribe(data => {
             this.User = data;
             if (this.User) {
+              this.UserFlag = false;
               loader.dismiss();
             }
           });
@@ -87,6 +90,6 @@ export class WelcomeHomePage {
   notifications() {
     this.Flag = true;
     this.CountNot = null;
-    this.navCtrl.push(ShowNotificationPage);
+    this.navCtrl.push(NotTabsPage);
   }
 }

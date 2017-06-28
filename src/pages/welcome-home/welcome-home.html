@@ -16,12 +16,12 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content padding *ngIf="books">
+<ion-content padding>
     <ion-grid>
         <ion-row>
             <ion-col>
-                <ion-slides pager loop effect="fade">
-                    <ion-slide *ngIf="DataFlag">
+                <ion-slides pager loop effect="fade" *ngIf="DataFlag">
+                    <ion-slide>
                         <ion-card>
                             <ion-card-header>
                                 <h1>Most Borrowed Book</h1> Sorry,There is No Data Yet
@@ -48,8 +48,8 @@
                 </ion-slides>
             </ion-col>
             <ion-col>
-                <ion-slides pager loop effect="fade">
-                    <ion-slide *ngIf="UserFlag">
+                <ion-slides pager loop effect="fade" *ngIf="UserFlag">
+                    <ion-slide>
                         <ion-card>
                             <ion-card-header>
                                 <h1>Most Active Users</h1> Sorry,There is No Data Yet
@@ -68,8 +68,8 @@
                                 </h1> {{item.Name}} <br> {{item.CityName}}
                             </ion-card-header>
                             <ion-card-content>
-                                <img *ngIf="item.Image" src="data:image/png;base64,{{item.Image}}" />
-                                <img *ngIf="!item.Image" src="https://image.ibb.co/dCLLf5/noimagefound.jpg" id="Image" />
+                                <img *ngIf="item.Image" src="data:image/png;base64,{{item.Image}}" id="UserImg" />
+                                <img *ngIf="!item.Image" src="https://image.ibb.co/dCLLf5/noimagefound.jpg" id="UserImg" />
                             </ion-card-content>
                         </ion-card>
                     </ion-slide>
