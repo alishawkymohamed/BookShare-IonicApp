@@ -11,6 +11,7 @@ export * from './edit-book/edit-book';
 export * from './borrowed/borrowed';
 export * from './add-book/add-book';
 export * from './rejected-list/rejected-list';
+export * from './edit-profile/edit-profile';
 
 
 

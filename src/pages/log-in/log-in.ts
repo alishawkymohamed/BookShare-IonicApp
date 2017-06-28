@@ -26,12 +26,14 @@ export class LogInPage {
     private loadingController: LoadingController
   ) {
 
-
     this.logInForm = this.formBuilder.group({
       email: ['', Validators.compose([Validators.required, Validators.pattern(this.re)])],
       password: ['', Validators.compose([Validators.required, Validators.pattern(this.passwordRegex)])]
     });
 
+  }
+
+  ionViewWillEnter() {
   }
 
   onSubmit() {
@@ -67,7 +69,6 @@ export class LogInPage {
     this.errors = true;
   }
   ionViewDidLoad() {
-
   }
 
 }

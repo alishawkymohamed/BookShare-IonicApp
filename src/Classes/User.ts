@@ -4,6 +4,7 @@ export class User {
     Password: string;
     CityID: number;
     Email: string;
-    phone: number;
+    phone: string;
     image: any;
+    UserId: any;
 }

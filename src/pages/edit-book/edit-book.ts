@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController } from 'ionic-angular';
-import { BookAPI, BookShareApi } from '../../shared/shared';
+import { BookShareApi } from '../../shared/shared';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Book } from "../../Classes/Book";
 import { Storage } from '@ionic/storage';
+import { CameraOptions, Camera } from "@ionic-native/camera";
 
 @Component({
   selector: 'page-edit-book',
-  templateUrl: 'edit-book.html',
+  templateUrl: 'edit-book.html'
 })
 export class EditBookPage {
 
@@ -18,7 +19,9 @@ export class EditBookPage {
   forSaleFlag: boolean = false;
   forBorrowFlag: boolean = false;
   addStatus: boolean = false;
-  returnBook: any;
+  duration;
+  price;
+  image;
 
   constructor(
     private navCtrl: NavController,
@@ -26,54 +29,27 @@ export class EditBookPage {
     private loadingController: LoadingController,
     private bookShareApi: BookShareApi,
     private formBuilder: FormBuilder,
-    private storage: Storage) {
+    private storage: Storage,
+    private camera: Camera) {
 
-  }
+    this.book = this.navParams.data;
 
-  ionViewWillEnter() {
-    this.storage.remove('book');
-    this.storage.get('book').then((res) => {
+    this.editBookForm = this.formBuilder.group({
+      title: [this.book.Title, Validators.compose([Validators.required, Validators.minLength(3)])],
+      author: [this.book.Author, Validators.compose([Validators.required, Validators.minLength(3)])],
+      discription: [this.book.Description, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(200)])],
+      forSale: [''],
+      price: [this.book.Price, Validators.compose([Validators.pattern(/[0-9]/)])],
+      forBorrow: [''],
+      duration: [this.book.Duration, Validators.compose([Validators.pattern(/[0-9]/)])],
+      available: ['']
     });
-    this.bookId = this.navParams.data;
-    let loader = this.loadingController.create({
-      content: 'Loading Book Data ..'
-    });
-    loader.present().then(() => {
-      this.bookShareApi.getBook(this.bookId)
-        .subscribe(res => {
-          this.book = res;
-          this.storage.set('book', this.book);
-          if (this.book) {
-            loader.dismiss();
-          }
-        });
-    });
-    this.storage.get('book').then((res) => {
-      this.returnBook = res;
-      console.log(this.returnBook);
-      if (this.returnBook) {
-        this.editBookForm = this.formBuilder.group({
-          title: [this.returnBook.Title, Validators.compose([Validators.required, Validators.minLength(3)])],
-          author: [this.returnBook.Author, Validators.compose([Validators.required, Validators.minLength(3)])],
-          discription: [this.returnBook.Description, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(200)])],
-          forSale: [''],
-          price: [this.returnBook.Price, Validators.compose([Validators.pattern(/[0-9]/)])],
-          forBorrow: [''],
-          duration: [this.returnBook.Duration, Validators.compose([Validators.pattern(/[0-9]/)])],
-          available: ['']
-        });
-        this.availableFlag = this.returnBook.Available;
-        this.forSaleFlag = this.returnBook.ForSale;
-        this.forBorrowFlag = this.returnBook.ForBorrow;
-      }
-    });
-  }
-  ionViewWillLeave() {
-    this.storage.remove('book');
-  }
-
-  ionViewWillUnload() {
-    this.storage.remove('book');
+    this.availableFlag = this.book.Available;
+    this.forSaleFlag = this.book.ForSale;
+    this.forBorrowFlag = this.book.ForBorrow;
+    this.duration = this.book.Duration;
+    this.price = this.book.Price;
+    this.image = this.book.Cover;
   }
 
   ionViewDidLoad() {
@@ -96,10 +72,27 @@ export class EditBookPage {
     this.navCtrl.pop();
   }
 
+  getImage() {
+    const options: CameraOptions = {
+      quality: 50,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
+    }
+    this.camera.getPicture(options).then((imageData) => {
+      let base64Image = 'data:image/jpeg;base64,' + imageData;
+      this.image = base64Image;
+      this.storage.set("base64Cover", imageData);
+    }, (err) => {
+      console.log("error");
+    });
+  }
+
   onSubmit() {
 
     let book = new Book();
-    book.BookId = this.navParams.data;
+    book.BookId = this.book.BookID
     book.Author = this.editBookForm.value.author;
     book.Available = this.availableFlag;
     book.Description = this.editBookForm.value.discription;
@@ -109,21 +102,31 @@ export class EditBookPage {
     book.Price = (this.forSaleFlag == false) ? '' : this.editBookForm.value.price;
     book.Title = this.editBookForm.value.title;
 
-    console.log(book);
-
     let loader = this.loadingController.create({
       content: 'Updating Your Book ..'
     });
     loader.present().then(() => {
-      this.bookShareApi.editBook(book)
-        .subscribe(res => {
-          this.addStatus = res;
-          if (this.addStatus) {
-            loader.dismiss();
-            this.storage.remove('book');
-          }
-        });
+      this.storage.get('base64Cover').then((res) => {
+        book.Cover = res;
+        if (res != null) {
+          this.bookShareApi.editBook(book)
+            .subscribe(res => {
+              this.addStatus = res;
+              if (this.addStatus == true || this.addStatus == false) {
+                loader.dismiss();
+              }
+            });
+        }
+        else {
+          this.bookShareApi.editBook(book)
+            .subscribe(res => {
+              this.addStatus = res;
+              if (this.addStatus == true || this.addStatus == false) {
+                loader.dismiss();
+              }
+            });
+        }
+      });
     });
   }
-
 }

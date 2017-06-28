@@ -1,4 +1,3 @@
-import { WelcomeHomePage } from './../welcome-home/welcome-home';
 import { Component } from '@angular/core';
 import { NavController, NavParams, ActionSheetController, AlertController, LoadingController } from 'ionic-angular';
 import { BookAPI } from '../../shared/shared';

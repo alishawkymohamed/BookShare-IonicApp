@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController, NavParams, ActionSheetController, AlertController, LoadingController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { BookAPI } from '../../shared/shared';
@@ -16,7 +16,7 @@ export class BorrowedPage {
   }
 
   ionViewDidLoad() {
-    
+
   }
   ionViewWillEnter() {
     let loader = this.loading.create({
