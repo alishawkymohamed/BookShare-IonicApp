@@ -13,13 +13,15 @@ export class DetailsPage {
   borrow: any;
   data: any;
   name: any;
-  flag: any;
+  //flag: any;
   AuthorFlag: any;
   AvailableFlag: any;
   PriceFlag: any;
   DescriptionFlag: any;
   DurationFlag: any;
   ForBorrowFlag: any;
+  BorrowFlag: any;
+  SaleFlag: any;
   ForSaleFlag: any;
   OwnerFlag: any;
   LoginID: any;
@@ -27,6 +29,7 @@ export class DetailsPage {
   Phone: any;
   Address: any;
   BookData: any;
+  BookID: any;
   Clicked: boolean = false;
   @ViewChild('error') ele: ElementRef;
   errors: any;
@@ -125,7 +128,7 @@ export class DetailsPage {
   }
   ionViewWillEnter() {
     let loader = this.loading.create({
-      content: "loading"
+      content: "loading..."
     });
     loader.present().then(() => {
       Promise.all([this.storage.get('ID'), this.storage.get('SearchBy')])
@@ -157,7 +160,6 @@ export class DetailsPage {
     loader.present().then(() => {
       this.bookApi.GetUserBook(this.Email).then((res) => {
         this.BookData = res;
-        console.log(res, this.BookData);
         if (this.BookData == false) {
           this.Flag = false;
           this.errors = "There is no Books To Show";
@@ -165,5 +167,82 @@ export class DetailsPage {
         loader.dismiss();
       });
     });
+  }
+  Borfrom(event) {
+    console.log(event.currentTarget.id);
+    this.BookID = event.currentTarget.id;
+    this.storage.get('LoginEmail').then((LoginEmail) => {
+      this.bookApi.BuyBorrow(LoginEmail, this.BookID, 0).then((res) => {
+        this.buy = res;
+        if (res == true) {
+          let alert = this.alertCtrl.create({
+            title: 'New Request!',
+            subTitle: 'Your Request Has been sent successfully!',
+            buttons: ['OK']
+          });
+          alert.present();
+          this.ForSaleFlag = false;
+        }
+        else {
+          if (res == false) {
+            let alert = this.alertCtrl.create({
+              title: 'Error!',
+              subTitle: 'There is An error..We are very sorry we will fix it soon..!',
+              buttons: ['OK']
+            });
+            alert.present();
+          }
+          else {
+            let alert = this.alertCtrl.create({
+              title: 'Error!',
+              subTitle: 'You Can\'t Send Two Request.!',
+              buttons: ['OK']
+            });
+            alert.present();
+          }
+
+        }
+
+      });
+    });
+  }
+  Buyfrom(event) {
+    console.log(event.currentTarget.id);
+    this.BookID = event.currentTarget.id;
+    this.storage.get('LoginEmail').then((LoginEmail) => {
+      this.bookApi.BuyBorrow(LoginEmail, this.BookID, 1).then((res) => {
+        this.buy = res;
+        if (res == true) {
+          let alert = this.alertCtrl.create({
+            title: 'New Request!',
+            subTitle: 'Your Request Has been sent successfully!',
+            buttons: ['OK']
+          });
+          alert.present();
+          this.ForSaleFlag = false;
+        }
+        else {
+          if (res == false) {
+            let alert = this.alertCtrl.create({
+              title: 'Error!',
+              subTitle: 'There is An error..We are very sorry we will fix it soon..!',
+              buttons: ['OK']
+            });
+            alert.present();
+          }
+          else {
+            let alert = this.alertCtrl.create({
+              title: 'Error!',
+              subTitle: 'You Can\'t Send Two Request.!',
+              buttons: ['OK']
+            });
+            alert.present();
+          }
+
+        }
+
+      });
+    });
+
   }
 }

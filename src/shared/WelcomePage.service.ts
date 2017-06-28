@@ -103,10 +103,10 @@ export class BookAPI {
                 .subscribe(res => resolve(res.json()));
         });
     }
-    AcceptNotication(NotID: number) {
+    AcceptNotication(NotID: number, Email: string) {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
-        let obj = { NotID: NotID };
+        let obj = { NotID: NotID, Email: Email };
         let body = obj;
         return new Promise(resolve => {
             this.http.post(`${this.BaseUrl}/AcceptNotication`, body, headers)
@@ -160,6 +160,16 @@ export class BookAPI {
         let body = obj;
         return new Promise(resolve => {
             this.http.post(`${this.BaseUrl}/RejectedList`, body, headers)
+                .subscribe(res => resolve(res.json()));
+        });
+    }
+    AcceptedList(Email: string) {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        let obj = { Email: Email };
+        let body = obj;
+        return new Promise(resolve => {
+            this.http.post(`${this.BaseUrl}/AcceptedList`, body, headers)
                 .subscribe(res => resolve(res.json()));
         });
     }

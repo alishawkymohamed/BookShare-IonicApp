@@ -25,28 +25,24 @@ export class PendingListPage {
     });
     loader.present().then(() => {
       this.storage.get("LoginEmail").then((LoginEmail) => {
-        this.bookAPI.PendingList(LoginEmail).then((res: Array<any>) => {
+        this.bookAPI.PendingList(LoginEmail).then((res) => {
           this.data = res;
-          for (var index = 0; index < res.length; index++) {
-            this.storage.set("PendingId", res[index].Notid);
-            if (res[index].Action == 0) {
-              res[index].Action = "Borrows";
-            }
-            else {
-              res[index].Action = "Buy";
-            }
+          if (this.data) {
+            loader.dismiss();
           }
           if (this.data == false) {
-            console.log("false");
+            console.log("false enter");
             this.flag = true;
             this.errors = "There is No Notification to Show!";
+            loader.dismiss();
           }
         })
       });
-      loader.dismiss();
     });
   }
-  AcceptNot() {
+  AcceptNot(event) {
+    console.log(event.currentTarget.id);
+    let id = event.currentTarget.id
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Modify your Notification',
       buttons: [
@@ -58,29 +54,46 @@ export class PendingListPage {
               content: "loading.."
             });
             loader.present().then(() => {
-              Promise.all([this.storage.get("PendingId"), this.storage.get("LoginEmail")])
+              this.storage.get("LoginEmail")
                 .then((val) => {
-                  this.bookAPI.CancelNot(val[0], val[1]).then(res => {
+                  this.bookAPI.CancelNot(id, val[1]).then(res => {
+                    console.log(res);
                     if (res == false) {
+                      console.log("false cancel");
                       let alert = this.alertCtrl.create({
                         title: 'Error !',
                         subTitle: 'There is an Error.. We are very sorry..We will fix this soon!',
                         buttons: ['OK']
                       });
                       alert.present();
+                      loader.dismiss();
                     }
-                    else {
+                    else if (res == true) {
+                      console.log("true");
                       let alert = this.alertCtrl.create({
                         title: 'success!',
                         subTitle: 'You have cancel the request!',
                         buttons: ['OK']
                       });
                       alert.present();
-                      this.ionViewWillEnter();
+                      this.flag = true;
+                      this.errors = "There is No Notification to Show!";
+                      loader.dismiss();
+                    }
+                    else {
+                      console.log("data");
+                      let alert = this.alertCtrl.create({
+                        title: 'success!',
+                        subTitle: 'You have cancel the request!',
+                        buttons: ['OK']
+                      });
+                      alert.present();
+                      this.data = res;
+                      this.flag = false;
+                      loader.dismiss();
                     }
                   })
                 });
-              loader.dismiss();
             });
           }
         }

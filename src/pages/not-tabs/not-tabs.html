@@ -1,0 +1,20 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>Notification</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-tabs>
+        <ion-tab [root]="RecievedRoot" tabTitle="Recieved" tabIcon="send"></ion-tab>
+        <ion-tab [root]="BorrowedRoot" tabTitle="Borrowed Books" tabIcon="book"></ion-tab>
+        <ion-tab [root]="PendingRoot" tabTitle="Pending" tabIcon="time"></ion-tab>
+        <ion-tab [root]="AcceptedRoot" tabTitle="Accepted" tabIcon="checkmark-circle-outline"></ion-tab>
+        <ion-tab [root]="RejectedRoot" tabTitle="Rejected" tabIcon="close-circle"></ion-tab>
+
+
+    </ion-tabs>
+</ion-content>
