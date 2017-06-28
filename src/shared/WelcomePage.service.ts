@@ -8,6 +8,7 @@ import { Storage } from '@ionic/storage';
 @Injectable()
 export class BookAPI {
     private BaseUrl = 'http://bookshareapi-service20170619054337.azurewebsites.net/api/book';
+    // private BaseUrl = 'http://localhost:2725/api/book';
     CurrentBooks: any = {};
     CurrentUsers: any = {};
     searchdata: any = {};

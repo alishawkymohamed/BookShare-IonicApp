@@ -1,0 +1,118 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Edit Profile</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list no-lines>
+    <form [formGroup]="editProfileForm">
+
+      <div>
+        <ion-item>
+          <ion-label floating>
+            <ion-icon name="contact"></ion-icon>&nbsp; Name</ion-label>
+          <ion-input formControlName="name" type="text"></ion-input>
+        </ion-item>
+        <p *ngIf="(editProfileForm.get('name').touched && editProfileForm.get('name').errors) && editProfileForm.get('name').errors.required"
+          style="color: #ea6153;" padding-left>Name is Required !!</p>
+        <p *ngIf="(editProfileForm.get('name').touched && editProfileForm.get('name').errors) && editProfileForm.get('name').errors.minlength"
+          style="color: #ea6153;" padding-left>Too Short !!</p>
+      </div>
+
+      <div>
+        <ion-item>
+          <ion-label floating>
+            <ion-icon name="at"></ion-icon>&nbsp; E-Mail</ion-label>
+          <ion-input disabled #email formControlName="email" type="email"></ion-input>
+        </ion-item>
+      </div>
+
+      <div formGroupName="passwordFG">
+        <ion-item>
+          <ion-label floating>
+            <ion-icon name="unlock"></ion-icon>&nbsp; Password</ion-label>
+          <ion-input formControlName="password" type="password"></ion-input>
+        </ion-item>
+        <p *ngIf="(editProfileForm.get('passwordFG.password').touched && editProfileForm.get('passwordFG.password').errors) && editProfileForm.get('passwordFG.password').errors.required"
+          style="color: #ea6153;" padding-left>Password is Required !!</p>
+        <p *ngIf="(editProfileForm.get('passwordFG.password').touched && editProfileForm.get('passwordFG.password').errors) && editProfileForm.get('passwordFG.password').errors.pattern"
+          style="color: #ea6153;" padding-left>Password Must Be Copmlex !!</p>
+
+        <ion-item>
+          <ion-label floating>
+            <ion-icon name="unlock"></ion-icon>&nbsp; Confirm Password</ion-label>
+          <ion-input formControlName="confirmPassword" type="password"></ion-input>
+        </ion-item>
+        <!--<p *ngIf="editProfileForm.get('passwordFG.confirmPassword').touched && editProfileForm.get('passwordFG.confirmPassword').errors" style="color: #ea6153;"
+                    padding-left>Confirm Password is Required !!</p>-->
+        <p *ngIf="(editProfileForm.get('passwordFG.confirmPassword').value && editProfileForm.get('passwordFG').errors) && editProfileForm.get('passwordFG').errors.match"
+          style="color: #ea6153;" padding-left>Two Values Must Be The Same !!</p>
+      </div>
+
+      <div>
+        <ion-item>
+          <ion-label floating>
+            <ion-icon name="call"></ion-icon>&nbsp; Phone</ion-label>
+          <ion-input formControlName="phone" type="text"></ion-input>
+        </ion-item>
+        <p *ngIf="(editProfileForm.get('phone').touched && editProfileForm.get('phone').errors) && editProfileForm.get('phone').errors.required"
+          style="color: #ea6153;" padding-left>Phone is Required !!</p>
+        <p *ngIf="(editProfileForm.get('phone').touched && editProfileForm.get('phone').errors) && editProfileForm.get('phone').errors.pattern"
+          style="color: #ea6153;" padding-left>Please Enter Correct Phone Number !!</p>
+      </div>
+
+      <div>
+        <ion-item>
+          <ion-label>
+            <ion-icon name="podium"></ion-icon>&nbsp; Governorate <span style="color:red;">(Required)</span></ion-label>
+          <ion-select formControlName="governorate" (ionChange)="GovDDL_Changed(editProfileForm.get('governorate').value)">
+            <ion-option *ngFor="let gov of govs" value="{{gov.GovernorateID}}">{{gov.Name}}</ion-option>
+          </ion-select>
+        </ion-item>
+      </div>
+
+      <div>
+        <ion-item>
+          <ion-label>
+            <ion-icon name="podium"></ion-icon>&nbsp; City <span style="color:red;">(Required)</span></ion-label>
+          <ion-select formControlName="city">
+            <ion-option *ngFor="let c of cities" value="{{c.CityID}}">{{c.Name}}</ion-option>
+          </ion-select>
+        </ion-item>
+      </div>
+
+      <div>
+        <ion-item>
+          <ion-label floating>
+            <ion-icon name="locate"></ion-icon>&nbsp; Address</ion-label>
+          <ion-input formControlName="address" type="text"></ion-input>
+        </ion-item>
+        <p *ngIf="(editProfileForm.get('address').touched && editProfileForm.get('address').errors) && editProfileForm.get('address').errors.required"
+          style="color: #ea6153;" padding-left>Address is Required !!</p>
+      </div>
+
+      <div text-center>
+        <ion-label>
+          <ion-icon name="images"></ion-icon>&nbsp; Photo</ion-label>
+        <button ion-button (click)="getImage()" [disabled]="addStatus">Upload Photo</button>
+        <hr/>
+        <img width="200" height="200" *ngIf="image" src="{{image}}" />
+      </div>
+      <hr/>
+      <ion-item *ngIf="!addStatus">
+        <button ion-button full large color="primary" type="submit" (click)="onSubmit()" [disabled]='!editProfileForm.valid'>
+                <ion-icon name="create-outline"></ion-icon> &nbsp;&nbsp;&nbsp;Update Data</button>
+      </ion-item>
+    </form>
+
+    <br/>
+    <p *ngIf="validityError" style="color: #ea6153;" padding-left>Data is Not Valid !!</p>
+    <div *ngIf="addStatus">
+      <h3 style="color:darkblue" text-center padding-left>Your Data Updated Successfully ..</h3>
+      <button ion-button full large round color="secondary" (click)="continue()">Continue</button>
+    </div>
+
+  </ion-list>
+</ion-content>

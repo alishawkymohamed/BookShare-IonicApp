@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule, NavController } from 'ionic-angular';
+import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -9,7 +9,7 @@ import { HttpModule } from "@angular/http";
 import { ReactiveFormsModule } from "@angular/forms";
 import { BookShareApi, BookAPI } from '../shared/shared';
 import { Camera } from '@ionic-native/camera';
-import { Storage, IonicStorageModule } from '@ionic/storage';
+import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
     declarations: [
@@ -27,8 +27,12 @@ import { Storage, IonicStorageModule } from '@ionic/storage';
         EditBookPage,
         BorrowedPage,
         RejectedListPage,
+<<<<<<< HEAD
+        EditProfilePage
+=======
         NotTabsPage,
         AcceptedNotPage
+>>>>>>> e8d31213b1f28f01925a9dcec658673d0af8a6c2
     ],
     imports: [
         BrowserModule,
@@ -53,8 +57,12 @@ import { Storage, IonicStorageModule } from '@ionic/storage';
         EditBookPage,
         BorrowedPage,
         RejectedListPage,
+<<<<<<< HEAD
+        EditProfilePage
+=======
         NotTabsPage,
         AcceptedNotPage
+>>>>>>> e8d31213b1f28f01925a9dcec658673d0af8a6c2
     ],
     providers: [
         StatusBar,

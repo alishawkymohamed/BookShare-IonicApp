@@ -1,8 +1,8 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController, NavParams, LoadingController } from 'ionic-angular';
-import { BookAPI } from '../../shared/shared';
+import { BookAPI, BookShareApi } from '../../shared/shared';
 import { Storage } from '@ionic/storage';
-import { AddBookPage, EditBookPage } from "../pages";
+import { AddBookPage, EditBookPage, EditProfilePage } from "../pages";
 @Component({
   selector: 'page-profile',
   templateUrl: 'profile.html',
@@ -10,12 +10,16 @@ import { AddBookPage, EditBookPage } from "../pages";
 export class ProfilePage {
   data: any;
   Book: any;
-  errors: any;
+  user: any;
   ImageFlag: boolean = false;
   @ViewChild('error') ele: ElementRef;
 
   constructor(private navCtrl: NavController,
-    private navParams: NavParams, private bookAPI: BookAPI, public storage: Storage, public loading: LoadingController) {
+    private navParams: NavParams,
+    private bookAPI: BookAPI,
+    public storage: Storage,
+    public loading: LoadingController,
+    private bookShareApi: BookShareApi) {
   }
 
   goToAddBook() {
@@ -44,12 +48,68 @@ export class ProfilePage {
           if (this.Book) {
             loader.dismiss();
           }
+          else if (this.Book == false) {
+            loader.dismiss();
+          }
         })
       );
     });
   }
 
   editBook($event, BookID) {
-    this.navCtrl.push(EditBookPage, BookID);
+    let loader = this.loading.create({
+      content: 'Loading Book Data ...'
+    });
+    loader.present().then(() => {
+      this.bookShareApi.getBook(BookID)
+        .subscribe(res => {
+          loader.dismiss();
+          this.navCtrl.push(EditBookPage, res);
+        });
+    });
+  }
+
+  deleteBook($event, BookID) {
+    let loader = this.loading.create({
+      content: 'Deleting Book  ...'
+    });
+    loader.present()
+      .then(() => {
+        this.bookShareApi.deleteBook(BookID)
+          .subscribe(res => {
+            if (res) {
+              this.ionViewWillEnter();
+              loader.dismiss();
+            }
+          });
+      });
+  }
+
+  editProfile() {
+    let loader = this.loading.create({
+      content: 'Loading User Data'
+    });
+    loader.present().then(() => {
+      this.storage.get('LoginEmail')
+        .then((email) => {
+          let emailz = email;
+          if (emailz) {
+            this.bookAPI.GetUserData(email)
+              .then((res) => {
+                this.data = res;
+                if (this.data) {
+                  this.bookShareApi.getUser(this.data.UserID)
+                    .subscribe(user => {
+                      this.user = user;
+                      if (this.user) {
+                        this.navCtrl.push(EditProfilePage, this.user);
+                        loader.dismiss();
+                      }
+                    });
+                }
+              });
+          }
+        });
+    });
   }
 }

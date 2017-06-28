@@ -1,5 +1,5 @@
 import { DetailsPage } from './../details/details';
-import { Component, ViewChild, ElementRef, Input } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { BookAPI } from '../../shared/shared';

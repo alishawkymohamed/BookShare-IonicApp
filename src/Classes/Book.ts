@@ -9,5 +9,5 @@ export class Book {
     Description: string;
     Available: boolean;
     email: string;
-    image: any;
+    Cover: any;
 }

@@ -10,7 +10,7 @@
 <ion-content padding>
   <div *ngIf="book">
     <ion-list no-lines>
-      <form [formGroup]="editBookForm" (ngSubmit)="onSubmit()">
+      <form [formGroup]="editBookForm">
 
         <div>
           <ion-item>
@@ -59,7 +59,7 @@
           <ion-item>
             <ion-label floating>
               <ion-icon name="logo-bitcoin"></ion-icon>&nbsp; Price</ion-label>
-            <ion-input formControlName="price" type="text"></ion-input>
+            <ion-input [(ngModel)]="price" formControlName="price" type="text"></ion-input>
           </ion-item>
         </div>
 
@@ -74,7 +74,7 @@
           <ion-item>
             <ion-label floating>
               <ion-icon name="logo-bitcoin"></ion-icon>&nbsp; Duration</ion-label>
-            <ion-input formControlName="duration" type="text"></ion-input>
+            <ion-input [(ngModel)]="duration" formControlName="duration" type="text"></ion-input>
           </ion-item>
         </div>
 
@@ -85,9 +85,19 @@
           </ion-item>
         </div>
 
+        <div text-center>
+          <ion-label>
+            <ion-icon name="images"></ion-icon>&nbsp; Cover</ion-label>
+          <button ion-button (click)="getImage()" [disabled]="addStatus">Upload Cover</button>
+          <hr/>
+          <img width="200" height="200" *ngIf="image" src="{{image}}" />
+        </div>
+        <hr/>
+
         <ion-item *ngIf="!addStatus">
-          <button ion-button full large color="primary" [disabled]='!editBookForm.valid'>
-             <!--|| (forsale.checked == true && editBookForm.get("price").pristine) || (forBorrow.checked == true && editBookForm.get("duration").pristine)-->
+
+          <button ion-button full large color="primary" (click)="onSubmit()" [disabled]='!editBookForm.valid
+             || (forsale.checked == true && ([price] == "")) || (forBorrow.checked == true && ([duration] == ""))'>
                 <ion-icon name="create-outline"></ion-icon> &nbsp;&nbsp;&nbsp;Update Book</button>
         </ion-item>
       </form>

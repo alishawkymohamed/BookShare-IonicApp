@@ -42,7 +42,7 @@ export class RegisterPage {
             phone: ['', Validators.compose([Validators.required, Validators.pattern(/[0-9]/), Validators.maxLength(11), Validators.minLength(7)])],
             governorate: [''],
             city: ['', Validators.compose([Validators.required])],
-            address: ['']
+            address: ['', Validators.compose([Validators.required])]
         });
     }
 
@@ -103,7 +103,7 @@ export class RegisterPage {
         });
         loader.present().then(() => {
             this.storage.get("base64Image")
-                .then(res => {
+                .then(ImgRes => {
                     if (this.signUpForm.valid) {
                         let obj: User = new User();
                         obj.Address = this.signUpForm.value.address;
@@ -112,7 +112,9 @@ export class RegisterPage {
                         obj.CityID = this.signUpForm.value.city;
                         obj.Email = this.signUpForm.value.email;
                         obj.Password = this.signUpForm.value.passwordFG.password;
-                        obj.image = res;
+                        if (ImgRes) {
+                            obj.image = ImgRes;
+                        }
                         this.bookShareApi.addUser(obj)
                             .subscribe(res => {
                                 this.addStatus = res;

@@ -77,20 +77,20 @@ export class AddBookPage {
       content: 'Please Wait ...'
     });
     loader.present().then(() => {
-      if (this.addBookForm.valid) {
-        let book = new Book();
-        book.Author = this.addBookForm.value.title;
-        book.Available = this.availableFlag;
-        book.Description = this.addBookForm.value.discription;
-        book.Duration = this.addBookForm.value.duration;
-        book.ForBorrow = this.forBorrowFlag;
-        book.ForSale = this.forSaleFlag;
-        book.Price = this.addBookForm.value.price;
-        book.Title = this.addBookForm.value.title;
-
-        this.storage.get("base64Cover").then((res) => {
-          book.image = res;
-
+      this.storage.get("base64Cover")
+        .then((res) => {
+          let book: Book = new Book();
+          book.Author = this.addBookForm.value.title;
+          book.Available = this.availableFlag;
+          book.Description = this.addBookForm.value.discription;
+          book.Duration = this.addBookForm.value.duration;
+          book.ForBorrow = this.forBorrowFlag;
+          book.ForSale = this.forSaleFlag;
+          book.Price = this.addBookForm.value.price;
+          book.Title = this.addBookForm.value.title;
+          if (res) {
+            book.Cover = res;
+          }
           this.storage.get("LoginEmail")
             .then((LoginEmail) => {
               book.email = LoginEmail;
@@ -103,14 +103,13 @@ export class AddBookPage {
                   else if (res == false) {
                     this.addStatus = false;
                   }
-                  if (this.addStatus) {
+                  if (this.addStatus == true || this.addStatus == false) {
                     loader.dismiss();
                     this.storage.remove("base64Cover");
                   }
                 });
             });
         });
-      }
     })
 
   }

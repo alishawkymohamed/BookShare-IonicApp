@@ -9,6 +9,7 @@ import { Book } from "../Classes/Book";
 export class BookShareApi {
 
     baseUrl: string = "http://bookshareapi-service20170619054337.azurewebsites.net/api/user";
+    // baseUrl: string = "http://localhost:2725/api/user";
     authData: any;
     Govs: any[];
     Cities: any[];
@@ -16,6 +17,8 @@ export class BookShareApi {
     book: any;
     updateFlag: boolean;
     emails: any;
+    deleted: any;
+    user: any;
 
     constructor(private _http: Http) {
     }
@@ -59,6 +62,17 @@ export class BookShareApi {
             });
     }
 
+    editUser(obj: User) {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        let body = obj;
+        return this._http.post(`${this.baseUrl}/editUser`, body, headers)
+            .map(res => {
+                this.userAddingStatus = res.json();
+                return this.userAddingStatus;
+            });
+    }
+
     addBook(obj: Book) {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
@@ -78,6 +92,14 @@ export class BookShareApi {
             });
     }
 
+    getUser(userId: number) {
+        return this._http.get(`${this.baseUrl}/getUser/${userId}`)
+            .map(res => {
+                this.user = res.json();
+                return this.user;
+            });
+    }
+
     editBook(book: Book) {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
@@ -94,6 +116,14 @@ export class BookShareApi {
             .map(res => {
                 this.emails = res.json();
                 return this.emails;
+            });
+    }
+
+    deleteBook(id: number) {
+        return this._http.get(`${this.baseUrl}/deleteBook/${id}`)
+            .map(res => {
+                this.deleted = res.json();
+                return this.deleted;
             });
     }
 }

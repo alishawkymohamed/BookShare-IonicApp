@@ -8,11 +8,10 @@
     </ion-navbar>
 </ion-header>
 
-
 <ion-content padding>
     <div text-center>
-        <h2>Welcome To Book Share App</h2>
-        <h3>Create Your Account</h3>
+        <h3>Welcome To Book Share App</h3>
+        <h4>Create Your Account</h4>
     </div>
 
     <ion-list no-lines>
@@ -103,6 +102,8 @@
                         <ion-icon name="locate"></ion-icon>&nbsp; Address</ion-label>
                     <ion-input formControlName="address" type="text"></ion-input>
                 </ion-item>
+                <p *ngIf="(signUpForm.get('address').touched && signUpForm.get('address').errors) && signUpForm.get('address').errors.required"
+                    style="color: #ea6153;" padding-left>Address is Required !!</p>
             </div>
 
             <div text-center>
