@@ -128,7 +128,7 @@ export class DetailsPage {
   }
   ionViewWillEnter() {
     let loader = this.loading.create({
-      content: "loading..."
+      content: "Loading .."
     });
     loader.present().then(() => {
       Promise.all([this.storage.get('ID'), this.storage.get('SearchBy')])
@@ -146,8 +146,10 @@ export class DetailsPage {
               this.Email = res[0].Email;
               this.Phone = res[0].Phone;
               this.Address = res[0].Address;
+              if (this.data) {
+                loader.dismiss();
+              }
             });
-          loader.dismiss();
         });
     });
 
@@ -169,7 +171,6 @@ export class DetailsPage {
     });
   }
   Borfrom(event) {
-    console.log(event.currentTarget.id);
     this.BookID = event.currentTarget.id;
     this.storage.get('LoginEmail').then((LoginEmail) => {
       this.bookApi.BuyBorrow(LoginEmail, this.BookID, 0).then((res) => {

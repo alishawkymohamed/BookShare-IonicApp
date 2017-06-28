@@ -17,7 +17,6 @@ export class AcceptedNotPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AcceptedNotPage');
   }
   ionViewWillEnter() {
     let loader = this.loading.create({
@@ -27,7 +26,6 @@ export class AcceptedNotPage {
       this.storage.get("LoginEmail").then((LoginEmail) => {
         this.bookAPI.AcceptedList(LoginEmail).then((res: Array<any>) => {
           this.data = res;
-          console.log(this.data, res);
           if (this.data) {
             loader.dismiss();
           }
@@ -40,7 +38,6 @@ export class AcceptedNotPage {
             }
           }
           if (this.data == false) {
-            console.log("false");
             this.flag = true;
             this.errors = "There is No Notification to Show!";
             loader.dismiss();

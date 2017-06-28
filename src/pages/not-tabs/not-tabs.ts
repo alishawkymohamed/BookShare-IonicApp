@@ -20,7 +20,6 @@ export class NotTabsPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad NotTabsPage');
   }
 
 }

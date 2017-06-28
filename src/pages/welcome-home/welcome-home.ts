@@ -25,18 +25,21 @@ export class WelcomeHomePage {
     private navParams: NavParams,
     private bookAPI: BookAPI, public storage: Storage, public loading: LoadingController) { }
   ionViewDidLoad() {
-    let loader = this.loading.create({
+    let loaderr = this.loading.create({
       content: "Loading ..."
     });
-    loader.present().then(() => {
+    loaderr.present().then(() => {
       this.bookAPI.GetMostBorrowedBook().
         subscribe(data => {
           this.books = data;
           if (this.books) {
             this.DataFlag = false;
-            loader.dismiss();
+            loaderr.dismiss();
           }
         });
+      let loader = this.loading.create({
+        content: "Loading ..."
+      });
       loader.present().then(() => {
         this.bookAPI.GetMostBorrowedUser().
           subscribe(data => {

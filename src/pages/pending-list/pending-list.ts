@@ -17,7 +17,6 @@ export class PendingListPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PendingListPage');
   }
   ionViewWillEnter() {
     let loader = this.loading.create({
@@ -31,7 +30,6 @@ export class PendingListPage {
             loader.dismiss();
           }
           if (this.data == false) {
-            console.log("false enter");
             this.flag = true;
             this.errors = "There is No Notification to Show!";
             loader.dismiss();
@@ -41,7 +39,6 @@ export class PendingListPage {
     });
   }
   AcceptNot(event) {
-    console.log(event.currentTarget.id);
     let id = event.currentTarget.id
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Modify your Notification',
@@ -57,9 +54,7 @@ export class PendingListPage {
               this.storage.get("LoginEmail")
                 .then((val) => {
                   this.bookAPI.CancelNot(id, val[1]).then(res => {
-                    console.log(res);
                     if (res == false) {
-                      console.log("false cancel");
                       let alert = this.alertCtrl.create({
                         title: 'Error !',
                         subTitle: 'There is an Error.. We are very sorry..We will fix this soon!',
@@ -69,7 +64,6 @@ export class PendingListPage {
                       loader.dismiss();
                     }
                     else if (res == true) {
-                      console.log("true");
                       let alert = this.alertCtrl.create({
                         title: 'success!',
                         subTitle: 'You have cancel the request!',
@@ -81,7 +75,6 @@ export class PendingListPage {
                       loader.dismiss();
                     }
                     else {
-                      console.log("data");
                       let alert = this.alertCtrl.create({
                         title: 'success!',
                         subTitle: 'You have cancel the request!',
