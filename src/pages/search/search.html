@@ -26,7 +26,7 @@
                         <ion-radio checked="False " value="Author "></ion-radio>
                     </ion-item>
                 </ion-list>
-                <button ion-button full icon-left (click)="Search()">
+                <button ion-button full icon-left (click)="Search()" [disabled]="!(searchTxt && searchby)">
                    <ion-icon name="search"></ion-icon>Search</button>
                 <p #error *ngIf="EFlag" style="color:#ea6153;" padding-left>{{errors}}</p>
             </ion-col>
