@@ -13,6 +13,7 @@ export * from './add-book/add-book';
 export * from './rejected-list/rejected-list';
 export * from './not-tabs/not-tabs';
 export * from './accepted-not/accepted-not';
+export * from './edit-profile/edit-profile';
 
 
 

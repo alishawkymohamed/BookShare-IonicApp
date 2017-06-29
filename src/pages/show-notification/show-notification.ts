@@ -23,7 +23,6 @@ export class ShowNotificationPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ShowNotificationPage');
   }
 
   ionViewWillEnter() {
@@ -72,7 +71,6 @@ export class ShowNotificationPage {
                 .then((val) => {
                   this.bookAPI.AcceptNotication(val[0], val[1]).then(res => {
                     if (res == true) {
-                      console.log("true");
                       let alert = this.alertCtrl.create({
                         title: 'Success!',
                         subTitle: 'You have Just accepted the request!',
@@ -84,7 +82,6 @@ export class ShowNotificationPage {
                       loader.dismiss();
                     }
                     else if (res == false) {
-                      console.log("False");
                       let alert = this.alertCtrl.create({
                         title: 'Error !',
                         subTitle: 'There is an Error.. We are very sorry..We will fix this soon!',
@@ -94,7 +91,6 @@ export class ShowNotificationPage {
                       loader.dismiss();
                     }
                     else {
-                      console.log("Dataaa");
                       let alert = this.alertCtrl.create({
                         title: 'success!',
                         subTitle: 'You have accpeted the request!',
@@ -102,7 +98,6 @@ export class ShowNotificationPage {
                       });
                       alert.present();
                       this.data = res;
-                      console.log(this.data);
                       this.flag = false;
                       loader.dismiss();
                     }
@@ -134,7 +129,6 @@ export class ShowNotificationPage {
                       loader.dismiss();
                     }
                     else if (res == false) {
-                      console.log("False");
                       let alert = this.alertCtrl.create({
                         title: 'Error !',
                         subTitle: 'There is an Error.. We are very sorry..We will fix this soon!',
@@ -144,7 +138,6 @@ export class ShowNotificationPage {
                       loader.dismiss();
                     }
                     else {
-                      console.log("Dataaa");
                       let alert = this.alertCtrl.create({
                         title: 'success!',
                         subTitle: 'You have rejected the request!',
@@ -152,7 +145,6 @@ export class ShowNotificationPage {
                       });
                       alert.present();
                       this.data = res;
-                      console.log(this.data);
                       this.flag = false;
                       loader.dismiss();
                     }

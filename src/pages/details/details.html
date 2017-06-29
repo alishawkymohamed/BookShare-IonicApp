@@ -7,7 +7,7 @@
 <ion-header>
 
     <ion-navbar>
-        <ion-title>details</ion-title>
+        <ion-title>Details</ion-title>
     </ion-navbar>
 
 </ion-header>
@@ -70,7 +70,7 @@
                             <ion-card-content>
                                 <img *ngIf="item.Cover" src="data:image/png;base64,{{item.Cover}}" id="Image">
                                 <img *ngIf="!item.Cover" src="https://image.ibb.co/dCLLf5/noimagefound.jpg" id="Image">
-                                <p>Author:{{item.Author}} <br> Available:{{item.Available}} <br> Description:{{item.Description}}<br> ForBorrow:{{item.ForBorrow}},Duration:{{item.Duration}}Days <br>ForSale:{{item.ForSale}},Price:{{item.Price}}
+                                <p>Author:{{item.Author}} <br> Available:{{item.Available}} <br> Description:{{item.Description}}<br>                                    ForBorrow:{{item.ForBorrow}},Duration:{{item.Duration}}Days <br>ForSale:{{item.ForSale}},Price:{{item.Price}}
                                 </p>
                                 <button ion-button *ngIf="item.Available==true && item.ForBorrow==true" id="{{item.BookID}}" (click)="Borfrom($event) ">Borrow</button>
                                 <button ion-button *ngIf="item.Available==true && item.ForSale==true" id="{{item.BookID}}" (click)="Buyfrom($event) ">Buy</button>

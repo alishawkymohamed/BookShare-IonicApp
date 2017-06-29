@@ -32,25 +32,23 @@ export class SearchPage {
         this.bookApi.Search(this.searchTxt, this.searchby, LoginEmail)
           .subscribe((res) => {
             this.data = res;
-            console.log(this.searchby);
-            console.log(this.data);
+            if (this.data) {
+              loader.dismiss();
+            }
             if (this.data == false) {
               this.errors = "There is No Book Except Yours if you own book named this and you can get it from your profile!";
               this.EFlag = true;
             }
           })
       });
-      loader.dismiss();
     });
   }
   Details(event) {
     this.storage.set('ID', event.currentTarget.id);
     this.storage.set('SearchBy', this.searchby);
-    console.log(event.currentTarget.id);
     this.navCtrl.push(DetailsPage);
   }
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SearchPage');
   }
   ionViewWillEnter() {
     this.searchby = null;

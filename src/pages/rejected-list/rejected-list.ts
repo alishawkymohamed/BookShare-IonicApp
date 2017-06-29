@@ -20,11 +20,10 @@ export class RejectedListPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad RejectedListPage');
   }
   ionViewWillEnter() {
     let loader = this.loading.create({
-      content: "loading.."
+      content: "Loading .."
     });
     loader.present().then(() => {
       this.storage.get("LoginEmail").then((LoginEmail) => {
@@ -42,7 +41,6 @@ export class RejectedListPage {
             }
           }
           if (this.data == false) {
-            console.log("false");
             this.flag = true;
             this.errors = "There is No Notification to Show!";
             loader.dismiss();

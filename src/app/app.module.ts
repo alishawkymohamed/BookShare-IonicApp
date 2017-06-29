@@ -4,7 +4,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { AcceptedNotPage, RejectedListPage, EditBookPage, PendingListPage, LogInPage, HomePage, ProfilePage, RegisterPage, AddBookPage, DetailsPage, SearchPage, ShowNotificationPage, WelcomeHomePage, BorrowedPage, NotTabsPage } from "../pages/pages";
+import { EditProfilePage, AcceptedNotPage, RejectedListPage, EditBookPage, PendingListPage, LogInPage, HomePage, ProfilePage, RegisterPage, AddBookPage, DetailsPage, SearchPage, ShowNotificationPage, WelcomeHomePage, BorrowedPage, NotTabsPage } from "../pages/pages";
 import { HttpModule } from "@angular/http";
 import { ReactiveFormsModule } from "@angular/forms";
 import { BookShareApi, BookAPI } from '../shared/shared';
@@ -27,12 +27,9 @@ import { IonicStorageModule } from '@ionic/storage';
         EditBookPage,
         BorrowedPage,
         RejectedListPage,
-<<<<<<< HEAD
-        EditProfilePage
-=======
         NotTabsPage,
-        AcceptedNotPage
->>>>>>> e8d31213b1f28f01925a9dcec658673d0af8a6c2
+        AcceptedNotPage,
+        EditProfilePage
     ],
     imports: [
         BrowserModule,
@@ -57,12 +54,9 @@ import { IonicStorageModule } from '@ionic/storage';
         EditBookPage,
         BorrowedPage,
         RejectedListPage,
-<<<<<<< HEAD
-        EditProfilePage
-=======
         NotTabsPage,
-        AcceptedNotPage
->>>>>>> e8d31213b1f28f01925a9dcec658673d0af8a6c2
+        AcceptedNotPage,
+        EditProfilePage
     ],
     providers: [
         StatusBar,

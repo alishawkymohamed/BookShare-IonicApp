@@ -26,7 +26,6 @@ export class BorrowedPage {
       this.storage.get("LoginEmail").then((LoginEmail) => {
         this.bookAPI.UserBorrowed(LoginEmail).then((res) => {
           this.Data = res;
-          console.log(this.Data);
           if (this.Data) {
             this.flag = true;
             loader.dismiss();

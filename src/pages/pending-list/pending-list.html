@@ -3,16 +3,18 @@
 
 <ion-content padding>
     <p #error *ngIf="flag" style="color: #ea6153; " padding-left>{{errors}}</p>
-    <ion-list *ngFor="let item of data">
-        <ion-item *ngIf="flag==false">
-            <ion-avatar item-start>
-                <img src="data:image/png;base64,{{item.Cover}}">
-            </ion-avatar>
-            <h2>{{item.BookName}}</h2>
-            <p>You send request for Book {{ item.BookName }}</p>
-            <button ion-button icon-only (click)="AcceptNot($event)" id="{{item.Notid}}">
+    <div *ngIf="data">
+        <ion-list *ngFor="let item of data">
+            <ion-item *ngIf="flag==false">
+                <ion-avatar item-start>
+                    <img src="data:image/png;base64,{{item.Cover}}">
+                </ion-avatar>
+                <h2>{{item.BookName}}</h2>
+                <p>You send request for Book {{ item.BookName }}</p>
+                <button ion-button icon-only (click)="AcceptNot($event)" id="{{item.Notid}}">
               <ion-icon name="settings"></ion-icon>
             </button>
-        </ion-item>
-    </ion-list>
+            </ion-item>
+        </ion-list>
+    </div>
 </ion-content>
