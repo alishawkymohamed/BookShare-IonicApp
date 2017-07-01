@@ -1,6 +1,20 @@
-page-home {}
 
 #Img {
-    height: 500px;
-    width: 500px
+    height: 100%;
+    width: 100%;
+}
+
+.page-bg {
+   background-image: url("https://preview.ibb.co/cvyPYQ/916266.jpg");
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(10px);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
 }
