@@ -27,26 +27,30 @@
                                 <h1>Most Borrowed Book</h1> Sorry,There is No Data Yet
                             </ion-card-header>
                             <ion-card-content>
-                                <img src="https://image.ibb.co/k3kLf5/book1.jpg" />
+                                <img src="https://image.ibb.co/k3kLf5/book1.jpg" id="Image" />
                             </ion-card-content>
                         </ion-card>
                     </ion-slide>
                 </ion-slides>
 
-                <ion-slides pager loop effect="fade">
+                <ion-slides pager loop effect="fade" *ngIf="!DataFlag">
                     <ion-slide *ngFor="let item of books">
                         <ion-card>
                             <ion-card-header>
                                 <h1>Most Borrowed Book</h1> {{item.Title}}
                             </ion-card-header>
                             <ion-card-content>
-                                <img *ngIf="item.Cover" src="data:image/png;base64,{{item.Cover}}" id="Image" />
-                                <img *ngIf="!item.Cover" src="https://image.ibb.co/dCLLf5/noimagefound.jpg" id="Image" />
+                                <div>
+                                    <img *ngIf="item.Cover" src="data:image/png;base64,{{item.Cover}}" id="Image" />
+                                    <img *ngIf="!item.Cover" src="https://image.ibb.co/dCLLf5/noimagefound.jpg" id="Image" />
+                                </div>
                             </ion-card-content>
                         </ion-card>
                     </ion-slide>
                 </ion-slides>
             </ion-col>
+        </ion-row>
+        <ion-row>
             <ion-col>
                 <ion-slides pager loop effect="fade" *ngIf="UserFlag">
                     <ion-slide>
@@ -60,7 +64,7 @@
                         </ion-card>
                     </ion-slide>
                 </ion-slides>
-                <ion-slides pager loop effect="fade">
+                <ion-slides pager loop effect="fade" *ngIf="!UserFlag">
                     <ion-slide *ngFor="let item of User">
                         <ion-card>
                             <ion-card-header>

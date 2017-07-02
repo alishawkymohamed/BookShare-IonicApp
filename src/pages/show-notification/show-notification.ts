@@ -1,6 +1,3 @@
-import { RejectedListPage } from './../rejected-list/rejected-list';
-import { BorrowedPage } from './../borrowed/borrowed';
-import { PendingListPage } from './../pending-list/pending-list';
 import { Component } from '@angular/core';
 import { NavController, NavParams, ActionSheetController, AlertController, LoadingController } from 'ionic-angular';
 import { BookAPI } from '../../shared/shared';

@@ -127,16 +127,3 @@ export class BookShareApi {
             });
     }
 }
-
-
-    // checkAuth ( email: string, pass: string ) {
-    //     let headers = new Headers();
-    //     headers.append( 'Content-Type', 'application/json' );
-    //     let obj = { pass: pass, email: email };
-    //     let body = obj;
-
-    //     return new Promise( resolve => {
-    //         this._http.post( `${ this.baseUrl }/checkAuth`, body, headers )
-    //             .subscribe( res => resolve( res.json() ) );
-    //     } );
-    // }

@@ -1,5 +1,4 @@
 import { NotTabsPage } from './../not-tabs/not-tabs';
-import { ShowNotificationPage } from './../show-notification/show-notification';
 import { SearchPage } from './../search/search';
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController } from 'ionic-angular';
