@@ -5,9 +5,9 @@
 <ion-content padding>
     <p #error *ngIf="flag" style="color: #ea6153; " padding-left>{{errors}}</p>
     <ion-list *ngFor="let item of data">
-        <ion-item>
-            <h2>{{item.Action}}</h2>
-            <p>You have been rejected to<br>{{item.Action}} Book {{ item.BookName }}</p>
+        <ion-item-divider color="light">{{item.AcceptedDate| date: 'dd/MM/yyyy'}}</ion-item-divider>
+        <ion-item text-wrap>
+            You have been rejected to{{item.Action}} Book {{item.Title}}
         </ion-item>
     </ion-list>
 </ion-content>

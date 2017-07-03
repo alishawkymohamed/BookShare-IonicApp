@@ -3,7 +3,7 @@
 <ion-content padding>
     <p #error *ngIf="flag" style="color: #ea6153; " padding-left>{{errors}}</p>
     <ion-list *ngFor="let item of data">
-        <ion-item *ngIf="flag==false">
+        <ion-item *ngIf="flag==false" text-wrap>
             <ion-avatar item-start>
                 <img *ngIf="item.Cover" src="data:image/png;base64,{{item.Cover}}">
                 <img *ngIf="!item.Cover" src="https://image.ibb.co/dCLLf5/noimagefound.jpg">

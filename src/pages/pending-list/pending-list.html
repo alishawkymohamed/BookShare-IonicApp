@@ -5,7 +5,7 @@
     <p #error *ngIf="flag" style="color: #ea6153; " padding-left>{{errors}}</p>
     <div *ngIf="data">
         <ion-list *ngFor="let item of data">
-            <ion-item *ngIf="flag==false">
+            <ion-item *ngIf="flag==false" text-wrap>
                 <ion-avatar item-start>
                     <img src="data:image/png;base64,{{item.Cover}}">
                 </ion-avatar>

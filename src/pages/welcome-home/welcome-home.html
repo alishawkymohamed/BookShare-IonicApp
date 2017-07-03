@@ -7,7 +7,7 @@
         <ion-buttons right>
             <button ion-button icon-left (click)="notifications()">
                 <ion-icon name="notifications"></ion-icon>
-                <ion-badge item-end *ngIf="CountNot" >{{CountNot}}</ion-badge>
+                <ion-badge item-end *ngIf="CountNot ||RejectNot ||AcceptNot " >{{CountNot+RejectNot+AcceptNot}}</ion-badge>
             </button>
             <button ion-button (click)="LogOut()">
       <ion-icon name="log-out"></ion-icon>
@@ -33,7 +33,7 @@
                     </ion-slide>
                 </ion-slides>
 
-                <ion-slides pager loop effect="fade" *ngIf="!DataFlag">
+                <ion-slides pager loop effect="cube" *ngIf="!DataFlag">
                     <ion-slide *ngFor="let item of books">
                         <ion-card>
                             <ion-card-header>
@@ -64,7 +64,7 @@
                         </ion-card>
                     </ion-slide>
                 </ion-slides>
-                <ion-slides pager loop effect="fade" *ngIf="!UserFlag">
+                <ion-slides pager loop effect="cube" *ngIf="!UserFlag">
                     <ion-slide *ngFor="let item of User">
                         <ion-card>
                             <ion-card-header>

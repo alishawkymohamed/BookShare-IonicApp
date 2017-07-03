@@ -13,7 +13,12 @@ export class WelcomeHomePage {
 
   books: any[];
   User: any;
+  Data: any;
+  AData: any;
+  RData: any;
   CountNot: number;
+  AcceptNot: number;
+  RejectNot: number;
   Flag: boolean = false;
   UserName: any;
   DataFlag: boolean;
@@ -58,14 +63,44 @@ export class WelcomeHomePage {
     loader.present().then(() => {
       this.storage.get("LoginEmail").then((LoginEmail) => {
         this.bookAPI.ShowNotification(LoginEmail).then((res: Array<any>) => {
+          this.Data = res;
           if (res) {
             loader.dismiss();
           }
           if (this.Flag == true) {
             this.CountNot = null;
           }
-          else {
+          else if (this.Flag == false && this.Data == false) {
+            this.CountNot = 0;
+          }
+          else if (this.Flag == false && this.Data != false) {
             this.CountNot = res.length;
+          }
+          console.log(this.CountNot);
+        })
+      });
+      this.storage.get("LoginEmail").then((LoginEmail) => {
+        this.bookAPI.RejectedList(LoginEmail).then((res: Array<any>) => {
+          this.RData = res;
+          if (this.RData != false && this.Flag == false) {
+            this.RejectNot = res.length;
+            console.log("RejectNot=" + this.RejectNot);
+          }
+          else {
+            this.RejectNot = 0;
+
+          }
+        })
+      });
+      this.storage.get("LoginEmail").then((LoginEmail) => {
+        this.bookAPI.AcceptedList(LoginEmail).then((res: Array<any>) => {
+          this.AData = res;
+          if (this.AData != false && this.Flag == false) {
+            this.AcceptNot = res.length;
+            console.log("AcceptNot=" + this.AcceptNot);
+          }
+          else {
+            this.AcceptNot = 0;
           }
         })
       });

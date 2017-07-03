@@ -27,28 +27,28 @@
                 </ion-item>
                 <ion-item>
                     <ion-list>
-                        <ion-item>
+                        <ion-item text-wrap>
                             <h2 *ngIf="item.Description">Description:</h2>
                             <p>{{item.Description}}</p><br>
                             <h2 *ngIf="item.Email">Email:{{item.Email}}</h2><br>
                         </ion-item>
-                        <ion-item>
+                        <ion-item text-wrap>
                             <h2 *ngIf="item.Owner ">Owner:{{item.Owner}}</h2><br>
                             <h2 *ngIf="item.Phone">Phone :{{item.Phone }}</h2><br>
                         </ion-item>
-                        <ion-item>
+                        <ion-item text-wrap>
                             <h2 *ngIf="item.Available">Available:{{item.Available}}</h2>
                             <br>
                             <h2 *ngIf="item.Address">Address:{{item.Address}}</h2>
                             <br>
                         </ion-item>
-                        <ion-item>
+                        <ion-item text-wrap>
                             <h2 *ngIf="item.ForBorrow">ForBorrow:{{item.ForBorrow}},Duration:{{item.Duration}}Days.
                             </h2><br>
                             <button *ngIf="item.ForBorrow" ion-button (click)="Borrow() ">Borrow</button>
                             <button *ngIf="Email" ion-button (click)="GetBook() ">Show User Book</button>
                         </ion-item>
-                        <ion-item>
+                        <ion-item text-wrap>
                             <h2 *ngIf="item.ForSale">ForSale:{{item.ForSale}},Price:{{item.Price}}
                             </h2>
                             <button ion-button *ngIf="item.ForSale" (click)="Buy() ">Buy</button>
@@ -60,7 +60,7 @@
             </ion-col>
             <ion-col>
                 <p #error *ngIf="Flag != true" style="color: #ea6153;" padding-left>{{errors}}</p>
-                <ion-slides pager loop effect="fade">
+                <ion-slides pager loop effect="cube">
                     <ion-slide *ngFor="let item of BookData">
                         <ion-card>
                             <ion-card-header>
@@ -70,7 +70,7 @@
                             <ion-card-content>
                                 <img *ngIf="item.Cover" src="data:image/png;base64,{{item.Cover}}" id="Image">
                                 <img *ngIf="!item.Cover" src="https://image.ibb.co/dCLLf5/noimagefound.jpg" id="Image">
-                                <p>Author:{{item.Author}} <br> Available:{{item.Available}} <br> Description:{{item.Description}}<br>                                    ForBorrow:{{item.ForBorrow}},Duration:{{item.Duration}}Days <br>ForSale:{{item.ForSale}},Price:{{item.Price}}
+                                <p text-wrap>Author:{{item.Author}} <br> Available:{{item.Available}} <br> Description:{{item.Description}}<br> ForBorrow:{{item.ForBorrow}},Duration:{{item.Duration}}Days <br>ForSale:{{item.ForSale}},Price:{{item.Price}}
                                 </p>
                                 <button ion-button *ngIf="item.Available==true && item.ForBorrow==true" id="{{item.BookID}}" (click)="Borfrom($event) ">Borrow</button>
                                 <button ion-button *ngIf="item.Available==true && item.ForSale==true" id="{{item.BookID}}" (click)="Buyfrom($event) ">Buy</button>

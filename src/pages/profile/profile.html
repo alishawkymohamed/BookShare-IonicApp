@@ -38,7 +38,7 @@
                         <h2 #error style="color: #ea6153;" padding-left>You Have No Books Yet</h2>
                     </div>
                     <div *ngIf="Book">
-                        <ion-slides pager loop effect="fade">
+                        <ion-slides pager loop effect="cube">
                             <ion-slide *ngFor="let item of Book">
                                 <ion-card>
                                     <ion-card-header>
@@ -47,7 +47,8 @@
                                     <ion-card-content>
                                         <img *ngIf="item.Cover" src="data:image/png;base64,{{item.Cover}}" id="Image" />
                                         <img *ngIf="!item.Cover" src="https://image.ibb.co/dCLLf5/noimagefound.jpg" id="Image" />
-                                        <p>Author : {{item.Author}} <br> Available : {{item.Available}} <br> Description : {{item.Description}}<br/>                                            ForBorrow : {{item.ForBorrow}} <span *ngIf="item.ForBorrow">=> Duration : {{item.Duration}}</span>                                            <br/>ForSale : {{item.ForSale}} <span *ngIf="item.ForSale">=> Price : {{item.Price}}</span>
+                                        <p>Author : {{item.Author}} <br> Available : {{item.Available}} <br> Description : {{item.Description}}<br/> ForBorrow : {{item.ForBorrow}} <span *ngIf="item.ForBorrow">=> Duration : {{item.Duration}}</span> <br/>ForSale
+                                            : {{item.ForSale}} <span *ngIf="item.ForSale">=> Price : {{item.Price}}</span>
                                         </p>
                                         <button ion-button (click)='editBook($event,item.BookID)'>Edit</button>
                                         <button ion-button color="danger" (click)='deleteBook($event,item.BookID)'>Delete</button>
