@@ -1,24 +1,38 @@
 <ion-header>
     <ion-navbar>
-
-        <ion-title text-center>Book Share </ion-title>
+        <ion-title text-center>Book Share</ion-title>
     </ion-navbar>
 </ion-header>
 
-<ion-content padding id="body">
-    <ion-slides pager loop full effect="fade" autoplay="2000">
-        <ion-slide>
-            <img src="https://image.ibb.co/k3kLf5/book1.jpg" id="Img" />
-        </ion-slide>
-        <ion-slide>
-            <img src="https://image.ibb.co/dFMt05/book2.jpg" id="Img" />
-        </ion-slide>
-        <ion-slide>
-            <img src="https://image.ibb.co/cWN0f5/book3.jpg" id="Img" />
-        </ion-slide>
-    </ion-slides>
-    <div class="page-bg">
-    </div>
+<ion-content padding id="body" class="home">
+    <ion-grid>
+        <ion-row justify-content-center>
+            <ion-col text-center>
+                <br />
+                <div id="myDIV">
+                    <h1 id="title">Book</h1>
+                </div>
+                <div>
+                    <h2 id="title2">Share</h2>
+                </div>
+            </ion-col>
+        </ion-row>
+        <ion-row justify-content-center>
+            <ion-col>
+                <ion-slides pager loop full effect="fade" autoplay="2500">
+                    <ion-slide>
+                        <img src="https://image.ibb.co/k3kLf5/book1.jpg" id="Img" />
+                    </ion-slide>
+                    <ion-slide>
+                        <img src="https://image.ibb.co/dFMt05/book2.jpg" id="Img" />
+                    </ion-slide>
+                    <ion-slide>
+                        <img src="https://image.ibb.co/cWN0f5/book3.jpg" id="Img" />
+                    </ion-slide>
+                </ion-slides>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>
 <ion-footer>
     <ion-grid>

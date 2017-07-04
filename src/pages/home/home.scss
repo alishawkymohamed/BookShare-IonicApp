@@ -1,20 +1,56 @@
+@font-face {
+  font-family: 'Sofia';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Sofia'), local('Sofia-Regular'), url(https://fonts.gstatic.com/s/sofia/v5/f2JBzUtFBEg-kZNlFQ7f-Q.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+ion-content{
+    background-image: url("https://image.ibb.co/estcqF/white_wood_texture_background_1232_1731.jpg");
+}
 
 #Img {
     height: 100%;
     width: 100%;
 }
+#title{
+    font-family: 'sofia';
+    font-size: 90px;
+    color: darkslategrey;
+    text-shadow: 1px 1px 2px black, 0 0 25px lightgray, 0 0 5px darkblue;
+}
+#title2{
+    font-family: 'sofia';
+    font-size: 50px;
+    color: white;
+    text-shadow: 1px 1px 2px black, 0 0 25px darkslategrey, 0 0 5px darkblue;
+}
+.home {
+ 
+    scroll-content {
+        display: flex;
+        flex-direction: column;
+    }
+ 
+    ion-grid {
+        padding: 0;
+        height: 100%;
+    }
+ 
+    ion-row {
+        flex: 1;
+    }
+ 
+}
+#myDIV{
+    -webkit-animation: mymove 10s infinite; /* Chrome, Safari, Opera */
+    animation: mymove 10s infinite;
+}
+@-webkit-keyframes mymove {
+    50% {-webkit-transform: rotate(-10deg);}
+}
 
-.page-bg {
-   background-image: url("https://preview.ibb.co/cvyPYQ/916266.jpg");
-  -webkit-filter: blur(5px);
-  -moz-filter: blur(5px);
-  -o-filter: blur(5px);
-  -ms-filter: blur(5px);
-  filter: blur(10px);
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  z-index: -1;
+/* Standard syntax */
+@keyframes mymove {
+    50% {transform: rotate(-10deg);}
 }
