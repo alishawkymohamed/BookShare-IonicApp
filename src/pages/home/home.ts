@@ -1,23 +1,27 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, MenuController } from 'ionic-angular';
 import { LogInPage, RegisterPage, WelcomeHomePage } from "../pages";
 
-@Component( {
+@Component({
   selector: 'page-home',
   templateUrl: 'home.html'
-} )
+})
 export class HomePage {
 
-  constructor( public navCtrl: NavController ) {
+  constructor(public navCtrl: NavController,
+    private menuCtrl: MenuController) {
 
   }
-  logIn () {
-    this.navCtrl.push( LogInPage );
+  ionViewDidLoad() {
+    this.menuCtrl.swipeEnable(false);
   }
-  goToSignUp () {
-    this.navCtrl.push( RegisterPage );
+  logIn() {
+    this.navCtrl.push(LogInPage);
   }
-  Welcome () {
-    this.navCtrl.push( WelcomeHomePage );
+  goToSignUp() {
+    this.navCtrl.push(RegisterPage);
+  }
+  Welcome() {
+    this.navCtrl.push(WelcomeHomePage);
   }
 }

@@ -12,15 +12,19 @@
   z-index: -1;
 
   display: block;
-  background-image: url('https://image.ibb.co/estcqF/white_wood_texture_background_1232_1731.jpg');
+  background-image: url('https://preview.ibb.co/bTo2ua/libraryone.jpg');
   width: 100%;
   height: 100%;
 
-  -webkit-filter: blur(3px);
-  -moz-filter: blur(3px);
-  -o-filter: blur(3px);
-  -ms-filter: blur(3px);
-  filter: blur(3px);
+  -webkit-filter: blur(2px);
+  -moz-filter: blur(2px);
+  -o-filter: blur(2px);
+  -ms-filter: blur(2px);
+  filter: blur(2px);
+}
+#divaity{
+    background-color: rgba(white , 0.5);
+    top: 50%;
 }
 
 #Img {
